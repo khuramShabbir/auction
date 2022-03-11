@@ -1,11 +1,9 @@
 import 'package:auction/api_services.dart';
 import 'package:auction/controllers_providers/auction_provider.dart';
+import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import 'const.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -210,8 +208,6 @@ class CustomWidget {
               onTap: () {
                 Get.back();
                 walletStatus();
-
-
               },
               buttonText: "Charge Your Wallet",
               buttonColor: StaticColors.blueColor,
@@ -222,159 +218,159 @@ class CustomWidget {
   }
 
   static walletStatus() {
-    Get.bottomSheet(
-        Container(
-
-      decoration:  BoxDecoration(color: StaticColors.whiteColor,
+    Get.bottomSheet(Container(
+      decoration: BoxDecoration(
+          color: StaticColors.whiteColor,
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15))),
       child: StaticKPadding.kPadding(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           CircleAvatar(
             backgroundColor: Colors.green,
             radius: 40,
-            child: Icon(Icons.check, color: StaticColors.whiteColor,size: 25),
+            child: Icon(Icons.check, color: StaticColors.whiteColor, size: 25),
           ),
-
           Text("Your wallet charge successfully",
               style: StaticTextStyles.headingStyle),
-          Column(crossAxisAlignment: CrossAxisAlignment.center,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("You are able"
-                " to make bidding now! "
-               ,style: StaticTextStyles.normalGreyTextStyle),
-              Text("Good luck",style: StaticTextStyles.normalGreyTextStyle),
-
-
-
+              Text(
+                  "You are able"
+                  " to make bidding now! ",
+                  style: StaticTextStyles.normalGreyTextStyle),
+              Text("Good luck", style: StaticTextStyles.normalGreyTextStyle),
             ],
           ),
-
-
           extendedButton(
               onTap: () {
                 Get.back();
-
-
               },
               buttonText: "Done",
               buttonColor: StaticColors.blueColor,
               textColor: StaticColors.whiteColor)
-
-
-
-
-
-
-
         ],
       )),
     ));
   }
+
   static biddingAmountBottomSheet(int carId) {
-    TextEditingController controller=TextEditingController();
-
-    if(Get.isBottomSheetOpen!){
-      Get.back();
-    }
+    TextEditingController controller = TextEditingController();
     Get.bottomSheet(
-        Container(
+        SingleChildScrollView(
+            child: StaticKPadding.kPadding(
+                child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 25,
+            ),
+            Text("Enter your bidding offer amount here.",
+                textAlign: TextAlign.center,
+                style: StaticTextStyles.headingStyle),
+            const SizedBox(
+              height: 25,
+            ),
+            Text(
+                "You are able"
+                " to make bidding now! Good luck",
+                style: StaticTextStyles.normalGreyTextStyle),
+            const SizedBox(
+              height: 25,
+            ),
+            customTextFormField(
+                hintText: "Amount SAR",
+                controller: controller,
+                inputType: TextInputType.number),
+            const SizedBox(
+              height: 40,
+            ),
+            extendedButton(
+                onTap: () async {
+                  if (controller.text.isEmpty) return;
+                  String body = await ApiServices.simplePost(
+                      "Bidding/Bid?userId=${getUser().result!.id}&carId=$carId&amount=${controller.text}");
+                  logger.i(body);
+                  if (Get.isBottomSheetOpen == true) {
+                    Get.back();
+                    showToast(msg: 'Bidding has been placed');
+                  }
 
-      decoration:  BoxDecoration(color: StaticColors.whiteColor,
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(15), topRight: Radius.circular(15))),
-      child: StaticKPadding.kPadding(
-          child: Column(
-mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-
-          // CircleAvatar(
-          //   backgroundColor: Colors.green,
-          //   radius: 40,
-          //   child: Icon(Icons.check, color: StaticColors.whiteColor,size: 25),
-          // ),
-
-          const SizedBox(height: 25,),
-          Text("Enter your bidding offer amount here.",
-              textAlign: TextAlign.center,
-              style: StaticTextStyles.headingStyle),
-          const SizedBox(height: 25,),
-
-          Text("You are able"
-              " to make bidding now! Good luck",style: StaticTextStyles.normalGreyTextStyle),
-
-
-          const SizedBox(height: 25,),
-
-          customTextFormField(hintText: "Amount SAR",controller:controller ),
-
-          const SizedBox(height: 40,),
-
-          extendedButton(
-              onTap: () async {
-                if(controller.text.isEmpty)return;
-                String body = await ApiServices.simplePost("Bidding/Bid?userId=${getUser().result!.id}&carId=$carId&amount=${controller.text}");
-                if(body.isEmpty  ) {
-                  Get.back();
-                }
-              },
-              buttonText: "Done",
-              buttonColor: StaticColors.blueColor,
-              textColor: StaticColors.whiteColor)
-
-
-
-
-
-
-
-        ],
-      )),
-    ));
+                  if (body.isEmpty) {
+                    Get.back();
+                  }
+                },
+                buttonText: "Done",
+                buttonColor: StaticColors.blueColor,
+                textColor: StaticColors.whiteColor)
+          ],
+        ))),
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(15), topLeft: Radius.circular(15))));
   }
 
+  static Future<dynamic> customDialogBox(
+      {String subTitle = "Sub Title"}) async {
+    TextEditingController textEditingController = TextEditingController();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return await Get.defaultDialog(
+      content: SizedBox(
+        width: width,
+        child: Column(
+          children: [
+            Text(
+              subTitle,
+              style: StaticTextStyles.normalBlackTextStyle,
+              textAlign: TextAlign.center,
+            ),
+            WhiteSpacer.verticalSpace(25),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: customTextFormField(
+                  inputType: TextInputType.number,
+                  hintText: "Enter Amount SAR",
+                  controller: textEditingController),
+            ),
+            WhiteSpacer.verticalSpace(10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                customizedButton(
+                    buttonColor: StaticColors.blueColor,
+                    onTap: () {
+                      if (textEditingController.text.isEmpty) {
+                        showToast(msg: "Please enter amount");
+                        return ;
+                      }
+                      Get.back(result: double.parse(textEditingController.text)*100);
+                    },
+                    textColor: StaticColors.whiteColor,
+                    buttonText: "Charge wallet",
+                    buttonWidth: .35),
+                customizedButton(
+                    buttonColor: StaticColors.greyColor,
+                    onTap: () {
+                      Get.back();
+                    },
+                    textColor: StaticColors.whiteColor,
+                    buttonText: "Cancel",
+                    buttonWidth: .35),
+              ],
+            )
+          ],
+        ),
+      ),
+      titlePadding: EdgeInsets.all(20),
+      barrierDismissible: false,
+    );
+  }
 }
 
 extendedButton({
@@ -416,7 +412,7 @@ customizedButton(
     child: Container(
       width: width * buttonWidth,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Center(
           child: Text(
             buttonText,
@@ -430,18 +426,17 @@ customizedButton(
   );
 }
 
-Widget customTextFormField({
-  bool isOutLinedBorder = false,
-  ValueChanged<String>? onChange,
-  TextInputType? inputType,
-  FormFieldValidator<String>? validator,
-  Key? key,
-  bool obscureText = false,
-  String hintText = "Hint Text",
-  String? labelText,
-  Widget? suffixIcon,
-  TextEditingController? controller
-}) {
+Widget customTextFormField(
+    {bool isOutLinedBorder = false,
+    ValueChanged<String>? onChange,
+    TextInputType? inputType,
+    FormFieldValidator<String>? validator,
+    Key? key,
+    bool obscureText = false,
+    String hintText = "Hint Text",
+    String? labelText,
+    Widget? suffixIcon,
+    TextEditingController? controller}) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 10.0),
     child: TextFormField(
@@ -450,7 +445,7 @@ Widget customTextFormField({
       validator: validator,
       keyboardType: inputType,
       onChanged: onChange,
-      controller:controller ,
+      controller: controller,
       decoration: InputDecoration(
           hintStyle: TextStyle(color: StaticColors.greyColor.withOpacity(.4)),
           suffixIcon: suffixIcon,

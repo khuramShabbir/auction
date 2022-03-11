@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:auction/api_services.dart';
-import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/models/auction/GetAllAuctions.dart';
 import 'package:auction/models/wallet/WalletModel.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
+import 'package:auction/views/payment_method_screens/web_view_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -42,20 +40,35 @@ class AuctionProvider extends ChangeNotifier {
 
     walletModel = walletModelFromJson(body);
     walletAmount = walletModel!.result.amount;
-    if (walletAmount! < 10) {
-       CustomWidget.addWalletBottomSheet();
+    if (walletAmount! >=result.minimumBidAmount) {
+      CustomWidget.biddingAmountBottomSheet(result.carInformationId);
       return;
+
+
     }
+
+ var amount=  await CustomWidget.customDialogBox(subTitle: "You have low balance to complete this process");
+     if(amount!=null){
+       Get.to(()=>PaymentWebView(initUrl: "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=$amount"));
+       
+     }
+     
+
+
+
+
+    // CustomWidget.addWalletBottomSheet();
+
 
   }
 
-  // bidding() async {
-  //
-  //   String body = await ApiServices.simplePost(ApiServices.BIDDING);
-  //   if(body.isEmpty){
-  //     showToast(msg:"Some thingWent wrong! try again later");
-  //
-  //   } showToast(msg:"Bidding has been placed successfully.");
-  //   logger.e(body);
-  // }
+  /*bidding() async {
+
+    String body = await ApiServices.simplePost(ApiServices.BIDDING);
+    if(body.isEmpty){
+      showToast(msg:"Some thingWent wrong! try again later");
+
+    } showToast(msg:"Bidding has been placed successfully.");
+    logger.e(body);
+  }*/
 }

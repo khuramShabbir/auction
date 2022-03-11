@@ -9,10 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-
-
-
-
 class AllAuctionScreen extends StatefulWidget {
   const AllAuctionScreen({Key? key}) : super(key: key);
 
@@ -27,10 +23,6 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
   void initState() {
     super.initState();
     auction.getAuction();
-   logger.i( boxStorage.read(StorageKey.FULL_USER_BODY));
-
-
-
   }
 
   @override
@@ -39,6 +31,7 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
       child: Consumer<AuctionProvider>(
         builder: (BuildContext context, data, Widget? child) {
           return Scaffold(
+              resizeToAvoidBottomInset: true,
               backgroundColor: StaticColors.whiteColor,
               appBar: CustomAppBar.appBar(),
               body: data.isAuctionLoaded
@@ -58,13 +51,13 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                               shrinkWrap: true,
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisSpacing: 2,
-                                mainAxisSpacing: 2,
+                                crossAxisSpacing: 3,
+                                mainAxisSpacing: 10,
                                 crossAxisCount: 2,
                               ),
                               itemBuilder: (context, index) {
                                 Result result = data.allAuctions!.result[index];
-                              Future.delayed(Duration.zero,(){  CustomWidget.biddingAmountBottomSheet(result.carInformationId);});
+
                                 return InkWell(
                                   onTap: () {
                                     Get.to(
@@ -101,7 +94,8 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(bottom: 4,right: 4,left: 4),
+                                          padding: const EdgeInsets.only(
+                                              bottom: 4, right: 4, left: 4),
                                           child: Column(
                                             children: [
                                               Row(
@@ -141,21 +135,23 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                                                             FontWeight.w100),
                                                   ),
                                                   InkWell(
-                                                    onTap:(){
-                                                      // data.getWallet(result);
+                                                    onTap: () {
+                                                      data.getWallet(result);
 
 
+                                                      //  data.getWallet(result);
                                                     },
-
-
                                                     child: Container(
-                                                      constraints: BoxConstraints(
-                                                          minWidth: width * .18),
+                                                      constraints:
+                                                          BoxConstraints(
+                                                              minWidth:
+                                                                  width * .18),
                                                       child: Padding(
-                                                        padding: const EdgeInsets
-                                                                .symmetric(
-                                                            horizontal: 8.0,
-                                                            vertical: 8),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal: 8.0,
+                                                                vertical: 8),
                                                         child: Center(
                                                           child: Text(
                                                             "BID ${double.parse(result.bidding.biddingAmount.toString()).toInt()}",
@@ -169,8 +165,8 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                                                           color: StaticColors
                                                               .orangeColor,
                                                           borderRadius:
-                                                              BorderRadius.circular(
-                                                                  5)),
+                                                              BorderRadius
+                                                                  .circular(5)),
                                                     ),
                                                   ),
                                                 ],

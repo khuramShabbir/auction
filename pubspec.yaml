@@ -46,6 +46,7 @@ dependencies:
   intl_phone_field: ^3.0.1
   searchfield: ^0.6.2
   flutter_rating_bar: ^4.0.0
+  webview_flutter: ^3.0.1
 
 
 
