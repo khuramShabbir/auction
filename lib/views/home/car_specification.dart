@@ -1,6 +1,3 @@
-
-import 'package:auction/api_services.dart';
-import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/models/auction/GetAllAuctions.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
@@ -10,18 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CarSpecification extends StatefulWidget {
-
   final Result? result;
-  const CarSpecification({Key? key,this.result }) : super(key: key);
+
+  const CarSpecification({Key? key, this.result}) : super(key: key);
 
   @override
   _CarSpecificationState createState() => _CarSpecificationState(this.result);
 }
 
-
 class _CarSpecificationState extends State<CarSpecification> {
-
-  String exampleText = "Tame Impala is the psychedelic music project of Australian multi-instrumentalist Kevin Parker. "
+  String exampleText =
+      "Tame Impala is the psychedelic music project of Australian multi-instrumentalist Kevin Parker. "
       "In the recording studio,Parker writes, records, performs,"
       " and produces all of theproject's music.";
   String imageUrl =
@@ -29,16 +25,13 @@ class _CarSpecificationState extends State<CarSpecification> {
       "winter/2021-Winter-BHP-Wrangler-"
       "Promotile-Desktop.jpg";
   Result? result;
+
   _CarSpecificationState(this.result);
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(result!.carImages.isNotEmpty){
-      imageUrl="${ApiServices.BASE_URL}${result!.carImages[0].imagePath}";
-      logger.e(imageUrl);
-    }
-
   }
 
   @override
@@ -54,23 +47,33 @@ class _CarSpecificationState extends State<CarSpecification> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
-                    image: NetworkImage(imageUrl), fit: BoxFit.fill)),
+                    image:
+                    result!.carImages.isEmpty?const NetworkImage("https://image.shutterstock.com/image-"
+                        "vector/no-image-available-sign-internet-26"
+                        "0nw-261719003.jpg"):
+
+                    NetworkImage(result!.carImages[0].imagePath),
+                    fit: BoxFit.fill)),
           ),
           const SizedBox(height: 10),
           SizedBox(
-            height:75,
+            height: 75,
             child: ListView.builder(
-              itemCount: 25,
+              itemCount: result!.carImages.length,
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return Row(
                   children: [
-                    Container(width: 85,height: 85,
+                    Container(
+                      width: 85,
+                      height: 85,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                              image: NetworkImage(imageUrl), fit: BoxFit.fill)),
+                              image: NetworkImage(
+                                  result!.carImages[index].imagePath),
+                              fit: BoxFit.fill)),
                     ),
                     const SizedBox(width: 10),
                   ],
@@ -102,19 +105,20 @@ class _CarSpecificationState extends State<CarSpecification> {
               ),
             ],
           ),
-
-          Expanded(child: SizedBox()),
-          extendedButton(onTap: (){ bottomSheet();},
-              buttonColor: StaticColors.blueColor, textColor: StaticColors.whiteColor,
-            buttonText: "Status"
-
-          )
-
+          const Expanded(child: SizedBox()),
+          extendedButton(
+              onTap: () {
+                bottomSheet();
+              },
+              buttonColor: StaticColors.blueColor,
+              textColor: StaticColors.whiteColor,
+              buttonText: "Status")
         ],
       )),
     );
   }
 }
+
 bottomSheet() {
   return Get.bottomSheet(
       Container(
@@ -144,90 +148,90 @@ bottomSheet() {
                             image: NetworkImage(imageUrl), fit: BoxFit.fill)),
                     child: StaticKPadding.kPadding(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "BMW Q7",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: StaticColors.whiteColor),
+                        ),
+                        const SizedBox(height: 5),
+                        Row(
                           children: [
                             Text(
-                              "BMW Q7",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: StaticColors.whiteColor),
-                            ),
-                            const SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Text(
-                                  "Weekdays",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w200,
-                                      color: StaticColors.whiteColor),
-                                ),
-                                Padding(
-                                  padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                                  child: Container(
-                                      height: 20,
-                                      width: 1,
-                                      color: StaticColors.whiteColor),
-                                ),
-                                Text(
-                                  "7:00",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w200,
-                                      color: StaticColors.whiteColor),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              "Riyadh",
+                              "Weekdays",
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w200,
                                   color: StaticColors.whiteColor),
                             ),
-                            const SizedBox(height: 5),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Colors.red.withOpacity(.3)),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Container(
-                                          width: 10,
-                                          height: 10,
-                                          decoration: BoxDecoration(
-                                              color: Colors.red,
-                                              borderRadius:
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Container(
+                                  height: 20,
+                                  width: 1,
+                                  color: StaticColors.whiteColor),
+                            ),
+                            Text(
+                              "7:00",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w200,
+                                  color: StaticColors.whiteColor),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Riyadh",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w200,
+                              color: StaticColors.whiteColor),
+                        ),
+                        const SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Colors.red.withOpacity(.3)),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius:
                                               BorderRadius.circular(100)),
-                                        ),
-                                      ),
-                                      const Text(
-                                        "Acceptable",
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                      const SizedBox(width: 10)
-                                    ],
+                                    ),
                                   ),
-                                ),
-                                const Text(
-                                  "25000 / SAR",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
+                                  const Text(
+                                    "Acceptable",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                  const SizedBox(width: 10)
+                                ],
+                              ),
+                            ),
+                            const Text(
+                              "25000 / SAR",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
-                        )))),
+                        )
+                      ],
+                    )))),
             const Icon(Icons.cancel, size: 100, color: Colors.red),
             const SizedBox(height: 15),
             Text("Good Luck Again", style: StaticTextStyles.headingStyle),
@@ -235,7 +239,7 @@ bottomSheet() {
               padding: const EdgeInsets.symmetric(horizontal: 50.0),
               child: Text(
                   "Sorry the car was rejected from the owner,"
-                      " and the down payment will be refunded to your wallet",
+                  " and the down payment will be refunded to your wallet",
                   style: StaticTextStyles.normalGreyTextStyle),
             ),
             const SizedBox(height: 15),

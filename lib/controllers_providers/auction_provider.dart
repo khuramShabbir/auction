@@ -21,7 +21,7 @@ class AuctionProvider extends ChangeNotifier {
   String? expMonth;
   String? expDate;
   bool isAuctionLoaded = false;
-  int carId=0;
+  int carId = 0;
 
   getAuction() async {
     String body = await ApiServices.simpleGet(ApiServices.GET_AUCTION);
@@ -32,7 +32,8 @@ class AuctionProvider extends ChangeNotifier {
   }
 
   getWallet(r.Result result) async {
-    String body = await ApiServices.simplePost("${ApiServices.GET_WALLET}${getUser().result!.id.toString()}");
+    String body = await ApiServices.simplePost(
+        "${ApiServices.GET_WALLET}${getUser().result!.id.toString()}");
     if (body.isEmpty) {
       showToast(msg: "Some thing went wrong! please try again later");
       return;
@@ -40,29 +41,23 @@ class AuctionProvider extends ChangeNotifier {
 
     walletModel = walletModelFromJson(body);
     walletAmount = walletModel!.result.amount;
-    if (walletAmount! >=result.minimumBidAmount) {
+    if (walletAmount! >= result.minimumBidAmount) {
       CustomWidget.biddingAmountBottomSheet(result.carInformationId);
       return;
-
-
     }
 
- var amount=  await CustomWidget.customDialogBox(subTitle: "You have low balance to complete this process");
-     if(amount!=null){
-       Get.to(()=>PaymentWebView(initUrl: "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=$amount"));
-       
-     }
-     
-
-
-
+    var amount = await CustomWidget.customDialogBox(
+        subTitle: "You have low balance to complete this process");
+    if (amount != null) {
+      Get.to(() => PaymentWebView(
+          initUrl:
+              "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=$amount"));
+    }
 
     // CustomWidget.addWalletBottomSheet();
-
-
   }
 
-  /*bidding() async {
+/*bidding() async {
 
     String body = await ApiServices.simplePost(ApiServices.BIDDING);
     if(body.isEmpty){

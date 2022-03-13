@@ -47,6 +47,8 @@ dependencies:
   searchfield: ^0.6.2
   flutter_rating_bar: ^4.0.0
   webview_flutter: ^3.0.1
+  cached_network_image:
+  percent_indicator: ^3.4.0
 
 
 
