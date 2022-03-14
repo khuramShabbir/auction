@@ -1,38 +1,59 @@
+import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/utils/const.dart';
-import 'package:auction/views/home/create_campaign_Screens/step3_screen.dart';
+import 'package:auction/views/home/create_campaign_Screens/bank_receipt_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
+import '../../../models/auction/auction_by_user.dart';
 import '../../../utils/widgets.dart';
 
-class CreateCampaignScreen extends StatefulWidget {
-  const CreateCampaignScreen({Key? key}) : super(key: key);
+class SoldCarDetailScreen extends StatefulWidget {
+  final Result? result;
+
+  const SoldCarDetailScreen({Key? key, this.result}) : super(key: key);
 
   @override
-  _CreateCampaignScreenState createState() => _CreateCampaignScreenState();
+  _SoldCarDetailScreenState createState() =>
+      _SoldCarDetailScreenState(this.result);
 }
 
-class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
+class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
+  Result? result;
+
+  _SoldCarDetailScreenState(this.result);
+
+  @override
+  void initState()  {
+    super.initState();
+     auctionProvider.getBankAccount();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            appBar: CustomAppBar.appBar(title: "Create a campaign"),
-            body: Column(
+    return Consumer<AuctionProvider>(
+      builder: (BuildContext context, data, Widget? child) {
+    double amount = result!.biddingList.last.biddingAmount;
+    double mazadCommission = amount / 100 * 2;
+    double vat = amount / 100 * 2;
+    double total = amount + mazadCommission + vat;
 
-              children: [
-                stepper(2,"Target amount"),
-                WhiteSpacer.verticalSpace(20),
-                StaticKPadding.kPadding(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+    return data.isBankDetailLoaded?Scaffold(
+        appBar: CustomAppBar.appBar(title: "Create a campaign"),
+        body: Column(
+          children: [
+            stepper(2, "Target amount"),
+            WhiteSpacer.verticalSpace(20),
+            StaticKPadding.kPadding(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Car value",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text("29.96" " SAR",
+                        Text(amount.toString() + " SAR",
                             style: StaticTextStyles.normalBlackTextStyle)
                       ],
                     ),
@@ -42,7 +63,7 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                       children: [
                         Text("Mazad Commission",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text("29.96" " SAR",
+                        Text(mazadCommission.toString() + " SAR",
                             style: StaticTextStyles.normalBlackTextStyle)
                       ],
                     ),
@@ -52,7 +73,7 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                       children: const [
                         Text("Down Payment",
                             style: TextStyle(color: Colors.red)),
-                        Text("-29.96"  " SAR",
+                        Text("00.00" " SAR",
                             style: TextStyle(color: Colors.red))
                       ],
                     ),
@@ -62,7 +83,7 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                       children: [
                         Text("vat",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text("2.9" " SAR",
+                        Text(vat.toString() + " SAR",
                             style: StaticTextStyles.normalBlackTextStyle)
                       ],
                     ),
@@ -72,7 +93,7 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                       children: [
                         Text("Total",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text("29.96" " SAR",
+                        Text("${double.parse(total.toString()).toStringAsFixed(2)} SAR",
                             style: StaticTextStyles.subTitleStyleBlack)
                       ],
                     ),
@@ -100,7 +121,18 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                         Text("NAME : ",
                             style: StaticTextStyles.normalBlackTextStyle),
                         Text(
-                          "Khaleed Al-kayali",
+                          data.bankAccount!.result[0].accountName,
+                          style: StaticTextStyles.normalGreyTextStyle,
+                        )
+                      ],
+                    ),
+                    WhiteSpacer.verticalSpace(10),
+                    Row(
+                      children: [
+                        Text("BANK : ",
+                            style: StaticTextStyles.normalBlackTextStyle),
+                        Text(
+                          data.bankAccount!.result[0].bankName,
                           style: StaticTextStyles.normalGreyTextStyle,
                         )
                       ],
@@ -111,7 +143,7 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                         Text("Account Number : ",
                             style: StaticTextStyles.normalBlackTextStyle),
                         Text(
-                          "900127212570007",
+                         data.bankAccount!.result[0].accountNumber,
                           style: StaticTextStyles.normalGreyTextStyle,
                         )
                       ],
@@ -122,25 +154,28 @@ class _CreateCampaignScreenState extends State<CreateCampaignScreen> {
                         Text("IBAN : ",
                             style: StaticTextStyles.normalBlackTextStyle),
                         Text(
-                          "SA7715000900127212570007",
+                          data.bankAccount!.result[0].iban,
                           style: StaticTextStyles.normalGreyTextStyle,
                         )
                       ],
                     ),
-
                   ],
                 )),
-                const Expanded(child: SizedBox()),
-                extendedButton(
-                    onTap: () {
-                      Get.to(()=>const UploadCarPhotoScreen());
-                    },
-                    buttonText: "Next",
-                    buttonColor: StaticColors.orangeColor.withOpacity(.3),
-                    textColor: StaticColors.greyColor),
-                WhiteSpacer.verticalSpace(20)
-
-              ],
-            )));
+            const Expanded(child: SizedBox()),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: extendedButton(
+                  onTap: ()async {
+                    Get.to(() => const BankReceiptScreen());
+                  },
+                  buttonText: "Next",
+                  buttonColor: StaticColors.orangeColor.withOpacity(.3),
+                  textColor: StaticColors.greyColor),
+            ),
+            WhiteSpacer.verticalSpace(20)
+          ],
+        )):Center(child: CircularProgressIndicator(color: StaticColors.orangeColor),);
+      },
+    );
   }
 }

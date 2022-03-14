@@ -1,3 +1,4 @@
+import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/models/auction/GetAllAuctions.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
@@ -30,8 +31,9 @@ class _CarSpecificationState extends State<CarSpecification> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+        auctionProvider.getAuctionByUser();
+
   }
 
   @override

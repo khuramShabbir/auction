@@ -2,31 +2,31 @@ import 'dart:convert';
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class ApiServices {
-
-
-
-
   static String BASE_URL = 'https://auction.api.deeps.info/api/';
   static String REGISTER = "accounts/register";
   static String SIGN_IN = "accounts/signIn";
   static String GET_AUCTION = "auction/get-Auctions";
   static final _HEADERS = {'Content-Type': 'application/json'};
   static String GET_WALLET = 'Wallet/Get-Wallet?userId=';
-  // static String BIDDING = '';
   static String ALL_USERS = 'users';
+  static String PAYMENT_EVIDENCE = 'PaymentEvidence/Upload-Payment-Evidence';
 
-  static Future<String> postMultiPart(String feedUrl, Map<String, String> body,
-      {String errorText = "Something went wrong"}) async {
+
+
+  static Future<String> postMultiPart(
+    String feedUrl,
+    Map<String, String> body, {
+    String errorText = "Something went wrong",
+  }) async {
     var request = http.MultipartRequest("POST", Uri.parse(BASE_URL + feedUrl));
     request.fields.addAll(body);
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       String resBody = await response.stream.bytesToString();
-
-      showToast(msg: "User Created");
 
       return resBody;
     } else {
@@ -42,6 +42,29 @@ class ApiServices {
       return "";
     }
   }
+
+  static Future<String> postMultiPartWithFile(
+      String feedUrl, List<String> paths, {Map<String, String>? body}) async {
+    var request = http.MultipartRequest('POST', Uri.parse(BASE_URL + feedUrl));
+
+    if (paths != null) {
+      for (var singlePath in paths)  {
+        request.files.add(await http.MultipartFile.fromPath(
+            'PaymentProof', singlePath));
+        }
+    }
+
+    request.fields.addAll(body!);
+        var response = await request.send();
+
+    if(response.statusCode==200 || response.statusCode==201){
+      return response.stream.bytesToString();
+    }
+
+  return '';
+  }
+
+
 
   static Future<String> simplePostWithBody(
       String feedUrl, Map<String, String> body) async {
@@ -72,9 +95,6 @@ class ApiServices {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return response.body;
     } else {
-      logger.e(response.body);
-
-      showToast(msg: "Some Thing Went Wrong");
       return '';
     }
   }
@@ -90,13 +110,4 @@ class ApiServices {
     logger.e(response.body);
     return "";
   }
-
-
-
-
-
-
-
-
-
 }

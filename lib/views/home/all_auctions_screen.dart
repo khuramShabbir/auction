@@ -15,14 +15,12 @@ class AllAuctionScreen extends StatefulWidget {
 }
 
 class _AllAuctionScreenState extends State<AllAuctionScreen> {
-  var auction = Provider.of<AuctionProvider>(Get.context!, listen: false);
+
 
   @override
   void initState() {
     super.initState();
-    auction.getAuction();
-
-
+    auctionProvider.getAuction();
   }
 
   @override
@@ -210,7 +208,7 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                         ],
                       ))
                   :  Center(
-                      child: CircularProgressIndicator(color: StaticColors.orangeColor,backgroundColor: Colors.transparent,),
+                      child: CircularProgressIndicator(color: StaticColors.orangeColor,backgroundColor: Colors.transparent),
                     ));
         },
       ),

@@ -2,14 +2,14 @@ import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:flutter/material.dart';
 
-class CampaignPreviewScreen extends StatefulWidget {
-  const CampaignPreviewScreen({Key? key}) : super(key: key);
+class ViewReceiptScreen extends StatefulWidget {
+  const ViewReceiptScreen({Key? key}) : super(key: key);
 
   @override
-  _CampaignPreviewScreenState createState() => _CampaignPreviewScreenState();
+  _ViewReceiptScreenState createState() => _ViewReceiptScreenState();
 }
 
-class _CampaignPreviewScreenState extends State<CampaignPreviewScreen> {
+class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

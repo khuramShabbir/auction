@@ -347,9 +347,11 @@ class CustomWidget {
                     onTap: () {
                       if (textEditingController.text.isEmpty) {
                         showToast(msg: "Please enter amount");
-                        return ;
+                        return;
                       }
-                      Get.back(result: double.parse(textEditingController.text)*100);
+                      Get.back(
+                          result:
+                              double.parse(textEditingController.text) * 100);
                     },
                     textColor: StaticColors.whiteColor,
                     buttonText: "Charge wallet",
@@ -370,6 +372,56 @@ class CustomWidget {
       titlePadding: EdgeInsets.all(20),
       barrierDismissible: false,
     );
+  }
+
+  static Future<String> imagePicker()async {
+    String value='';
+   await  Get.bottomSheet(
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            WhiteSpacer.verticalSpace(20),
+            Text(
+              "Upload Your Receipt",
+              style: StaticTextStyles.subTitleStyleBlack,
+            ),
+            WhiteSpacer.verticalSpace(30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                customizedButton(
+                    onTap: () {
+
+                      value= "Gallery";
+                      Get.back(result: value);
+
+
+                    },
+                    buttonColor: StaticColors.blueColor,
+                    textColor: StaticColors.whiteColor,
+                    buttonWidth: .25,
+                    buttonText: "Gallery"),
+                customizedButton(
+                    onTap: () {
+                      value= "Camera";
+                      Get.back(result: value);
+                    },
+                    buttonColor: StaticColors.blueColor,
+                    textColor: StaticColors.whiteColor,
+                    buttonWidth: .25,
+                    buttonText: "Camera"),
+              ],
+            ),
+            WhiteSpacer.verticalSpace(30),
+          ],
+        ),
+        isDismissible: false,
+        backgroundColor: StaticColors.whiteColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)));
+     return value;
+
+
+
   }
 }
 
