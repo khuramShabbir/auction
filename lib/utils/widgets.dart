@@ -528,7 +528,7 @@ Widget customTextFormField(
   );
 }
 
-Future showProgressCircular() async {
+ showProgressCircular() async {
   Get.dialog(Center(
     child: CircularProgressIndicator(
       backgroundColor: StaticColors.greyColor.withOpacity(.2),

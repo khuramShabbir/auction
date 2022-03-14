@@ -1,11 +1,13 @@
 import 'package:auction/controllers_providers/auction_provider.dart';
-import 'package:auction/controllers_providers/auth_provider.dart';
+
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
-import 'package:auction/views/home/create_campaign_Screens/sold_car_detail_screen.dart';
 import 'package:auction/views/home/create_campaign_Screens/payment_complete_screen.dart';
+import 'package:auction/views/home/create_campaign_Screens/sold_car_detail_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:provider/provider.dart';
 
 class MyCarsScreen extends StatefulWidget {
@@ -40,11 +42,21 @@ class _MyCarsState extends State<MyCarsScreen> {
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
                             child: InkWell(
                               onTap: () async {
+                                if(!data.auctionByUser!.result[index].isCarSold) return;
+                                auctionProvider.isBankDetailLoaded = false;
+                                auctionProvider.bankAccount = null;
 
+                                bool isPaymentFound =
+                                    await auctionProvider.getPaymentEvidence(
+                                        data.auctionByUser!.result[index]);
 
-                              await  data.getPaymentEvidence();
-
-
+                                if (isPaymentFound == false) {
+                                  Get.to(() => SoldCarDetailScreen(
+                                      result:
+                                          data.auctionByUser!.result[index]));
+                                } else if (isPaymentFound == true) {
+                                  Get.to(() => PaymentCompleteScreen());
+                                }
 
                               },
                               child: Container(
@@ -117,8 +129,11 @@ class _MyCarsState extends State<MyCarsScreen> {
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(5),
-                                                color: Colors.green
-                                                    .withOpacity(.3)),
+                                                color: data.auctionByUser!
+                                                        .result[index].isCarSold
+                                                    ? Colors.green
+                                                    : Colors.red
+                                                        .withOpacity(.3)),
                                             child: Row(
                                               children: [
                                                 Padding(
@@ -128,7 +143,12 @@ class _MyCarsState extends State<MyCarsScreen> {
                                                     width: 10,
                                                     height: 10,
                                                     decoration: BoxDecoration(
-                                                        color: Colors.green,
+                                                        color: data
+                                                                .auctionByUser!
+                                                                .result[index]
+                                                                .isCarSold
+                                                            ? Colors.green
+                                                            : Colors.red,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(100)),
@@ -139,10 +159,15 @@ class _MyCarsState extends State<MyCarsScreen> {
                                                           .auctionByUser!
                                                           .result[index]
                                                           .isCarSold
-                                                      ? "Pending"
-                                                      : "Accepted",
-                                                  style: const TextStyle(
-                                                      color: Colors.green),
+                                                      ? "Accepted"
+                                                      : "Pending",
+                                                  style: TextStyle(
+                                                      color: data
+                                                              .auctionByUser!
+                                                              .result[index]
+                                                              .isCarSold
+                                                          ? Colors.green
+                                                          : Colors.red),
                                                 ),
                                                 const SizedBox(width: 10)
                                               ],

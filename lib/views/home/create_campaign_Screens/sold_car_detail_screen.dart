@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/create_campaign_Screens/bank_receipt_screen.dart';
@@ -24,28 +26,26 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
   _SoldCarDetailScreenState(this.result);
 
   @override
-  void initState()  {
+  void initState() {
     super.initState();
-     auctionProvider.getBankAccount();
+
+    Future.delayed(Duration.zero, () {
+      auctionProvider.getBankAccount(result!.user.userId);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AuctionProvider>(
       builder: (BuildContext context, data, Widget? child) {
-    double amount = result!.biddingList.last.biddingAmount;
-    double mazadCommission = amount / 100 * 2;
-    double vat = amount / 100 * 2;
-    double total = amount + mazadCommission + vat;
-
-    return data.isBankDetailLoaded?Scaffold(
-        appBar: CustomAppBar.appBar(title: "Create a campaign"),
-        body: Column(
-          children: [
-            stepper(2, "Target amount"),
-            WhiteSpacer.verticalSpace(20),
-            StaticKPadding.kPadding(
-                child: Column(
+        return Scaffold(
+            appBar: CustomAppBar.appBar(title: "Create a campaign"),
+            body: Column(
+              children: [
+                stepper(2, "Target amount"),
+                WhiteSpacer.verticalSpace(20),
+                StaticKPadding.kPadding(
+                    child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -53,7 +53,9 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                       children: [
                         Text("Car value",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text(amount.toString() + " SAR",
+                        Text(
+                            result!.biddingList.last.biddingAmount.toString() +
+                                " SAR",
                             style: StaticTextStyles.normalBlackTextStyle)
                       ],
                     ),
@@ -63,7 +65,7 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                       children: [
                         Text("Mazad Commission",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text(mazadCommission.toString() + " SAR",
+                        Text(2.toString() + " SAR",
                             style: StaticTextStyles.normalBlackTextStyle)
                       ],
                     ),
@@ -83,7 +85,7 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                       children: [
                         Text("vat",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text(vat.toString() + " SAR",
+                        Text(2.toString() + " SAR",
                             style: StaticTextStyles.normalBlackTextStyle)
                       ],
                     ),
@@ -93,88 +95,116 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                       children: [
                         Text("Total",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text("${double.parse(total.toString()).toStringAsFixed(2)} SAR",
+                        Text(
+                            "${double.parse(result!.biddingList.last.biddingAmount.toString()).toStringAsFixed(2)} SAR",
                             style: StaticTextStyles.subTitleStyleBlack)
                       ],
                     ),
                     WhiteSpacer.verticalSpace(20),
                     Text("Payment Info",
                         style: StaticTextStyles.subTitleStyleBlack),
-                    WhiteSpacer.verticalSpace(20),
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Image.asset(
-                          "assets/PngAssets/bankLogo10.png",
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      height: 75,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          color: StaticColors.whiteColor,
-                          borderRadius: BorderRadius.circular(15)),
-                    ),
-                    WhiteSpacer.verticalSpace(20),
-                    Row(
-                      children: [
-                        Text("NAME : ",
-                            style: StaticTextStyles.normalBlackTextStyle),
-                        Text(
-                          data.bankAccount!.result[0].accountName,
-                          style: StaticTextStyles.normalGreyTextStyle,
-                        )
-                      ],
-                    ),
-                    WhiteSpacer.verticalSpace(10),
-                    Row(
-                      children: [
-                        Text("BANK : ",
-                            style: StaticTextStyles.normalBlackTextStyle),
-                        Text(
-                          data.bankAccount!.result[0].bankName,
-                          style: StaticTextStyles.normalGreyTextStyle,
-                        )
-                      ],
-                    ),
-                    WhiteSpacer.verticalSpace(10),
-                    Row(
-                      children: [
-                        Text("Account Number : ",
-                            style: StaticTextStyles.normalBlackTextStyle),
-                        Text(
-                         data.bankAccount!.result[0].accountNumber,
-                          style: StaticTextStyles.normalGreyTextStyle,
-                        )
-                      ],
-                    ),
-                    WhiteSpacer.verticalSpace(10),
-                    Row(
-                      children: [
-                        Text("IBAN : ",
-                            style: StaticTextStyles.normalBlackTextStyle),
-                        Text(
-                          data.bankAccount!.result[0].iban,
-                          style: StaticTextStyles.normalGreyTextStyle,
-                        )
-                      ],
-                    ),
+                    data.isBankDetailLoaded
+                        ? Column(
+                            children: [
+                              WhiteSpacer.verticalSpace(20),
+                              Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Image.asset(
+                                    "assets/PngAssets/bankLogo10.png",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                height: 75,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    color: StaticColors.whiteColor,
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
+                              WhiteSpacer.verticalSpace(20),
+                              Row(
+                                children: [
+                                  Text("NAME : ",
+                                      style: StaticTextStyles
+                                          .normalBlackTextStyle),
+                                  Text(
+                                    data.bankAccount!.result[0].accountName,
+                                    style: StaticTextStyles.normalGreyTextStyle,
+                                  )
+                                ],
+                              ),
+                              WhiteSpacer.verticalSpace(10),
+                              Row(
+                                children: [
+                                  Text("BANK : ",
+                                      style: StaticTextStyles
+                                          .normalBlackTextStyle),
+                                  Text(
+                                    data.bankAccount!.result[0].bankName,
+                                    style: StaticTextStyles.normalGreyTextStyle,
+                                  )
+                                ],
+                              ),
+                              WhiteSpacer.verticalSpace(10),
+                              Row(
+                                children: [
+                                  Text("Account Number : ",
+                                      style: StaticTextStyles
+                                          .normalBlackTextStyle),
+                                  Text(
+                                    data.bankAccount!.result[0].accountNumber,
+                                    style: StaticTextStyles.normalGreyTextStyle,
+                                  )
+                                ],
+                              ),
+                              WhiteSpacer.verticalSpace(10),
+                              Row(
+                                children: [
+                                  Text("IBAN : ",
+                                      style: StaticTextStyles
+                                          .normalBlackTextStyle),
+                                  Text(
+                                    data.bankAccount!.result[0].iban,
+                                    style: StaticTextStyles.normalGreyTextStyle,
+                                  )
+                                ],
+                              ),
+                            ],
+                          )
+                        : Column(
+                            children: [
+                              WhiteSpacer.verticalSpace(20),
+                              Padding(
+                                padding: const EdgeInsets.all(25.0),
+                                child: Center(
+                                  child: Text(
+                                    "",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
                   ],
                 )),
-            const Expanded(child: SizedBox()),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: extendedButton(
-                  onTap: ()async {
-                    Get.to(() => const BankReceiptScreen());
-                  },
-                  buttonText: "Next",
-                  buttonColor: StaticColors.orangeColor.withOpacity(.3),
-                  textColor: StaticColors.greyColor),
-            ),
-            WhiteSpacer.verticalSpace(20)
-          ],
-        )):Center(child: CircularProgressIndicator(color: StaticColors.orangeColor),);
+                const Expanded(child: SizedBox()),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: extendedButton(
+                      onTap: () async {
+                        if (auctionProvider.isBankDetailLoaded) {
+                          Get.to(() => const BankReceiptScreen());
+                        }
+                      },
+                      buttonText: "Next",
+                      buttonColor: StaticColors.orangeColor.withOpacity(.3),
+                      textColor: StaticColors.greyColor),
+                ),
+                WhiteSpacer.verticalSpace(20)
+              ],
+            ));
       },
     );
   }

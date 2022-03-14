@@ -17,10 +17,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> carList = [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSILG8H9S3IzanrQQLzWKdDsX1Kp8BgqBb6gw&usqp=CAU",
-    "https://images.pexels.com/photos/241316/pexels-photo-241316.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuqYmHoSC_OG1v_96S5KyK055IVGAlyj3uiw&usqp=CAU"
-  ];
+'assets/PngAssets/Car0.png',
+'assets/PngAssets/Car1.png',
+'assets/PngAssets/Car2.png'
+
+
+
+
+    ];
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: height * .2,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(carList[0]), fit: BoxFit.cover),
+                          image: AssetImage(carList[0]), fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -106,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: height * .2,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(carList[0]), fit: BoxFit.cover),
+                          image: AssetImage(carList[1]), fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -154,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: height * .2,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(carList[0]), fit: BoxFit.cover),
+                          image: AssetImage(carList[2]), fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
@@ -164,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "auction that interest you",
+                            "Parts that interest you",
                             style: TextStyle(
                                 color: StaticColors.whiteColor,
                                 fontWeight: FontWeight.bold),
@@ -173,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Row(
                               children: [
-                                Text("Get Bid",
+                                Text("Get Parts",
                                     style: TextStyle(
                                         color: StaticColors.whiteColor,
                                         fontWeight: FontWeight.bold)),

@@ -10,31 +10,28 @@ class PaymentCompleteScreen extends StatefulWidget {
   const PaymentCompleteScreen({Key? key}) : super(key: key);
 
   @override
-  _PaymentCompleteScreenState createState() =>
-      _PaymentCompleteScreenState();
+  _PaymentCompleteScreenState createState() => _PaymentCompleteScreenState();
 }
 
 class _PaymentCompleteScreenState extends State<PaymentCompleteScreen> {
-
-
-
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuctionProvider>(builder: (BuildContext context, value, Widget? child) { return Scaffold(
-      appBar: CustomAppBar.appBar(title: "Complete", action: [
-        Padding(
-          padding: const EdgeInsets.only(right: 20.0),
-          child: Center(
-            child: Text(
-              "Preview",
-              style: TextStyle(color: StaticColors.blueColor),
-            ),
-          ),
-        )
-      ]),
-      body: StaticKPadding.kPadding(
-          child: Column(
+    return Consumer<AuctionProvider>(
+      builder: (BuildContext context, value, Widget? child) {
+        return Scaffold(
+          appBar: CustomAppBar.appBar(title: "Complete", action: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: Center(
+                child: Text(
+                  "",
+                  style: TextStyle(color: StaticColors.blueColor),
+                ),
+              ),
+            )
+          ]),
+          body: StaticKPadding.kPadding(
+              child: Column(
             children: [
               WhiteSpacer.verticalSpace(10),
               Column(
@@ -53,27 +50,28 @@ class _PaymentCompleteScreenState extends State<PaymentCompleteScreen> {
                     "Create successful campaign",
                     style: StaticTextStyles.subTitleStyleBlack,
                   ),
-
                 ],
               ),
               WhiteSpacer.verticalSpace(20),
               Text(
                 "Fundria will verify your campaign as soon as you publish"
-                    ". This can take 12-48 hours."
-                    " If there is any problem, we will notify you.",
+                ". This can take 12-48 hours."
+                " If there is any problem, we will notify you.",
                 style: StaticTextStyles.normalGreyTextStyle,
               ),
               WhiteSpacer.verticalSpace(20),
-              extendedButton(
-                onTap: () {
-                  Get.to(() => const ViewReceiptScreen());
-                },
-                buttonColor: StaticColors.blueColor,
-                buttonText: "View Receipt",
-                textColor: StaticColors.whiteColor,
-              ),
+              // extendedButton(
+              //   onTap: () {
+              //     // Get.to(() => const ViewReceiptScreen());
+              //   },
+              //   buttonColor: StaticColors.blueColor,
+              //   buttonText: "View Receipt",
+              //   textColor: StaticColors.whiteColor,
+              // ),
             ],
           )),
-    ); },);
+        );
+      },
+    );
   }
 }

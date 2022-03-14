@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:http/http.dart' as http;
@@ -13,8 +14,6 @@ class ApiServices {
   static String GET_WALLET = 'Wallet/Get-Wallet?userId=';
   static String ALL_USERS = 'users';
   static String PAYMENT_EVIDENCE = 'PaymentEvidence/Upload-Payment-Evidence';
-
-
 
   static Future<String> postMultiPart(
     String feedUrl,
@@ -43,28 +42,26 @@ class ApiServices {
     }
   }
 
-  static Future<String> postMultiPartWithFile(
-      String feedUrl, List<String> paths, {Map<String, String>? body}) async {
+  static Future<String> postMultiPartWithFile(String feedUrl, List<File> paths,
+      {Map<String, String>? body}) async {
     var request = http.MultipartRequest('POST', Uri.parse(BASE_URL + feedUrl));
 
     if (paths != null) {
-      for (var singlePath in paths)  {
-        request.files.add(await http.MultipartFile.fromPath(
-            'PaymentProof', singlePath));
-        }
+      for (var singlePath in paths) {
+        request.files.add(
+            await http.MultipartFile.fromPath('PaymentProof', singlePath.path));
+      }
     }
 
     request.fields.addAll(body!);
-        var response = await request.send();
+    var response = await request.send();
 
-    if(response.statusCode==200 || response.statusCode==201){
+    if (response.statusCode == 200 || response.statusCode == 201) {
       return response.stream.bytesToString();
     }
 
-  return '';
+    return '';
   }
-
-
 
   static Future<String> simplePostWithBody(
       String feedUrl, Map<String, String> body) async {
@@ -91,7 +88,7 @@ class ApiServices {
 
   static Future<String> simpleGet(String feedUrl) async {
     http.Response response = await http.get(Uri.parse(BASE_URL + feedUrl));
-
+    logger.e(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       return response.body;
     } else {
