@@ -34,6 +34,7 @@ class Result {
      required this.carInformationId,
      required this.isManual,
      required this.carName,
+     required this.image360,
      required this.isGps,
      required this.isBluetooth,
      required this.isSnowTires,
@@ -55,18 +56,23 @@ class Result {
      required this.isAvailableForAuction,
      required this.isCarSold,
      required this.reAuctionCount,
-     required this.minimumBidAmount,
+     required this.downPayment,
+     required this.bidIncrement,
+     required this.inspectionPdf,
+     required this.isWinning,
   });
 
   final dynamic carInformationId;
   final bool isManual;
   final String carName;
+  final String? image360;
   final bool isGps;
   final bool isBluetooth;
   final bool isSnowTires;
   final dynamic doors;
   final dynamic passengers;
   final String fuelTank;
+  final String? inspectionPdf;
   final String milleage;
   final String maxSpeed;
   final String maxPower;
@@ -80,12 +86,16 @@ class Result {
   final DateTime auctionCreated;
   final bool isDownpaymentCleared;
   final bool isAvailableForAuction;
+  final bool isWinning;
   final bool isCarSold;
   final dynamic reAuctionCount;
-  final dynamic minimumBidAmount;
+  final dynamic downPayment;
+  final dynamic bidIncrement;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     carInformationId: json["carInformationId"],
+    isWinning: json["isWinning"],
+    image360: json["image360"],
     isManual: json["isManual"],
     carName: json["carName"],
     isGps: json["isGPS"],
@@ -96,6 +106,7 @@ class Result {
     fuelTank: json["fuelTank"],
     milleage: json["milleage"],
     maxSpeed: json["maxSpeed"],
+    inspectionPdf: json["inspectionPdf"],
     maxPower: json["maxPower"],
     company: Company.fromJson(json["company"]),
     model: Model.fromJson(json["model"]),
@@ -109,12 +120,15 @@ class Result {
     isAvailableForAuction: json["isAvailableForAuction"],
     isCarSold: json["isCarSold"],
     reAuctionCount: json["reAuctionCount"],
-    minimumBidAmount: json["minimumBidAmount"],
+    downPayment: json["downPayment"],
+    bidIncrement: json["bidIncrement"],
   );
 
   Map<String, dynamic> toJson() => {
     "carInformationId": carInformationId,
+    "isWinning": isWinning,
     "isManual": isManual,
+    "image360": image360,
     "carName": carName,
     "isGPS": isGps,
     "isBluetooth": isBluetooth,
@@ -122,6 +136,7 @@ class Result {
     "doors": doors,
     "passengers": passengers,
     "fuelTank": fuelTank,
+    "inspectionPdf": inspectionPdf,
     "milleage": milleage,
     "maxSpeed": maxSpeed,
     "maxPower": maxPower,
@@ -137,7 +152,8 @@ class Result {
     "isAvailableForAuction": isAvailableForAuction,
     "isCarSold": isCarSold,
     "reAuctionCount": reAuctionCount,
-    "minimumBidAmount": minimumBidAmount,
+    "minimumBidAmount": downPayment,
+    "bidIncrement": bidIncrement,
   };
 }
 
@@ -184,7 +200,7 @@ class Company {
   });
 
   final dynamic id;
-  final String name;
+  final String? name;
 
   factory Company.fromJson(Map<String, dynamic> json) => Company(
     id: json["id"],
@@ -204,7 +220,7 @@ class Model {
   });
 
   final dynamic carModelId;
-  final String modelName;
+  final String? modelName;
 
   factory Model.fromJson(Map<String, dynamic> json) => Model(
     carModelId: json["carModelId"],
@@ -223,7 +239,7 @@ class User {
      required this.userId,
   });
 
-  final String name;
+  final String? name;
   final dynamic userId;
 
   factory User.fromJson(Map<String, dynamic> json) => User(

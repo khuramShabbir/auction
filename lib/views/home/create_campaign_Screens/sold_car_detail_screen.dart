@@ -65,17 +65,17 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                       children: [
                         Text("Mazad Commission",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text(2.toString() + " SAR",
+                        Text("${double.parse(result!.muzadCommission.toString()).toInt()} SAR",
                             style: StaticTextStyles.normalBlackTextStyle)
                       ],
                     ),
                     WhiteSpacer.verticalSpace(10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children:  [
                         Text("Down Payment",
                             style: TextStyle(color: Colors.red)),
-                        Text("00.00" " SAR",
+                        Text("${result!.downPayment}" " SAR",
                             style: TextStyle(color: Colors.red))
                       ],
                     ),
@@ -83,9 +83,9 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("vat",
+                        Text("VAT",
                             style: StaticTextStyles.normalGreyTextStyle),
-                        Text(2.toString() + " SAR",
+                        Text("(${result!.vatPercent??0}%) ${(double.parse(result!.biddingList.last.biddingAmount.toString())*((double.parse(result!.vatPercent))/100.0))} SAR",
                             style: StaticTextStyles.normalBlackTextStyle)
                       ],
                     ),
@@ -96,7 +96,15 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                         Text("Total",
                             style: StaticTextStyles.normalGreyTextStyle),
                         Text(
-                            "${double.parse(result!.biddingList.last.biddingAmount.toString()).toStringAsFixed(2)} SAR",
+                            "${
+                                (double.parse(result!.biddingList.last.biddingAmount.toString()) +
+                                double.parse(result!.muzadCommission.toString()).toInt() +
+                                (double.parse(result!.biddingList.last.biddingAmount.toString())*((double.parse(result!.vatPercent))/100.0)))
+                                - double.parse(result!.downPayment.toString())
+
+
+
+                            } SAR",
                             style: StaticTextStyles.subTitleStyleBlack)
                       ],
                     ),
@@ -195,12 +203,12 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                   child: extendedButton(
                       onTap: () async {
                         if (auctionProvider.isBankDetailLoaded) {
-                          Get.to(() => const BankReceiptScreen());
+                          Get.to(() => BankReceiptScreen(result!));
                         }
                       },
                       buttonText: "Next",
                       buttonColor: StaticColors.orangeColor.withOpacity(.3),
-                      textColor: StaticColors.greyColor),
+                      textColor: Colors.black),
                 ),
                 WhiteSpacer.verticalSpace(20)
               ],

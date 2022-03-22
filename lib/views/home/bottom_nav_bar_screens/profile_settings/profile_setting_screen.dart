@@ -2,6 +2,7 @@ import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/profile_settings/profile_editting_screen.dart';
+import 'package:auction/views/wallet/user_wallet.dart';
 import 'package:auction/views/welcome_screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -40,7 +41,11 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     leading: SvgPicture.asset('assets/SvgAssets/notification.svg',
                         color: StaticColors.blackColor)),
                 profileModules(
-                    onTap: () {},
+                    onTap: () {
+
+
+                      Get.to(UserWallet());
+                    },
                     title: 'Your wallet',
                     leading: SvgPicture.asset('assets/SvgAssets/Wallet.svg',
                         color: StaticColors.blackColor)),

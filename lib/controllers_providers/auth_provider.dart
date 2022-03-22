@@ -14,12 +14,13 @@ import 'package:provider/provider.dart';
 import '../utils/const.dart';
 import '../utils/widgets.dart';
 
-Logger logger = Logger();
-AuthProvider authProvider =
-    Provider.of<AuthProvider>(Get.context!, listen: false);
-final boxStorage = GetStorage();
+  Logger logger = Logger();
 
-class AuthProvider extends ChangeNotifier {
+  AuthProvider authProvider = Provider.of<AuthProvider>(Get.context!, listen: false);
+
+  final boxStorage = GetStorage();
+
+  class AuthProvider extends ChangeNotifier {
 
   String name = 'Welcome';
 
@@ -132,15 +133,16 @@ class AuthProvider extends ChangeNotifier {
   }
 
   loginUser() async {
+
     showProgressCircular();
+
     Map<String, String> body = {"username": email!, "password": password!};
+
     var bodyResponse = await ApiServices.simplePostWithBody(ApiServices.SIGN_IN, body);
+
     dismissDialog();
+
     saveUser(bodyResponse);
-
-
-
-
 
   }
 
@@ -152,4 +154,5 @@ class AuthProvider extends ChangeNotifier {
 
     Get.offAll(const DashBoardScreen());
   }
+
 }

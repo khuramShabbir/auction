@@ -1,12 +1,12 @@
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/controllers_providers/dashboard_provider.dart';
 import 'package:auction/utils/const.dart';
+import 'package:auction/utils/widgets.dart';
 import 'package:auction/views/home/all_auctions_screen.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/search_for_cars_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,20 +17,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> carList = [
-'assets/PngAssets/Car0.png',
-'assets/PngAssets/Car1.png',
-'assets/PngAssets/Car2.png'
-
-
-
-
-    ];
+    'assets/PngAssets/Car0.png',
+    'assets/PngAssets/Car1.png',
+    'assets/PngAssets/Car2.png'
+  ];
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Consumer<DashBoardProvider>(
         builder: (BuildContext context, data, child) {
       return Scaffold(
@@ -50,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.grey.withOpacity(.5),
                       fontWeight: FontWeight.bold,
                       fontSize: 17)),
-              Text("auction", style: StaticTextStyles.headingStyle),
+              Text("${getUser().result!.name}", style: StaticTextStyles.headingStyle),
               Expanded(
                   child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
@@ -103,7 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: InkWell(
                   onTap: () {
-                    Get.to(() => const SearchForCarsScreen());
+                    bottomSheetComingSoon();
+                    // Get.to(() => const SearchForCarsScreen());
                   },
                   child: Container(
                     width: width,
@@ -151,7 +145,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: InkWell(
                   onTap: () {
-                    Get.to(() => const SearchForCarsScreen());
+                    bottomSheetComingSoon();
+
+                    // Get.to(() => const SearchForCarsScreen());
                   },
                   child: Container(
                     width: width,
@@ -199,5 +195,48 @@ class _HomeScreenState extends State<HomeScreen> {
         )),
       );
     });
+  }
+
+  bottomSheetComingSoon() {
+    Get.bottomSheet(Material(
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(topRight: Radius.circular(10),
+                topLeft: Radius.circular(10)
+
+            )),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Alert",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Text("This services will be available so soon, keep in touch"),
+              SizedBox(
+                height: 25,
+              ),
+              customizedButton(
+                  onTap: () {
+                    Get.back();
+                  },
+                  textColor: Colors.white,
+                  buttonColor: StaticColors.orangeColor,
+                  buttonText: "Ok"),
+              SizedBox(
+                height: 25,
+              ),
+            ],
+          ),
+        ),
+      ),
+      color: Colors.transparent,
+    ));
   }
 }

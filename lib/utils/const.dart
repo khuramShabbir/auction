@@ -61,7 +61,7 @@ class StaticAssets {
 
 class CustomAppBar {
   static appBar({
-    String title = "auction",
+    String title = "Auction",
     List <Widget>? action,
   }) {
     return AppBar(

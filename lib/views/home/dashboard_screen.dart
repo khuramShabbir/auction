@@ -28,6 +28,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   List<PersistentBottomNavBarItem> itemList() {
     return [
+
+
       PersistentBottomNavBarItem(
         activeColorPrimary: StaticColors.whiteColor,
         activeColorSecondary: StaticColors.blackColor,
@@ -74,19 +76,18 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         ),
         title: "Profile",
       ),
+
+
     ];
   }
 
   List<Widget> listScreen() {
     return [
-      const HomeScreen(),
-      const SearchForCarsScreen(),
-      //  const AuctionAvailability(),
-     const MyCarsScreen(),
-     // const CheckOutScreen(),
-      //const AddPaymentMethodScreen(),
-      const WalletScreen(),
-      const ProfileSettingScreen(),
+       HomeScreen(),
+       SearchForCarsScreen(),
+       MyCarsScreen(),
+       WalletScreen(),
+       ProfileSettingScreen(),
     ];
   }
 
@@ -94,43 +95,41 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   Widget build(BuildContext context) {
     return Consumer<DashBoardProvider>(
       builder: (BuildContext context, value, Widget? child) {
-        return SafeArea(
-          child: PersistentTabView(
-            context,
-            controller: persistentTabController,
-            screens: listScreen(),
-            items: itemList(),
-            selectedTabScreenContext: (context) {
+        return PersistentTabView(
+          context,
+          controller: persistentTabController,
+          screens: listScreen(),
+          items: itemList(),
+          selectedTabScreenContext: (context) {
 
-              },
-            confineInSafeArea: true,
-            backgroundColor: Colors.white,
-            handleAndroidBackButtonPress: true,
-            resizeToAvoidBottomInset: true,
-            stateManagement: true,
-            onItemSelected: (index) {
-              this.index = index;
-              setState(() {});
             },
-            hideNavigationBarWhenKeyboardShows: true,
-            decoration: NavBarDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              colorBehindNavBar: Colors.white,
-            ),
-            popAllScreensOnTapOfSelectedTab: true,
-            popActionScreens: PopActionScreensType.all,
-            itemAnimationProperties: const ItemAnimationProperties(
-              duration: Duration(milliseconds: 500),
-              curve: Curves.ease,
-            ),
-            screenTransitionAnimation: const ScreenTransitionAnimation(
-              animateTabTransition: true,
-              curve: Curves.ease,
-              duration: Duration(milliseconds: 500),
-            ),
-            navBarStyle: NavBarStyle
-                .style7,
+          confineInSafeArea: true,
+          backgroundColor: Colors.white,
+          handleAndroidBackButtonPress: true,
+          resizeToAvoidBottomInset: true,
+          stateManagement: true,
+          onItemSelected: (index) {
+            this.index = index;
+            setState(() {});
+          },
+          hideNavigationBarWhenKeyboardShows: true,
+          decoration: NavBarDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            colorBehindNavBar: Colors.white,
           ),
+          popAllScreensOnTapOfSelectedTab: true,
+          popActionScreens: PopActionScreensType.all,
+          itemAnimationProperties: const ItemAnimationProperties(
+            duration: Duration(milliseconds: 500),
+            curve: Curves.ease,
+          ),
+          screenTransitionAnimation: const ScreenTransitionAnimation(
+            animateTabTransition: true,
+            curve: Curves.ease,
+            duration: Duration(milliseconds: 500),
+          ),
+          navBarStyle: NavBarStyle
+              .style7,
         );
       },
     );

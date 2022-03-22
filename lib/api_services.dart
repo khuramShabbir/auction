@@ -15,11 +15,7 @@ class ApiServices {
   static String ALL_USERS = 'users';
   static String PAYMENT_EVIDENCE = 'PaymentEvidence/Upload-Payment-Evidence';
 
-  static Future<String> postMultiPart(
-    String feedUrl,
-    Map<String, String> body, {
-    String errorText = "Something went wrong",
-  }) async {
+  static Future<String> postMultiPart(String feedUrl, Map<String, String> body, {String errorText = "Something went wrong",}) async {
     var request = http.MultipartRequest("POST", Uri.parse(BASE_URL + feedUrl));
     request.fields.addAll(body);
     http.StreamedResponse response = await request.send();
@@ -42,8 +38,7 @@ class ApiServices {
     }
   }
 
-  static Future<String> postMultiPartWithFile(String feedUrl, List<File> paths,
-      {Map<String, String>? body}) async {
+  static Future<String> postMultiPartWithFile(String feedUrl, List<File> paths, {Map<String, String>? body}) async {
     var request = http.MultipartRequest('POST', Uri.parse(BASE_URL + feedUrl));
 
     if (paths != null) {
@@ -63,8 +58,7 @@ class ApiServices {
     return '';
   }
 
-  static Future<String> simplePostWithBody(
-      String feedUrl, Map<String, String> body) async {
+  static Future<String> simplePostWithBody(String feedUrl, Map<String, String> body) async {
     var request = http.Request('POST', Uri.parse(BASE_URL + feedUrl));
     request.body = json.encode(body);
 
@@ -88,7 +82,7 @@ class ApiServices {
 
   static Future<String> simpleGet(String feedUrl) async {
     http.Response response = await http.get(Uri.parse(BASE_URL + feedUrl));
-    logger.e(response.body);
+    // logger.e(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       return response.body;
     } else {
@@ -97,7 +91,6 @@ class ApiServices {
   }
 
   static Future<String> simplePost(String feedUrl) async {
-    showProgressCircular();
     http.Response response = await http.post(Uri.parse(BASE_URL + feedUrl));
     dismissDialog();
     if (response.statusCode == 200) {

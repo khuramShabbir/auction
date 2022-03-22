@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:auction/utils/const.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -64,6 +65,10 @@ class _PaymentWebViewState extends State<PaymentWebView> {
                 print('Page started loading: $url');
               },
               onPageFinished: (String url) {
+                if(url.contains("status=success")) {
+                  Get.back(result: true);
+
+                }
                 setState(() {
                   isLoading = false;
                 });

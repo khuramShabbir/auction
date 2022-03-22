@@ -1,6 +1,7 @@
 import 'package:auction/api_services.dart';
 import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/controllers_providers/auth_provider.dart';
+import 'package:auction/models/auction/GetAllAuctions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -258,121 +259,7 @@ class CustomWidget {
     ));
   }
 
-  static biddingAmountBottomSheet(int carId) {
-    TextEditingController controller = TextEditingController();
-    Get.bottomSheet(
-        SingleChildScrollView(
-            child: StaticKPadding.kPadding(
-                child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 25,
-            ),
-            Text("Enter your bidding offer amount here.",
-                textAlign: TextAlign.center,
-                style: StaticTextStyles.headingStyle),
-            const SizedBox(
-              height: 25,
-            ),
-            Text(
-                "You are able"
-                " to make bidding now! Good luck",
-                style: StaticTextStyles.normalGreyTextStyle),
-            const SizedBox(
-              height: 25,
-            ),
-            customTextFormField(
-                hintText: "Amount SAR",
-                controller: controller,
-                inputType: TextInputType.number),
-            const SizedBox(
-              height: 40,
-            ),
-            extendedButton(
-                onTap: () async {
-                  if (controller.text.isEmpty) return;
-                  String body = await ApiServices.simplePost(
-                      "Bidding/Bid?userId=${getUser().result!.id}&carId=$carId&amount=${controller.text}");
-                  logger.i(body);
-                  if (Get.isBottomSheetOpen == true) {
-                    Get.back();
-                    showToast(msg: 'Bidding has been placed');
-                  }
 
-                  if (body.isEmpty) {
-                    Get.back();
-                  }
-                },
-                buttonText: "Done",
-                buttonColor: StaticColors.blueColor,
-                textColor: StaticColors.whiteColor)
-          ],
-        ))),
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(15), topLeft: Radius.circular(15))));
-  }
-
-  static Future<dynamic> customDialogBox(
-      {String subTitle = "Sub Title"}) async {
-    TextEditingController textEditingController = TextEditingController();
-
-    return await Get.defaultDialog(
-      content: SizedBox(
-        width: width,
-        child: Column(
-          children: [
-            Text(
-              subTitle,
-              style: StaticTextStyles.normalBlackTextStyle,
-              textAlign: TextAlign.center,
-            ),
-            WhiteSpacer.verticalSpace(25),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: customTextFormField(
-                  inputType: TextInputType.number,
-                  hintText: "Enter Amount SAR",
-                  controller: textEditingController),
-            ),
-            WhiteSpacer.verticalSpace(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                customizedButton(
-                    buttonColor: StaticColors.blueColor,
-                    onTap: () {
-                      if (textEditingController.text.isEmpty) {
-                        showToast(msg: "Please enter amount");
-                        return;
-                      }
-                      Get.back(
-                          result:
-                              double.parse(textEditingController.text) * 100);
-                    },
-                    textColor: StaticColors.whiteColor,
-                    buttonText: "Charge wallet",
-                    buttonWidth: .35),
-                customizedButton(
-                    buttonColor: StaticColors.greyColor,
-                    onTap: () {
-                      Get.back();
-                    },
-                    textColor: StaticColors.whiteColor,
-                    buttonText: "Cancel",
-                    buttonWidth: .35),
-              ],
-            )
-          ],
-        ),
-      ),
-      titlePadding: EdgeInsets.all(20),
-      barrierDismissible: false,
-    );
-  }
 
   static Future<String> imagePicker()async {
     String value='';
@@ -485,6 +372,7 @@ Widget customTextFormField(
     FormFieldValidator<String>? validator,
     Key? key,
     bool obscureText = false,
+    bool enabled = true,
     String hintText = "Hint Text",
     String? labelText,
     Widget? suffixIcon,
@@ -498,6 +386,7 @@ Widget customTextFormField(
       keyboardType: inputType,
       onChanged: onChange,
       controller: controller,
+      enabled: enabled,
       decoration: InputDecoration(
           hintStyle: TextStyle(color: StaticColors.greyColor.withOpacity(.4)),
           suffixIcon: suffixIcon,

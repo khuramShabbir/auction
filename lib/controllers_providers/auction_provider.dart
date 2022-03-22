@@ -17,13 +17,13 @@ import 'package:auction/views/home/create_campaign_Screens/payment_complete_scre
 import 'package:auction/views/home/create_campaign_Screens/sold_car_detail_screen.dart';
 import 'package:auction/views/payment_method_screens/web_view_screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:auction/models/auction/GetAllAuctions.dart' as r;
 
-AuctionProvider auctionProvider =
-    Provider.of<AuctionProvider>(Get.context!, listen: false);
+AuctionProvider auctionProvider = Provider . of < AuctionProvider > (Get.context!, listen: false);
 
 class AuctionProvider extends ChangeNotifier {
   GetAllAuctions? allAuctions;
@@ -41,16 +41,20 @@ class AuctionProvider extends ChangeNotifier {
   bool isAuctionLoaded = false;
   bool isAuctionByUserLoaded = false;
   bool isBankDetailLoaded = false;
+  static TextEditingController biddingController = TextEditingController();
 
   getAuction() async {
-    String body = await ApiServices.simpleGet(ApiServices.GET_AUCTION);
+    String body = await ApiServices.simpleGet("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
     if (body.isEmpty) return;
     allAuctions = getAllAuctionsFromJson(body);
+    isAuctionLoaded=false;
+    notifyListeners();
     isAuctionLoaded = true;
     notifyListeners();
   }
 
-  getWallet(r.Result result) async {
+  getWallet(r.Result? result,{bool isOnlyWalletRequired=false}) async {
+
     String body = await ApiServices.simplePost(
         "${ApiServices.GET_WALLET}${getUser().result!.id.toString()}");
     if (body.isEmpty) {
@@ -60,41 +64,61 @@ class AuctionProvider extends ChangeNotifier {
 
     walletModel = walletModelFromJson(body);
     walletAmount = walletModel!.result.amount;
+    if(isOnlyWalletRequired){
 
-    if (result.minimumBidAmount == 0) {
+    notifyListeners();
+      return;
+    }
+
+
+
+    if (result!.downPayment == 0) {
       showToast(msg: "Can't be bid at this car");
       return;
-    } else if (walletAmount! >= result.minimumBidAmount) {
-      CustomWidget.biddingAmountBottomSheet(result.carInformationId);
+    }
+    else if (walletAmount! >= result.downPayment) {
+
+        payBid(result);
+      //biddingAmountBottomSheet(result);
       return;
     }
 
-    var amount = await CustomWidget.customDialogBox(
-        subTitle: "You have low balance to complete this process");
-    if (amount != null) {
-      Get.to(() => PaymentWebView(
-          initUrl:
-              "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=$amount"));
+    var resultBool= await Get.to(() => PaymentWebView(
+        initUrl: "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=${
+            double.parse(result.downPayment.toString())*100
+        }"));
+    if(resultBool==true){
+      payBid(result);
+
     }
-
-    // CustomWidget.addWalletBottomSheet();
   }
+  void payBid(r.Result result) async {
+    biddingController.text=(double.parse(result.bidding.biddingAmount.toString())
+        +
+        double.parse(result.bidIncrement.toString())).toString();
 
+    String body = await ApiServices.simplePost("Bidding/Bid?userId=${getUser().result!.id}&carId=${result.carInformationId}&amount=${biddingController.text}");
+    getAuction();
+  }
   getAuctionByUser() async {
-    String body =
-        await ApiServices.simpleGet("Auction/get-Auctions-by-user?userId=30");
-    logger.e(body);
+    auctionByUser =null;
+    isAuctionByUserLoaded = false;
+    notifyListeners();
+
+    String body = await ApiServices.simpleGet("Auction/get-Auctions-by-user?userId=${getUser().result!.id}");
+    // logger.e(body);
     if (body.isEmpty) return;
+
     auctionByUser = auctionByUserModelFromJson(body);
     isAuctionByUserLoaded = true;
     notifyListeners();
   }
 
-  uploadPaymentEvidence(List<File> files) async {
+  uploadPaymentEvidence(List<File> files, int carInformationId) async {
     showProgressCircular();
     Map<String, String> body = {
       'UserId': getUser().result!.id.toString(),
-      'CarID': '2',
+      'CarID': '$carInformationId',
     };
     String bodyResult = await ApiServices.postMultiPartWithFile(
         ApiServices.PAYMENT_EVIDENCE, files,
@@ -140,4 +164,22 @@ class AuctionProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  static void increamentBidd(r.Result result, AuctionProvider data) {
+
+    biddingController.text=(double.parse(biddingController.text)+double.parse(result.bidIncrement.toString())).toString();
+    data.notifyListeners();
+  }
+
+  static void decreamentBidd(r.Result result, AuctionProvider data) {
+
+    if(double.parse(biddingController.text)<=double.parse(result.bidding.biddingAmount.toString())) return;
+    biddingController.text=(double.parse(biddingController.text)-double.parse(result.bidIncrement.toString())).toString();
+    data.notifyListeners();
+
+
+  }
+
+
+
 }

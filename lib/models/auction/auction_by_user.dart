@@ -35,6 +35,7 @@ class Result {
      required this.carName,
      required this.isGps,
      required this.isBluetooth,
+     required this.isAwarded,
      required this.isSnowTires,
      required this.doors,
      required this.passengers,
@@ -54,10 +55,14 @@ class Result {
      required this.isAvailableForAuction,
      required this.isCarSold,
      required this.reAuctionCount,
-     required this.minimumBidAmount,
+     required this.downPayment,
+     required this.vatPercent,
+     required this.muzadCommission,
   });
 
   int carInformationId;
+  dynamic muzadCommission;
+  dynamic vatPercent;
   bool isManual;
   String carName;
   bool isGps;
@@ -67,6 +72,7 @@ class Result {
   int passengers;
   String fuelTank;
   String milleage;
+  bool isAwarded;
   String maxSpeed;
   String maxPower;
   Company company;
@@ -81,11 +87,13 @@ class Result {
   bool isAvailableForAuction;
   bool isCarSold;
   int reAuctionCount;
-  double minimumBidAmount;
+  double downPayment;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         carInformationId: json["carInformationId"],
         isManual: json["isManual"],
+    muzadCommission: json["muzadCommission"],
+    vatPercent: json["vatPercent"],
         carName: json["carName"],
         isGps: json["isGPS"],
         isBluetooth: json["isBluetooth"],
@@ -93,6 +101,7 @@ class Result {
         doors: json["doors"],
         passengers: json["passengers"],
         fuelTank: json["fuelTank"],
+    isAwarded: json["isAwarded"],
         milleage: json["milleage"],
         maxSpeed: json["maxSpeed"],
         maxPower: json["maxPower"],
@@ -110,13 +119,16 @@ class Result {
         isAvailableForAuction: json["isAvailableForAuction"],
         isCarSold: json["isCarSold"],
         reAuctionCount: json["reAuctionCount"],
-        minimumBidAmount: json["minimumBidAmount"],
+        downPayment: json["downPayment"],
       );
 
   Map<String, dynamic> toJson() => {
         "carInformationId": carInformationId,
         "isManual": isManual,
+        "muzadCommission": muzadCommission,
+        "vatPercent": vatPercent,
         "carName": carName,
+        "isAwarded": isAwarded,
         "isGPS": isGps,
         "isBluetooth": isBluetooth,
         "isSnowTires": isSnowTires,
@@ -138,7 +150,7 @@ class Result {
         "isAvailableForAuction": isAvailableForAuction,
         "isCarSold": isCarSold,
         "reAuctionCount": reAuctionCount,
-        "minimumBidAmount": minimumBidAmount,
+        "minimumBidAmount": downPayment,
       };
 }
 
