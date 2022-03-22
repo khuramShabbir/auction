@@ -144,7 +144,7 @@ int index=0;
                   Text("Specifications", style: StaticTextStyles.headingStyle),
                   const SizedBox(height: 10),
                   const SizedBox(height: 10),
-                  result!.inspectionPdf != null
+                  result!.inspectionPdf == null
                       ? Container()
                       : InkWell(
                           onTap: () {

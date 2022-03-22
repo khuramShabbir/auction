@@ -84,9 +84,7 @@ class AuctionProvider extends ChangeNotifier {
     }
 
     var resultBool= await Get.to(() => PaymentWebView(
-        initUrl: "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=${
-            double.parse(result.downPayment.toString())*100
-        }"));
+        initUrl: "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=${double.parse((double.parse(result.downPayment.toString())*100).toString()).toInt()}"));
     if(resultBool==true){
       payBid(result);
 
