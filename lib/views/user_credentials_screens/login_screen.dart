@@ -80,8 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
                            data.loginUser();
                         }
                       },
-                      buttonColor: StaticColors.lightOrangeColor,
-                      textColor: StaticColors.blackColor,
+                      buttonColor: StaticColors.orangeColor,
+                      textColor: StaticColors.whiteColor,
                       buttonText: "Login")
                 ],
               ),

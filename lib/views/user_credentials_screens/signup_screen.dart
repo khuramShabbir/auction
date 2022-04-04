@@ -108,19 +108,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide:
-                              BorderSide(color: StaticColors.orangeColor)),
+                              BorderSide(color: StaticColors.orangeColor,width: 1.5)),
                       focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide:
-                              BorderSide(color: StaticColors.orangeColor)),
+                              BorderSide(color: StaticColors.orangeColor,width: 1.5)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide:
-                              BorderSide(color: StaticColors.blueColor)),
+                              BorderSide(color: StaticColors.orangeColor,width: 1.5)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide(
-                              color: StaticColors.greyColor.withOpacity(.2))),
+                              color: StaticColors.orangeColor,width: 1.5)),
                     )),
 
                 extendedButton(

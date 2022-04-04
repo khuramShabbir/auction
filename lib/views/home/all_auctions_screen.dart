@@ -17,7 +17,6 @@ class AllAuctionScreen extends StatefulWidget {
 }
 
 class _AllAuctionScreenState extends State<AllAuctionScreen> {
-
   Timer? timer;
 
   @override
@@ -25,7 +24,7 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
     super.initState();
     auctionProvider.getAuction();
     Timer.periodic(Duration(seconds: 1), (timer) {
-      this.timer=timer;
+      this.timer = timer;
       setState(() {});
     });
   }
@@ -41,190 +40,196 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
             body: data.isAuctionLoaded
                 ? StaticKPadding.kPadding(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        WhiteSpacer.verticalSpace(20),
-                        Text(
-                          "auction that interest you",
-                          style: StaticTextStyles.headingStyle,
-                        ),
-                        WhiteSpacer.verticalSpace(10),
-                        Expanded(
-                          child: GridView.builder(
-                              itemCount: data.allAuctions!.result.length,
-                              shrinkWrap: true,
-                              gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisSpacing: 0,
-                                mainAxisSpacing: 0,
-                                crossAxisCount: 2,
-                              ),
-                              itemBuilder: (context, index) {
-                                Result result = data.allAuctions!.result[index];
-                                return InkWell(
-                                  onTap: () {
-                                    Get.to(
-                                            () => CarSpecification(result: result));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: StaticColors.whiteColor,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: StaticColors.greyColor
-                                                    .withOpacity(.1),
-                                                spreadRadius: 1,
-                                                blurRadius: 2)
-                                          ],
-                                          borderRadius:
-                                          BorderRadius.circular(10)),
-                                      child: Column(
-                                        children: [
-                                          Expanded(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      WhiteSpacer.verticalSpace(20),
+                      Text(
+                        "Auction",
+                        style: StaticTextStyles.headingStyle,
+                      ),
+                      WhiteSpacer.verticalSpace(10),
+                      Expanded(
+                        child: GridView.builder(
+                            itemCount: data.allAuctions!.result.length,
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              mainAxisExtent: height * .35,
+                              crossAxisSpacing: 2,
+                              mainAxisSpacing: 2,
+                              crossAxisCount: 2,
+                            ),
+                            itemBuilder: (context, index) {
+                              Result result = data.allAuctions!.result[index];
+                              return InkWell(
+                                onTap: () {
+                                  Get.to(
+                                      () => CarSpecification(result: result));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.black),
+                                        color: StaticColors.whiteColor,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: StaticColors.greyColor
+                                                  .withOpacity(.1),
+                                              spreadRadius: 1,
+                                              blurRadius: 2)
+                                        ],
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Column(
+                                      children: [
+                                        Expanded(
                                             child: Container(
-                                              decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: result
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: result
                                                           .carImages.isEmpty
-                                                          ? const NetworkImage(
+                                                      ? const NetworkImage(
                                                           "https://image.shutterstock.com/image-vector/"
-                                                              "no-image-available-sign-internet-"
-                                                              "260nw-261719003.jpg")
-                                                          : NetworkImage(result
+                                                          "no-image-available-sign-internet-"
+                                                          "260nw-261719003.jpg")
+                                                      : NetworkImage(result
                                                           .carImages[0]
                                                           .imagePath),
-                                                      fit: BoxFit.fill),
-                                                  borderRadius:
+                                                  fit: BoxFit.fill),
+                                              borderRadius:
                                                   const BorderRadius.only(
                                                       topRight:
-                                                      Radius.circular(10),
+                                                          Radius.circular(10),
                                                       topLeft:
-                                                      Radius.circular(
-                                                          10))),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 4, right: 4, left: 4),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      result.carName,
-                                                      style: TextStyle(
-                                                          color: StaticColors
-                                                              .blackColor),
-                                                    ),
-                                                    Text(
-                                                      // "${DateTime.now().difference(result.auctionExpiry)}",
-                                                      result.auctionExpiry
-                                                          .difference(
-                                                          DateTime.now())
-                                                          .toString()
-                                                          .split('.')[0],
-                                                      style: TextStyle(
-                                                          color: StaticColors
-                                                              .blackColor),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                                  children: [
-                                                    const Text(
-                                                      "WINNING",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                          FontWeight.w100),
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        data.getWallet(result);
+                                                          Radius.circular(10))),
+                                        )),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 4, right: 4, left: 4),
+                                          child: Column(
+                                            children: [
+                                              WhiteSpacer.verticalSpace(5),
+                                              Text(result.carName),
+                                              WhiteSpacer.verticalSpace(5),
+                                              Text(
+                                                result.auctionExpiry
+                                                    .difference(DateTime.now())
+                                                    .toString()
+                                                    .split('.')[0],
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: StaticColors
+                                                        .blackColor),
+                                              ),
+                                              WhiteSpacer.verticalSpace(5),
+                                              InkWell(
+                                                onTap: () {
+                                                  data.getWallet(result);
 
-                                                        //  data.getWallet(result);
-                                                      },
-                                                      child: Container(
-                                                        constraints:
-                                                        BoxConstraints(
-                                                            minWidth:
-                                                            width * .18),
-                                                        child: Padding(
-                                                          padding:
-                                                          const EdgeInsets
-                                                              .symmetric(
-                                                              horizontal: 8.0,
-                                                              vertical: 8),
-                                                          child: Center(
-                                                            child: Text(
-                                                              "BID ${double.parse(result.bidding.biddingAmount.toString()).toInt()}",
-                                                              style: TextStyle(
-                                                                  color: StaticColors
-                                                                      .whiteColor),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        decoration: BoxDecoration(
+                                                  //  data.getWallet(result);
+                                                },
+                                                child: Container(
+                                                  constraints: BoxConstraints(
+                                                      minWidth: width * .18),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 12),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "BID ${double.parse(result.bidding.biddingAmount.toString()).toInt()}",
+                                                        style: TextStyle(
                                                             color: StaticColors
-                                                                .orangeColor,
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(5)),
+                                                                .whiteColor),
                                                       ),
                                                     ),
-                                                  ],
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                      color: getUser()
+                                                                  .result!
+                                                                  .id !=
+                                                              result.user.userId
+                                                          ? StaticColors
+                                                              .orangeColor
+                                                          : StaticColors
+                                                              .blueColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
                                                 ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  children: [
-                                                    result.user.name==null?Container(): CircleAvatar(
-                                                      radius: 12,
-                                                      backgroundImage:
-                                                      NetworkImage(imageUrl),
-                                                    ),
-                                                    const SizedBox(width: 10),
-                                                    Text(
-
-                                                      result.user.name==null ?""
-                                                          :
-                                                      result.user.name!,
-
-                                                      style: const TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                          FontWeight.w100),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
+                                              ),
+                                              WhiteSpacer.verticalSpace(5),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  result.user.name == null
+                                                      ? Container()
+                                                      : CircleAvatar(
+                                                          radius: 12,
+                                                          backgroundImage:
+                                                              NetworkImage(
+                                                                  imageUrl),
+                                                        ),
+                                                  const SizedBox(width: 10),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        "WINNING",
+                                                        style: TextStyle(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    .7),
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                      Text(
+                                                        result.user.name == null
+                                                            ? ""
+                                                            : result.user.name!,
+                                                        style: TextStyle(
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    .7),
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                );
-                              }),
-                        )
-                      ],
-                    ))
-                :  Center(
-                    child: CircularProgressIndicator(color: StaticColors.orangeColor,backgroundColor: Colors.transparent),
+                                ),
+                              );
+                            }),
+                      )
+                    ],
+                  ))
+                : Center(
+                    child: CircularProgressIndicator(
+                        color: StaticColors.orangeColor,
+                        backgroundColor: Colors.transparent),
                   ));
       },
     );
   }
 
-@override
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();

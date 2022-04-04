@@ -395,23 +395,23 @@ Widget customTextFormField(
           focusedErrorBorder: isOutLinedBorder
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: StaticColors.orangeColor))
+                  borderSide: BorderSide(color: StaticColors.orangeColor,width: 1.5))
               : null,
           errorBorder: isOutLinedBorder
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: StaticColors.orangeColor))
+                  borderSide: BorderSide(color: StaticColors.orangeColor,width: 1.5))
               : null,
           focusedBorder: isOutLinedBorder
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: StaticColors.blueColor))
+                  borderSide: BorderSide(color: StaticColors.orangeColor,width: 1.5))
               : null,
           enabledBorder: isOutLinedBorder
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide:
-                      BorderSide(color: StaticColors.greyColor.withOpacity(.2)))
+                      BorderSide(color: StaticColors.orangeColor,width: 1.5))
               : null),
     ),
   );

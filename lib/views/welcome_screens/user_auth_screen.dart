@@ -4,6 +4,7 @@ import 'package:auction/views/user_credentials_screens/login_screen.dart';
 import 'package:auction/views/user_credentials_screens/signup_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../utils/const.dart';
@@ -23,12 +24,13 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
       builder: (BuildContext context, data, Widget? child) {
         return SafeArea(
           child: Scaffold(
-            body: StaticKPadding.kPadding(child:  Column(
+            body: StaticKPadding.kPadding(
+                child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CarouselSlider(
                   options: CarouselOptions(
-                      height: height * .5,
+                      height: height * .7,
                       viewportFraction: 1,
                       onPageChanged:
                           (int index, CarouselPageChangedReason reason) {
@@ -37,43 +39,44 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                       }),
                   items: List.generate(
                       textListHeadline.length,
-                          (index) => Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 25),
-                            child: Text(textListHeadline[index],
-                                style: StaticTextStyles.headingStyle),
-                          ),
-                          const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 25),
-                            child: Text(subTitleTextList[index],
-                                style:
-                                StaticTextStyles.normalGreyTextStyle),
-                          ),
-                          const SizedBox(height: 20),
-                        ],
-                      )),
+                      (index) => Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SvgPicture.asset(svgAssetsList[index]),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 25),
+                                child: Text(textListHeadline[index],
+                                    style: StaticTextStyles.headingStyle),
+                              ),
+                              const SizedBox(height: 20),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 25),
+                                child: Text(subTitleTextList[index],
+                                    style:
+                                        StaticTextStyles.normalGreyTextStyle),
+                              ),
+                              const SizedBox(height: 20),
+                            ],
+                          )),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     dots(
                         color: index == 0
-                            ? StaticColors.orangeColor
+                            ? StaticColors.blueColor
                             : StaticColors.lightOrangeColor,
                         radius: index == 0 ? 5.0 : 3.0),
                     dots(
                         color: index == 1
-                            ? StaticColors.orangeColor
+                            ? StaticColors.blueColor
                             : StaticColors.lightOrangeColor,
                         radius: index == 1 ? 5.0 : 3.0),
                     dots(
                         color: index == 2
-                            ? StaticColors.orangeColor
+                            ? StaticColors.blueColor
                             : StaticColors.lightOrangeColor,
                         radius: index == 2 ? 5.0 : 3.0),
                   ],
@@ -91,8 +94,8 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                       Get.to(() => const LoginScreen());
                     },
                     buttonText: "Login",
-                    buttonColor: StaticColors.lightOrangeColor,
-                    textColor: StaticColors.blackColor),
+                    buttonColor: StaticColors.orangeColor,
+                    textColor: StaticColors.whiteColor),
               ],
             )),
           ),
@@ -115,12 +118,25 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     "Setup your budget for each category so you in control",
   ];
 
+  List<String> svgAssetsList = [
+    "assets/SvgAssets/Car finance.svg",
+    "assets/SvgAssets/Vehicle Sale-cuate.svg",
+    "assets/SvgAssets/Online ads-pana.svg"
+  ];
+
   Widget dots({required color, required radius}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3),
-      child: CircleAvatar(
-        radius: radius,
-        backgroundColor: color,
+      child: Container(
+        width: 15,
+        height: 15,
+        decoration: BoxDecoration(
+            border: Border.all(color: StaticColors.orangeColor, width: 3),
+            borderRadius: BorderRadius.circular(100)),
+        child: CircleAvatar(
+          radius: radius,
+          backgroundColor: color,
+        ),
       ),
     );
   }

@@ -2,7 +2,6 @@ import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/controllers_providers/dashboard_provider.dart';
 import 'package:auction/controllers_providers/payment_method_provider.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
