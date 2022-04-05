@@ -1,9 +1,11 @@
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/controllers_providers/dashboard_provider.dart';
+import 'package:auction/controllers_providers/wallet_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:auction/views/home/all_auctions_screen.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/search_for_cars_screen.dart';
+import 'package:auction/views/wallet/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -23,15 +25,34 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    walletProvider.getWallet();
+  }
+  @override
   Widget build(BuildContext context) {
     return Consumer<DashBoardProvider>(
         builder: (BuildContext context, data, child) {
       return Scaffold(
         appBar:
             AppBar(elevation: 0, backgroundColor: Colors.transparent, actions: [
-          Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: StaticAssets.notificationIcon)
+          InkWell(
+            onTap: (){
+
+            },
+            child: Consumer<WalletProvider>(
+              builder: (builder,data,child) {
+                return Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Row(children: [
+                      StaticAssets.walletSvg,
+                      SizedBox(width: 10,),
+                      Text(data.walletModel==null?"0 SAR":"${double.parse(data.walletModel!.result.amount.toString()).toInt()} SAR",style: TextStyle(color: Colors.black),)
+                    ],));
+              }
+            ),
+          )
         ]),
         body: SafeArea(
             child: StaticKPadding.kPadding(
@@ -96,8 +117,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: InkWell(
                   onTap: () {
-                    bottomSheetComingSoon();
-                    // Get.to(() => const SearchForCarsScreen());
+                    // bottomSheetComingSoon();
+                    Get.to(() => const SearchForCarsScreen());
                   },
                   child: Container(
                     width: width,

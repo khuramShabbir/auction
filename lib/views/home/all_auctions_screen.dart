@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/models/auction/GetAllAuctions.dart';
 import 'package:auction/utils/const.dart';
@@ -54,9 +53,9 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                             shrinkWrap: true,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              mainAxisExtent: height * .35,
-                              crossAxisSpacing: 2,
-                              mainAxisSpacing: 2,
+                              mainAxisExtent: height * .3,
+                              // crossAxisSpacing: 3,
+                              // mainAxisSpacing: 2,
                               crossAxisCount: 2,
                             ),
                             itemBuilder: (context, index) {
@@ -126,8 +125,6 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                                               InkWell(
                                                 onTap: () {
                                                   data.getWallet(result);
-
-                                                  //  data.getWallet(result);
                                                 },
                                                 child: Container(
                                                   constraints: BoxConstraints(
@@ -231,7 +228,6 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     timer!.cancel();
   }

@@ -42,8 +42,8 @@ class AuctionProvider extends ChangeNotifier {
   bool isAuctionByUserLoaded = false;
   bool isBankDetailLoaded = false;
   static TextEditingController biddingController = TextEditingController();
-
   getAuction() async {
+    logger.e("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
     String body = await ApiServices.simpleGet("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
     if (body.isEmpty) return;
     allAuctions = getAllAuctionsFromJson(body);
@@ -52,27 +52,20 @@ class AuctionProvider extends ChangeNotifier {
     isAuctionLoaded = true;
     notifyListeners();
   }
-
-  getWallet(r.Result? result,{bool isOnlyWalletRequired=false}) async {
-
+  getWallet(r.Result? result) async {
+    if(result!.alreadyBid){
+      payBid(result);
+    }
+    else {
     String body = await ApiServices.simplePost(
         "${ApiServices.GET_WALLET}${getUser().result!.id.toString()}");
     if (body.isEmpty) {
       showToast(msg: "Some thing went wrong! please try again later");
       return;
     }
-
     walletModel = walletModelFromJson(body);
     walletAmount = walletModel!.result.amount;
-    if(isOnlyWalletRequired){
-
-    notifyListeners();
-      return;
-    }
-
-
-
-    if (result!.downPayment == 0) {
+    if (result.downPayment == 0) {
       showToast(msg: "Can't be bid at this car");
       return;
     }
@@ -82,20 +75,15 @@ class AuctionProvider extends ChangeNotifier {
       //biddingAmountBottomSheet(result);
       return;
     }
-
-    var resultBool= await Get.to(() => PaymentWebView(
-        initUrl: "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=${double.parse((double.parse(result.downPayment.toString())*100).toString()).toInt()}"));
+    var resultBool= await Get.to(() => PaymentWebView(initUrl: "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=${double.parse((double.parse(result.downPayment.toString())*100).toString()).toInt()}"));
     if(resultBool==true){
       payBid(result);
-
+    }
     }
   }
   void payBid(r.Result result) async {
-    biddingController.text=(double.parse(result.bidding.biddingAmount.toString())
-        +
-        double.parse(result.bidIncrement.toString())).toString();
-
-    String body = await ApiServices.simplePost("Bidding/Bid?userId=${getUser().result!.id}&carId=${result.carInformationId}&amount=${biddingController.text}");
+    biddingController.text=(double.parse(result.bidding.biddingAmount.toString()) + double.parse(result.bidIncrement.toString())).toString();
+    String body = await ApiServices.simplePost("Bidding/Bid?userId=${getUser().result!.id}&carId=${result.carInformationId}&amount=${biddingController.text}&lastUserId=${result.user.userId}");
     getAuction();
   }
   getAuctionByUser() async {
@@ -111,7 +99,6 @@ class AuctionProvider extends ChangeNotifier {
     isAuctionByUserLoaded = true;
     notifyListeners();
   }
-
   uploadPaymentEvidence(List<File> files, int carInformationId) async {
     showProgressCircular();
     Map<String, String> body = {
@@ -131,7 +118,6 @@ class AuctionProvider extends ChangeNotifier {
     dismissDialog();
     return true;
   }
-
   Future<bool> getPaymentEvidence(user_auction.Result? result) async {
     showProgressCircular();
     print(
@@ -146,7 +132,6 @@ class AuctionProvider extends ChangeNotifier {
     return true;
     // return Get.to(() => const PaymentCompleteScreen());
   }
-
   getBankAccount(int userId) async {
     String body = await ApiServices.simpleGet('BankAccount/31');
     if (body.isEmpty) {
@@ -162,15 +147,12 @@ class AuctionProvider extends ChangeNotifier {
 
     notifyListeners();
   }
-
   static void increamentBidd(r.Result result, AuctionProvider data) {
 
     biddingController.text=(double.parse(biddingController.text)+double.parse(result.bidIncrement.toString())).toString();
     data.notifyListeners();
   }
-
   static void decreamentBidd(r.Result result, AuctionProvider data) {
-
     if(double.parse(biddingController.text)<=double.parse(result.bidding.biddingAmount.toString())) return;
     biddingController.text=(double.parse(biddingController.text)-double.parse(result.bidIncrement.toString())).toString();
     data.notifyListeners();

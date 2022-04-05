@@ -12,6 +12,7 @@ class ApiServices {
   static String GET_AUCTION = "auction/get-Auctions";
   static final _HEADERS = {'Content-Type': 'application/json'};
   static String GET_WALLET = 'Wallet/Get-Wallet?userId=';
+  static String GET_WALLET_HISTORY = 'Wallet/Get-Wallet-History?UserId=';
   static String ALL_USERS = 'users';
   static String PAYMENT_EVIDENCE = 'PaymentEvidence/Upload-Payment-Evidence';
 
@@ -67,10 +68,13 @@ class ApiServices {
     var response = await request.send();
 
     String resBody = await response.stream.bytesToString();
+    dismissDialog;
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       return resBody;
-    } else {
+    }
+    else {
+      print(resBody);
       var decoded = jsonDecode(resBody);
 
       logger.i(decoded["responseException"]["exceptionMessage"]);
@@ -100,4 +104,5 @@ class ApiServices {
     logger.e(response.body);
     return "";
   }
+
 }

@@ -45,7 +45,7 @@ import '../utils/widgets.dart';
       Get.to(() => const UserAuthScreen());
     } else {
       await showToast(msg: "Logged in");
-      Get.to(() => DashBoardScreen());
+      Get.to(() => const DashBoardScreen());
     }
   }
 

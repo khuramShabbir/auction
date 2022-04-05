@@ -1,28 +1,26 @@
-//@dart=2.9
-
 import 'dart:convert';
 
-UserWalletHistory userWalletHistoryFromJson(String str) => UserWalletHistory.fromJson(json.decode(str));
+GetWalletHistory getWalletHistoryFromJson(String str) => GetWalletHistory.fromJson(json.decode(str));
 
-String userWalletHistoryToJson(UserWalletHistory data) => json.encode(data.toJson());
+String getWalletHistoryToJson(GetWalletHistory data) => json.encode(data.toJson());
 
-class UserWalletHistory {
-  UserWalletHistory({
+class GetWalletHistory {
+  GetWalletHistory({
     this.message,
     this.result,
   });
 
-  String message;
-  List<Result> result;
+  String? message;
+   List<Result>? result;
 
-  factory UserWalletHistory.fromJson(Map<String, dynamic> json) => UserWalletHistory(
+  factory GetWalletHistory.fromJson(Map<String, dynamic> json) => GetWalletHistory(
     message: json["message"],
     result: List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "message": message,
-    "result": List<dynamic>.from(result.map((x) => x.toJson())),
+    "result": List<dynamic>.from(result!.map((x) => x.toJson())),
   };
 }
 
@@ -45,21 +43,21 @@ class Result {
     this.reference,
   });
 
-  int id;
-  int walletId;
-  Wallet wallet;
-  int amountPaid;
-  int remainingAmount;
-  int actualAmount;
-  String amountPaidFor;
-  DateTime paymentDate;
-  String paymentId;
-  String status;
-  String transactionUrl;
-  DateTime creationTime;
+  dynamic id;
+  dynamic walletId;
+  Wallet? wallet;
+  dynamic amountPaid;
+  dynamic remainingAmount;
+  dynamic actualAmount;
+  String? amountPaidFor;
+  DateTime? paymentDate;
+  dynamic paymentId;
+  String? status;
+  dynamic transactionUrl;
+  DateTime? creationTime;
   dynamic paymentTime;
   dynamic referenceId;
-  String reference;
+  String? reference;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["id"],
@@ -68,11 +66,11 @@ class Result {
     amountPaid: json["amountPaid"],
     remainingAmount: json["remainingAmount"],
     actualAmount: json["actualAmount"],
-    amountPaidFor: json["amountPaidFor"] == null ? null : json["amountPaidFor"],
+    amountPaidFor: json["amountPaidFor"],
     paymentDate: DateTime.parse(json["paymentDate"]),
-    paymentId: json["paymentId"] == null ? null : json["paymentId"],
+    paymentId: json["paymentId"],
     status: json["status"],
-    transactionUrl: json["transactionUrl"] == null ? null : json["transactionUrl"],
+    transactionUrl: json["transactionUrl"],
     creationTime: DateTime.parse(json["creationTime"]),
     paymentTime: json["paymentTime"],
     referenceId: json["referenceId"],
@@ -82,16 +80,16 @@ class Result {
   Map<String, dynamic> toJson() => {
     "id": id,
     "walletId": walletId,
-    "wallet": wallet.toJson(),
+    "wallet": wallet!.toJson(),
     "amountPaid": amountPaid,
     "remainingAmount": remainingAmount,
     "actualAmount": actualAmount,
-    "amountPaidFor": amountPaidFor == null ? null : amountPaidFor,
-    "paymentDate": paymentDate.toIso8601String(),
-    "paymentId": paymentId == null ? null : paymentId,
+    "amountPaidFor": amountPaidFor,
+    "paymentDate": paymentDate!.toIso8601String(),
+    "paymentId": paymentId,
     "status": status,
-    "transactionUrl": transactionUrl == null ? null : transactionUrl,
-    "creationTime": creationTime.toIso8601String(),
+    "transactionUrl": transactionUrl,
+    "creationTime": creationTime!.toIso8601String(),
     "paymentTime": paymentTime,
     "referenceId": referenceId,
     "reference": reference,
@@ -106,10 +104,10 @@ class Wallet {
     this.amount,
   });
 
-  int id;
-  int userId;
+  dynamic id;
+  dynamic userId;
   dynamic user;
-  int amount;
+  dynamic amount;
 
   factory Wallet.fromJson(Map<String, dynamic> json) => Wallet(
     id: json["id"],

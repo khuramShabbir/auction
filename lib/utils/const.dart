@@ -50,13 +50,12 @@ class StaticTextStyles {
 }
 
 class StaticAssets {
-  static final notificationIcon =
-      SvgPicture.asset('assets/SvgAssets/notification.svg');
+  static final notificationIcon =SvgPicture.asset('assets/SvgAssets/notification.svg');
+  static final walletSvg =SvgPicture.asset('assets/SvgAssets/Wallet.svg',color: Colors.black,);
   static final leftArrow =
       Icon(Icons.arrow_back, color: StaticColors.blackColor);
 
-  static final rightArrow =
-      Icon(Icons.arrow_forward, color: StaticColors.whiteColor);
+  static final rightArrow =Icon(Icons.arrow_forward, color: StaticColors.whiteColor);
 }
 
 class CustomAppBar {

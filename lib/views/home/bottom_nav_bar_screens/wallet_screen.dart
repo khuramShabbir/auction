@@ -18,7 +18,8 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.appBar(title: 'PAYMENT METHOD'),
+      appBar: AppBar(title: const Text("PAYMENT METHOD",style: TextStyle(color: Colors.black),),elevation: 0,backgroundColor: Colors.transparent,),
+      // appBar: CustomAppBar.appBar(title: 'PAYMENT METHOD'),
       body: SizedBox(
         height: height,
         child: Column(

@@ -33,6 +33,7 @@ class Result {
   Result({
      required this.carInformationId,
      required this.isManual,
+     required this.alreadyBid,
      required this.carName,
      required this.image360,
      required this.isGps,
@@ -64,6 +65,7 @@ class Result {
 
   final dynamic carInformationId;
   final bool isManual;
+  final bool alreadyBid;
   final String carName;
   final String? image360;
   final bool isGps;
@@ -97,6 +99,7 @@ class Result {
     isWinning: json["isWinning"],
     image360: json["image360"],
     isManual: json["isManual"],
+    alreadyBid: json["alreadyBid"],
     carName: json["carName"],
     isGps: json["isGPS"],
     isBluetooth: json["isBluetooth"],
@@ -128,6 +131,7 @@ class Result {
     "carInformationId": carInformationId,
     "isWinning": isWinning,
     "isManual": isManual,
+    "alreadyBid": alreadyBid,
     "image360": image360,
     "carName": carName,
     "isGPS": isGps,

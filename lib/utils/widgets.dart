@@ -545,44 +545,6 @@ Widget stepper(int activeStep, String title) {
   );
 }
 
-Widget profileModules(
-    {required leading, required String title, required onTap}) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10),
-    child: InkWell(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              height: 55,
-              width: 55,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: leading,
-              ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: StaticColors.whiteColor,
-                  boxShadow: [
-                    BoxShadow(
-                        color: StaticColors.greyColor.withOpacity(.1),
-                        blurRadius: 10,
-                        spreadRadius: 1)
-                  ]),
-            ),
-            WhiteSpacer.horizontalSpace(30),
-            Text(title, style: StaticTextStyles.subTitleStyleBlack),
-            const Expanded(child: SizedBox()),
-            const Icon(Icons.keyboard_arrow_right)
-          ],
-        ),
-      ),
-    ),
-  );
-}
 
 Widget profileEditingModule(String title) {
   return Padding(

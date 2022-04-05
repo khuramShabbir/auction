@@ -28,60 +28,66 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                CarouselSlider(
-                  options: CarouselOptions(
-                      height: height * .7,
-                      viewportFraction: 1,
-                      onPageChanged:
-                          (int index, CarouselPageChangedReason reason) {
-                        this.index = index;
-                        setState(() {});
-                      }),
-                  items: List.generate(
-                      textListHeadline.length,
-                      (index) => Column(
+              Expanded(
+                child: Column(children: [
+                  Expanded(
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                          height: height * .7,
+                          viewportFraction: 1,
+                          onPageChanged:
+                              (int index, CarouselPageChangedReason reason) {
+                            this.index = index;
+                            setState(() {});
+                          }),
+                      items: List.generate(
+                          textListHeadline.length,
+                              (index) => Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               SvgPicture.asset(svgAssetsList[index]),
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
+                                const EdgeInsets.symmetric(horizontal: 25),
                                 child: Text(textListHeadline[index],
                                     style: StaticTextStyles.headingStyle),
                               ),
                               const SizedBox(height: 20),
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
+                                const EdgeInsets.symmetric(horizontal: 25),
                                 child: Text(subTitleTextList[index],
                                     style:
-                                        StaticTextStyles.normalGreyTextStyle),
+                                    StaticTextStyles.normalGreyTextStyle),
                               ),
                               const SizedBox(height: 20),
                             ],
                           )),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    dots(
-                        color: index == 0
-                            ? StaticColors.blueColor
-                            : StaticColors.lightOrangeColor,
-                        radius: index == 0 ? 5.0 : 3.0),
-                    dots(
-                        color: index == 1
-                            ? StaticColors.blueColor
-                            : StaticColors.lightOrangeColor,
-                        radius: index == 1 ? 5.0 : 3.0),
-                    dots(
-                        color: index == 2
-                            ? StaticColors.blueColor
-                            : StaticColors.lightOrangeColor,
-                        radius: index == 2 ? 5.0 : 3.0),
-                  ],
-                ),
-                const SizedBox(height: 20),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      dots(
+                          color: index == 0
+                              ? StaticColors.blueColor
+                              : StaticColors.lightOrangeColor,
+                          radius: index == 0 ? 5.0 : 3.0),
+                      dots(
+                          color: index == 1
+                              ? StaticColors.blueColor
+                              : StaticColors.lightOrangeColor,
+                          radius: index == 1 ? 5.0 : 3.0),
+                      dots(
+                          color: index == 2
+                              ? StaticColors.blueColor
+                              : StaticColors.lightOrangeColor,
+                          radius: index == 2 ? 5.0 : 3.0),
+                    ],
+                  ),
+
+                ],),
+              ),
                 extendedButton(
                     onTap: () {
                       Get.to(() => const SignUpScreen());

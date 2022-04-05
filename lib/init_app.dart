@@ -2,6 +2,7 @@ import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/controllers_providers/dashboard_provider.dart';
 import 'package:auction/controllers_providers/payment_method_provider.dart';
+import 'package:auction/controllers_providers/wallet_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -14,8 +15,7 @@ void initApp() async {
 
   await GetStorage.init();
 
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 }
 
 class InitApp extends StatefulWidget {
@@ -38,6 +38,8 @@ class _InitAppState extends State<InitApp> {
       providers: [
         ChangeNotifierProvider(
           create: (BuildContext context) => AuthProvider(),
+        ),  ChangeNotifierProvider(
+          create: (BuildContext context) => WalletProvider(),
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => DashBoardProvider(),
@@ -50,7 +52,6 @@ class _InitAppState extends State<InitApp> {
         ),
       ],
       child: const GetMaterialApp(
-        //theme: ThemeData(primaryColor: StaticColors.whiteColor),
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       ),
