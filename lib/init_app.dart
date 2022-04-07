@@ -1,6 +1,7 @@
 import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/controllers_providers/dashboard_provider.dart';
+import 'package:auction/controllers_providers/normalSale/normalSaleProvider.dart';
 import 'package:auction/controllers_providers/payment_method_provider.dart';
 import 'package:auction/controllers_providers/wallet_provider.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,8 @@ class _InitAppState extends State<InitApp> {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => AuctionProvider(),
+        ),  ChangeNotifierProvider(
+          create: (BuildContext context) => NormalSaleProvider(),
         ),
       ],
       child: const GetMaterialApp(
