@@ -1,4 +1,4 @@
-// @dart=2.9
+
 
 import 'dart:convert';
 
@@ -12,8 +12,8 @@ class AllCarsSpecs {
     this.result,
   });
 
-  String message;
-  Result result;
+  String? message;
+  Result? result;
 
   factory AllCarsSpecs.fromJson(Map<String, dynamic> json) => AllCarsSpecs(
     message: json["message"],
@@ -22,7 +22,7 @@ class AllCarsSpecs {
 
   Map<String, dynamic> toJson() => {
     "message": message,
-    "result": result.toJson(),
+    "result": result!.toJson(),
   };
 }
 
@@ -34,10 +34,10 @@ class Result {
     this.models,
   });
 
-  List<Data> companies;
-  List<Data> colors;
-  List<Type> types;
-  List<Data> models;
+  List<Data>? companies;
+  List<Data>? colors;
+  List<Type>? types;
+  List<Data>? models;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     companies: List<Data>.from(json["companies"].map((x) => Data.fromJson(x))),
@@ -47,10 +47,10 @@ class Result {
   );
 
   Map<String, dynamic> toJson() => {
-    "companies": List<dynamic>.from(companies.map((x) => x.toJson())),
-    "colors": List<dynamic>.from(colors.map((x) => x.toJson())),
-    "types": List<dynamic>.from(types.map((x) => x.toJson())),
-    "models": List<dynamic>.from(models.map((x) => x.toJson())),
+    "companies": List<dynamic>.from(companies!.map((x) => x.toJson())),
+    "colors": List<dynamic>.from(colors!.map((x) => x.toJson())),
+    "types": List<dynamic>.from(types!.map((x) => x.toJson())),
+    "models": List<dynamic>.from(models!.map((x) => x.toJson())),
   };
 }
 
@@ -60,8 +60,8 @@ class Data {
     this.name,
   });
 
-  int id;
-  String name;
+  int? id;
+  String? name;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["id"],
@@ -80,8 +80,8 @@ class Type {
     this.typeName,
   });
 
-  int carTypeId;
-  String typeName;
+  int? carTypeId;
+  String? typeName;
 
   factory Type.fromJson(Map<String, dynamic> json) => Type(
     carTypeId: json["carTypeId"],

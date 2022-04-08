@@ -1,11 +1,19 @@
+import 'dart:io';
+
 import 'package:auction/api_services.dart';
+import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/models/AllCars/AllCarsSpecs.dart';
 import 'package:auction/models/AllCars/all_cars_model.dart';
+import 'package:auction/utils/const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker_platform_interface/src/types/picked_file/unsupported.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/widgets.dart';
 var normalSaleProvider=Provider.of<NormalSaleProvider>(Get.context!,listen: false);
 class NormalSaleProvider extends ChangeNotifier{
+
 
 
   AllCarsModel? allCarsModel;
@@ -29,7 +37,23 @@ class NormalSaleProvider extends ChangeNotifier{
   String carModelYearName="Model";
 
   String carTypeName="Type";
-  
+
+
+  List<File> imagesList=[];
+
+  TextEditingController priceController=TextEditingController();
+  TextEditingController discountedPRiceController=TextEditingController();
+  TextEditingController passengerController=TextEditingController();
+  TextEditingController doorsController=TextEditingController();
+  TextEditingController feulTankController=TextEditingController();
+  TextEditingController millageController=TextEditingController();
+  TextEditingController maxPowerController=TextEditingController();
+  TextEditingController maxSpeedController=TextEditingController();
+  TextEditingController plateNumbrController=TextEditingController();
+  TextEditingController chassisController=TextEditingController();
+  TextEditingController descriptionController=TextEditingController();
+
+
   void getAllCars() async {
    String body=await ApiServices.simpleGet(ApiServices.ALL_CAR_SALES);
    if(body.isEmpty)return ;
@@ -45,8 +69,6 @@ class NormalSaleProvider extends ChangeNotifier{
     isCarsLoaded=true;
     notifyListeners();
 
-
-
   }
   AllCarsSpecs? allCarsSpecs;
   void getAllCarSpecs() async {
@@ -59,9 +81,56 @@ class NormalSaleProvider extends ChangeNotifier{
   }
 
   void submitCar()async {
+    print(cartypeId);
+    print(carModelYearId);
+    print(colorId);
+    print(companyId);
+    print(imagesList);
 
-    if(cartypeId==1 || carModelYearId==-1 || colorId==-1 || companyId==-1){}
+    if(cartypeId==-1 || carModelYearId==-1 || colorId==-1 || companyId==-1 || imagesList.isEmpty){
+      return;
+    }
 
+    Map<String, String> body={
+      "userId":"${getUser().result!.id}",
+      "MakeCompanyId":"$companyId",
+      "Model":"$carModelYearId",
+      "TypeId":"$cartypeId",
+      "YearId":"$carModelYearId",
+      "ColorId":"$colorId",
+      "Plate":"${plateNumbrController.text}",
+      "Milleage":"${millageController.text}",
+      "Chassis":"${chassisController.text}",
+      "Price":"${priceController.text}",
+      "DiscountedPrice":"${discountedPRiceController.text}",
+      "SerialNo":"",
+      "IsGPS":"$isGPS",
+      "IsBluetooth":"$isBluetooth",
+      "IsSnowTires":"$isSnowTiers",
+      "IsManual":"$isManual",
+      "Doors":"${doorsController.text}",
+      "Passengers":"${passengerController.text}",
+      "FuelTank":"${feulTankController.text}",
+      "MaxSpeed":"${maxSpeedController.text}",
+      "MaxPower":"${maxPowerController.text}",
+      "Description":"${descriptionController.text}"
+    };
+    print(body);
+    showProgressCircular();
+
+    String response = await ApiServices.postMultiPartWithFile(ApiServices.ADD_A_CAR_NORMAL_PURCHASE, imagesList,pathName: "Pictures",body: body);
+    dismissDialog();
+    imagesList.clear();
+    getAllCars();
+    getMyUploadedCars();
+    Get.back();
+
+  }
+
+  void setSelectedImage(pickedFile) {
+
+    imagesList.add(File(pickedFile.path));
+    notifyListeners();
 
   }
 

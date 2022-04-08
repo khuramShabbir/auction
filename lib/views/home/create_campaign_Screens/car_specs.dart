@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../models/AllCars/all_cars_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CarSpecsScreen extends StatefulWidget {
   const CarSpecsScreen({Key? key, this.result}) : super(key: key);
@@ -27,6 +28,9 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
 
   _CarSpecsScreenState(this.result);
 
+  int imageIndex=0;
+
+
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> resultData = result!.toJson();
@@ -44,26 +48,32 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                      image: NetworkImage(imageUrl), fit: BoxFit.fill)),
+                      image: NetworkImage("https://auction.api.deeps.info/${result!.pictures![imageIndex]}"), fit: BoxFit.fill)),
             ),
             WhiteSpacer.verticalSpace(10),
             SizedBox(
               height: 75,
               child: ListView.builder(
-                itemCount: result!.pictures.length,
+                itemCount: result!.pictures!.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
                   return Row(
                     children: [
-                      Container(
-                        width: 85,
-                        height: 85,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                                image: NetworkImage(imageUrl),
-                                fit: BoxFit.fill)),
+                      InkWell(
+                        onTap: (){
+                          imageIndex=index;
+                          setState(() {});
+                        },
+                        child: Container(
+                          width: 85,
+                          height: 85,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: NetworkImage("https://auction.api.deeps.info/${result!.pictures![index]}"),
+                                  fit: BoxFit.fill)),
+                        ),
                       ),
                       const SizedBox(width: 10),
                     ],
@@ -89,71 +99,34 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Sunburn?",
+                    Text("${result!.user!.name}",
                         style: StaticTextStyles.subTitleStyleBlack),
-                    Text("Posted on 30 jan,2022?",
+                    Text("${result!.user!.created}",
                         style: StaticTextStyles.normalGreyTextStyle),
                   ],
                 ),
                 const Expanded(child: SizedBox()),
-                CircleAvatar(
-                    backgroundColor: StaticColors.blueColor,
-                    radius: 20,
-                    child: Icon(Icons.phone, color: StaticColors.whiteColor)),
+                InkWell(
+                  onTap: (){
+                    launch("tel://${result!.user!.phoneNumber}");
+                  },
+                  child: CircleAvatar(
+                      backgroundColor: StaticColors.blueColor,
+                      radius: 20,
+                      child: Icon(Icons.phone, color: StaticColors.whiteColor)),
+                ),
                 WhiteSpacer.horizontalSpace(5),
-                CircleAvatar(
-                    backgroundColor: StaticColors.blueColor,
-                    radius: 20,
-                    child: Icon(Icons.mail_outline,
-                        color: StaticColors.whiteColor)),
+                // CircleAvatar(
+                //     backgroundColor: StaticColors.blueColor,
+                //     radius: 20,
+                //     child: Icon(Icons.mail_outline,
+                //         color: StaticColors.whiteColor)),
               ],
             ),
             WhiteSpacer.verticalSpace(20),
             Text("Specifications", style: StaticTextStyles.subTitleStyleBlack),
             WhiteSpacer.verticalSpace(10),
-            /* GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 15,
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 5,
-                    mainAxisSpacing: 5,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
 
-
-
-
-
-
-                    return Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                              color: StaticColors.greyColor.withOpacity(.5),
-                              width: 2)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(Icons.battery_charging_full_outlined,
-                                  color: StaticColors.greyColor.withOpacity(
-                                      .7)),
-                              const Expanded(child: SizedBox()),
-                              Text("Max Power",
-                                  style: StaticTextStyles.normalGreyTextStyle),
-                              Text(result!.maxPower??"",
-                                  style: TextStyle(
-                                      color: StaticColors.blackColor,
-                                      fontSize: 13)),
-                            ]),
-                      ),
-                    );
-                  },
-                ),*/
             SizedBox(
               width: width,
               height: height * .1,
@@ -162,11 +135,11 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                 children: [
                   carFeatures(title: "Color", value: result!.color ?? 'NA'),
                   carFeatures(
-                      title: "Max Power", value: result!.maxPower ?? 'NA'),
+                      title: "Max Power", value: result!.maxPower ?? 'NA',icon: Image.asset("assets/PngAssets/maxspeed.png")),
                   carFeatures(
-                      title: "Max Speed", value: result!.maxSpeed ?? 'NA'),
+                      title: "Max Speed", value: result!.maxSpeed ?? 'NA',icon: Image.asset("assets/PngAssets/maxspeed.png")),
                   carFeatures(
-                      title: "Fuel Tank", value: result!.fuelTank ?? 'NA'),
+                      title: "Fuel Tank", value: result!.fuelTank ?? 'NA',icon: Image.asset("assets/PngAssets/Petrol.png")),
                 ],
               ),
             ),
@@ -179,7 +152,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                 children: [
                   carFeatures(title: "Year", value: result!.year ?? 'NA'),
                   carFeatures(
-                      title: "Milleage", value: result!.milleage ?? 'NA'),
+                      title: "Milleage", value: result!.milleage ?? 'NA',icon: Image.asset("assets/PngAssets/millage.png")),
                   carFeatures(
                       title: "Serial No", value: result!.serialNo ?? "NA"),
                   carFeatures(title: "Plate", value: result!.plate ?? "NA"),
@@ -208,50 +181,59 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                     flex: 2,
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              'assets/PngAssets/User Account.png',
-                              height: 20,
-                            ),
-                            WhiteSpacer.horizontalSpace(5),
-                            Text("${result!.passengers ?? ''} Passengers",
-                                style: StaticTextStyles.normalBlackTextStyle),
-                            const Expanded(child: SizedBox()),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                'assets/PngAssets/User Account.png',
+                                height: 20,
+                              ),
+                              WhiteSpacer.horizontalSpace(5),
+                              Text("${result!.passengers ?? ''} Passengers",
+                                  style: StaticTextStyles.normalBlackTextStyle),
+                              const Expanded(child: SizedBox()),
+                            ],
+                          ),
                         ),
                         WhiteSpacer.verticalSpace(5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              'assets/PngAssets/Winter.png',
-                              height: 20,
-                            ),
-                            WhiteSpacer.horizontalSpace(5),
-                            Text(
-                                result!.isSnowTires
-                                    ? "Snow Tires"
-                                    : "Snow Tires NA",
-                                style: StaticTextStyles.normalBlackTextStyle),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                'assets/PngAssets/Winter.png',
+                                height: 20,
+                              ),
+                              WhiteSpacer.horizontalSpace(5),
+                              Text(
+                                  result!.isSnowTires!
+                                      ? "Snow Tires"
+                                      : "Snow Tires NA",
+                                  style: StaticTextStyles.normalBlackTextStyle),
+                            ],
+                          ),
                         ),
                         WhiteSpacer.verticalSpace(5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              'assets/PngAssets/Bluetooth.png',
-                              height: 20,
-                            ),
-                            WhiteSpacer.horizontalSpace(5),
-                            Text(
-                                result!.isBluetooth
-                                    ? "Bluetooth"
-                                    : "Bluetooth NA",
-                                style: StaticTextStyles.normalBlackTextStyle),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                'assets/PngAssets/Bluetooth.png',
+                                height: 20,
+                              ),
+                              WhiteSpacer.horizontalSpace(5),
+                              Text(
+                                  result!.isBluetooth!
+                                      ? "Bluetooth"
+                                      : "Bluetooth NA",
+                                  style: StaticTextStyles.normalBlackTextStyle),
+                            ],
+                          ),
                         ),
                       ],
                     )),
@@ -259,41 +241,50 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                     flex: 1,
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image.asset(
-                              'assets/PngAssets/Car Door.png',
-                              height: 20,
-                            ),
-                            WhiteSpacer.horizontalSpace(10),
-                            Text("${result!.doors ?? ''} Doors",
-                                style: StaticTextStyles.normalBlackTextStyle),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                'assets/PngAssets/Car Door.png',
+                                height: 20,
+                              ),
+                              WhiteSpacer.horizontalSpace(10),
+                              Text("${result!.doors ?? ''} Doors",
+                                  style: StaticTextStyles.normalBlackTextStyle),
+                            ],
+                          ),
                         ),
                         WhiteSpacer.verticalSpace(5),
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/PngAssets/GPS.png',
-                              height: 20,
-                            ),
-                            WhiteSpacer.horizontalSpace(10),
-                            Text(result!.isGps ? "GPS" : "GPS NA",
-                                style: StaticTextStyles.normalBlackTextStyle),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/PngAssets/GPS.png',
+                                height: 20,
+                              ),
+                              WhiteSpacer.horizontalSpace(10),
+                              Text(result!.isGps! ? "GPS" : "GPS NA",
+                                  style: StaticTextStyles.normalBlackTextStyle),
+                            ],
+                          ),
                         ),
                         WhiteSpacer.verticalSpace(5),
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/PngAssets/Book.png',
-                              height: 20,
-                            ),
-                            WhiteSpacer.horizontalSpace(10),
-                            Text(result!.isManual ? "Manual" : "Automatic",
-                                style: StaticTextStyles.normalBlackTextStyle),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/PngAssets/Book.png',
+                                height: 20,
+                              ),
+                              WhiteSpacer.horizontalSpace(10),
+                              Text(result!.isManual! ? "Manual" : "Automatic",
+                                  style: StaticTextStyles.normalBlackTextStyle),
+                            ],
+                          ),
                         )
                       ],
                     )),
@@ -303,7 +294,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
             Text("Information", style: StaticTextStyles.subTitleStyleBlack),
             WhiteSpacer.verticalSpace(10),
             Text(
-              result!.description,
+              result!.description!,
               style: StaticTextStyles.normalGreyTextStyle,
             ),
             WhiteSpacer.verticalSpace(20),
@@ -415,7 +406,7 @@ Widget commentSection() {
   ]);
 }
 
-Widget carFeatures({required title, required value}) {
+Widget carFeatures({required title, required value,Widget icon=const Text("")}) {
   return Container(
     constraints: BoxConstraints(minWidth: width * .21),
     decoration: BoxDecoration(
@@ -428,8 +419,7 @@ Widget carFeatures({required title, required value}) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(Icons.battery_charging_full_outlined,
-                color: StaticColors.greyColor.withOpacity(.7)),
+            icon,
             const Expanded(child: SizedBox()),
             Text(title, style: StaticTextStyles.normalGreyTextStyle),
             Text(value,

@@ -32,7 +32,6 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    logger.i(myCarsLoaded);
    if(myCarsLoaded==true){ normalSaleProvider.getAllCars();}
    normalSaleProvider.getMyUploadedCars();
 
@@ -104,11 +103,11 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
           return ListView.builder(
             itemCount: data.allCarsModel == null
                 ? 0
-                : data.allCarsModel!.result.length,
+                : data.allCarsModel!.result!.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
-              var singleCarDetail = data.allCarsModel!.result[index];
-              Result result = data.allCarsModel!.result[index];
+              var singleCarDetail = data.allCarsModel!.result![index];
+              Result result = data.allCarsModel!.result![index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5.0),
                 child: InkWell(
@@ -122,9 +121,10 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                         width: width * .25,
                         height: width * .18,
                         decoration: BoxDecoration(
+                          color: StaticColors.greyColor.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(8),
                             image: DecorationImage(
-                                image: NetworkImage(imageUrl),
+                                image: NetworkImage("https://auction.api.deeps.info/${singleCarDetail.pictures!.isEmpty ? "": singleCarDetail.pictures![0]}"),
                                 fit: BoxFit.fill)),
                       ),
                       WhiteSpacer.horizontalSpace(5),

@@ -55,6 +55,7 @@ dependencies:
   imageview360: ^1.3.0
   syncfusion_flutter_pdfviewer: ^19.4.56-beta
   panorama: ^0.4.1
+  url_launcher: ^6.0.20
 
 
 

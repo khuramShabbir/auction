@@ -6,6 +6,7 @@ import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -19,8 +20,8 @@ class UploadCarScreen extends StatefulWidget {
 class _UploadCarScreenState extends State<UploadCarScreen> {
 
   final formKey = GlobalKey<FormState>();
-  List<File> files = [];
-  final ImagePicker picker = ImagePicker();
+
+  final picker = ImagePicker();
 
   @override
   void initState() {
@@ -46,31 +47,30 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                   children: [
                     Expanded(
                         child: customTextFormField(
-                          inputType:TextInputType.number ,
-                          onChange: (v){},
-                            validator: (v){
-                            if(v!.isEmpty){
-                              return "Invalid Information";
-                            }return null;
-
+                            inputType: TextInputType.number,
+                            controller: data.priceController,
+                            validator: (v) {
+                              if (v!.isEmpty) {
+                                return "Invalid Information";
+                              }
+                              return null;
                             },
-
-
-
-                            isOutLinedBorder: true, hintText: "Price",borderColor:Colors.grey)),
+                            isOutLinedBorder: true,
+                            hintText: "Price",
+                            borderColor: Colors.grey)),
                     WhiteSpacer.horizontalSpace(10),
                     Expanded(
                         child: customTextFormField(
-                            inputType:TextInputType.number ,
-
-                            onChange: (v){},
-                            validator: (v){
-                              if(v!.isEmpty){
+                            inputType: TextInputType.number,
+                            controller: data.discountedPRiceController,
+                            validator: (v) {
+                              if (v!.isEmpty) {
                                 return "Invalid Information";
-                              }return null;
-
+                              }
+                              return null;
                             },
-                            isOutLinedBorder: true,borderColor:Colors.grey,
+                            isOutLinedBorder: true,
+                            borderColor: Colors.grey,
                             hintText: "Discounted Price")),
                   ],
                 ),
@@ -80,29 +80,32 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                   children: [
                     Expanded(
                         child: customTextFormField(
-                            inputType:TextInputType.number ,
+                            inputType: TextInputType.number,
+                            controller: data.passengerController,
 
-                            onChange: (v){},
-                            validator: (v){
-                              if(v!.isEmpty){
+                            validator: (v) {
+                              if (v!.isEmpty) {
                                 return "Invalid Information";
-                              }return null;
-
+                              }
+                              return null;
                             },
-                            isOutLinedBorder: true, hintText: "Passengers",borderColor:Colors.grey)),
+                            isOutLinedBorder: true,
+                            hintText: "Passengers",
+                            borderColor: Colors.grey)),
                     WhiteSpacer.horizontalSpace(10),
                     Expanded(
                         child: customTextFormField(
-                            inputType:TextInputType.number ,
-
-                            onChange: (v){},
-                            validator: (v){
-                              if(v!.isEmpty){
+                            inputType: TextInputType.number,
+                            controller: data.doorsController,
+                            validator: (v) {
+                              if (v!.isEmpty) {
                                 return "Invalid Information";
-                              }return null;
-
+                              }
+                              return null;
                             },
-                            isOutLinedBorder: true, hintText: "Doors",borderColor:Colors.grey)),
+                            isOutLinedBorder: true,
+                            hintText: "Doors",
+                            borderColor: Colors.grey)),
                   ],
                 ),
                 WhiteSpacer.horizontalSpace(10),
@@ -111,29 +114,31 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                   children: [
                     Expanded(
                         child: customTextFormField(
-                            inputType:TextInputType.number ,
-
-                            onChange: (v){},
-                            validator: (v){
-                              if(v!.isEmpty){
+                            inputType: TextInputType.number,
+                            controller: data.feulTankController,
+                            validator: (v) {
+                              if (v!.isEmpty) {
                                 return "Invalid Information";
-                              }return null;
-
+                              }
+                              return null;
                             },
-                            isOutLinedBorder: true, hintText: "Fuel Tank",borderColor:Colors.grey)),
+                            isOutLinedBorder: true,
+                            hintText: "Fuel Tank",
+                            borderColor: Colors.grey)),
                     WhiteSpacer.horizontalSpace(10),
                     Expanded(
                         child: customTextFormField(
-                            inputType:TextInputType.number ,
-
-                            onChange: (v){},
-                            validator: (v){
-                              if(v!.isEmpty){
+                            inputType: TextInputType.number,
+                            controller: data.millageController,
+                            validator: (v) {
+                              if (v!.isEmpty) {
                                 return "Invalid Information";
-                              }return null;
-
+                              }
+                              return null;
                             },
-                            isOutLinedBorder: true, hintText: "Millage",borderColor:Colors.grey)),
+                            isOutLinedBorder: true,
+                            hintText: "Millage",
+                            borderColor: Colors.grey)),
                   ],
                 ),
                 WhiteSpacer.horizontalSpace(10),
@@ -142,29 +147,31 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                   children: [
                     Expanded(
                         child: customTextFormField(
-                            inputType:TextInputType.number ,
-
-                            onChange: (v){},
-                            validator: (v){
-                              if(v!.isEmpty){
+                            inputType: TextInputType.number,
+                            controller: data.maxPowerController,
+                            validator: (v) {
+                              if (v!.isEmpty) {
                                 return "Invalid Information";
-                              }return null;
-
+                              }
+                              return null;
                             },
-                            isOutLinedBorder: true, hintText: "Max Power",borderColor:Colors.grey)),
+                            isOutLinedBorder: true,
+                            hintText: "Max Power",
+                            borderColor: Colors.grey)),
                     WhiteSpacer.horizontalSpace(10),
                     Expanded(
                         child: customTextFormField(
-                            inputType:TextInputType.number ,
-
-                            onChange: (v){},
-                            validator: (v){
-                              if(v!.isEmpty){
+                            inputType: TextInputType.number,
+                            controller: data.maxSpeedController,
+                            validator: (v) {
+                              if (v!.isEmpty) {
                                 return "Invalid Information";
-                              }return null;
-
+                              }
+                              return null;
                             },
-                            isOutLinedBorder: true, hintText: "Max Speed",borderColor:Colors.grey)),
+                            isOutLinedBorder: true,
+                            hintText: "Max Speed",
+                            borderColor: Colors.grey)),
                   ],
                 ),
                 WhiteSpacer.horizontalSpace(10),
@@ -173,25 +180,29 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                   children: [
                     Expanded(
                         child: customTextFormField(
-                            onChange: (v){},
-                            validator: (v){
-                              if(v!.isEmpty){
+                            controller: data.plateNumbrController,
+                            validator: (v) {
+                              if (v!.isEmpty) {
                                 return "Invalid Information";
-                              }return null;
-
+                              }
+                              return null;
                             },
-                            isOutLinedBorder: true, hintText: "Plate",borderColor:Colors.grey)),
+                            isOutLinedBorder: true,
+                            hintText: "Plate",
+                            borderColor: Colors.grey)),
                     WhiteSpacer.horizontalSpace(10),
                     Expanded(
                         child: customTextFormField(
-                            onChange: (v){},
-                            validator: (v){
-                              if(v!.isEmpty){
+                            controller: data.chassisController,
+                            validator: (v) {
+                              if (v!.isEmpty) {
                                 return "Invalid Information";
-                              }return null;
-
+                              }
+                              return null;
                             },
-                            isOutLinedBorder: true, hintText: "Chassis",borderColor:Colors.grey)),
+                            isOutLinedBorder: true,
+                            hintText: "Chassis",
+                            borderColor: Colors.grey)),
                   ],
                 ),
                 WhiteSpacer.horizontalSpace(10),
@@ -284,7 +295,6 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                   ],
                 ),
 
-
                 WhiteSpacer.horizontalSpace(20),
                 data.allCarsSpecs != null
                     ? Column(
@@ -297,26 +307,26 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                   child: DropdownButton(
                                     isExpanded: true,
                                     hint: Text(data.compannName),
-                                    items: data.allCarsSpecs!.result.companies
+                                    items: data.allCarsSpecs!.result!.companies!
                                         .map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value.id.toString(),
                                         child: Text(
                                           value.name ?? "",
-                                          style: TextStyle(color: Colors.black),
+                                          style: const TextStyle(color: Colors.black),
                                         ),
                                       );
                                     }).toList(),
                                     onChanged: (v) {
                                       setState(() {
                                         var where = data
-                                            .allCarsSpecs!.result.companies
+                                            .allCarsSpecs!.result!.companies!
                                             .where((element) =>
                                                 element.id.toString() ==
                                                 v.toString());
                                         if (where.isNotEmpty) {
-                                          data.compannName = where.first.name;
-                                          data.companyId = where.first.id;
+                                          data.compannName = where.first.name!;
+                                          data.companyId = where.first.id!;
                                         }
                                       });
                                     },
@@ -329,7 +339,7 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                   child: DropdownButton(
                                     isExpanded: true,
                                     hint: Text(data.colorName),
-                                    items: data.allCarsSpecs!.result.colors
+                                    items: data.allCarsSpecs!.result!.colors!
                                         .map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value.id.toString(),
@@ -337,13 +347,14 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                       );
                                     }).toList(),
                                     onChanged: (v) {
-                                      var where = data.allCarsSpecs!.result.colors
+                                      var where = data
+                                          .allCarsSpecs!.result!.colors!
                                           .where((element) =>
                                               element.id.toString() ==
                                               v.toString());
                                       if (where.isNotEmpty) {
-                                        data.colorName = where.first.name;
-                                        data.colorId = where.first.id;
+                                        data.colorName = where.first.name!;
+                                        data.colorId = where.first.id!;
                                       }
                                       // data.colorName = v.toString();
                                       setState(() {});
@@ -362,7 +373,7 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                   child: DropdownButton(
                                     isExpanded: true,
                                     hint: Text(data.carModelYearName),
-                                    items: data.allCarsSpecs!.result.models
+                                    items: data.allCarsSpecs!.result!.models!
                                         .map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value.id.toString(),
@@ -372,14 +383,14 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                     onChanged: (v) {
                                       setState(() {
                                         var where = data
-                                            .allCarsSpecs!.result.models
+                                            .allCarsSpecs!.result!.models!
                                             .where((element) =>
                                                 element.id.toString() ==
                                                 v.toString());
                                         if (where.isNotEmpty) {
                                           data.carModelYearName =
-                                              where.first.name;
-                                          data.carModelYearId = where.first.id;
+                                              where.first.name!;
+                                          data.carModelYearId = where.first.id!;
                                         }
                                       });
                                     },
@@ -392,7 +403,7 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                   child: DropdownButton(
                                     isExpanded: true,
                                     hint: Text(data.carTypeName),
-                                    items: data.allCarsSpecs!.result.types
+                                    items: data.allCarsSpecs!.result!.types!
                                         .map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value.carTypeId.toString(),
@@ -400,11 +411,14 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                       );
                                     }).toList(),
                                     onChanged: (v) {
-                                      var where = data.allCarsSpecs!.result.types
-                                          .where((element) =>element.carTypeId.toString() == v.toString());
+                                      var where = data
+                                          .allCarsSpecs!.result!.types!
+                                          .where((element) =>
+                                              element.carTypeId.toString() ==
+                                              v.toString());
                                       if (where.isNotEmpty) {
-                                        data.carTypeName = where.first.typeName;
-                                        data.cartypeId = where.first.carTypeId;
+                                        data.carTypeName = where.first.typeName!;
+                                        data.cartypeId = where.first.carTypeId!;
                                       }
 
                                       setState(() {});
@@ -412,8 +426,6 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                   ),
                                 ),
                               ),
-
-
                             ],
                           ),
                           WhiteSpacer.verticalSpace(10),
@@ -422,89 +434,68 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                     : Container(),
                 WhiteSpacer.horizontalSpace(20),
 
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [
-                 InkWell(
-                     onTap: ()async{
-                       String value=await CustomWidget.imagePicker();
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                          onTap: () async {
+                            Get.bottomSheet(uploadphotosbottomSheet());
 
-                       if (value.isEmpty) {
-                         return;
-                       } else if (value == "Gallery") {
-                         logger.i(value);
-                         XFile? xFile =
-                         await picker.pickImage(source: ImageSource.gallery);
-                         if (xFile == null) return;
-                         files.add(File(xFile.path));
-                         setState(() {});
-                       } else {
-                         logger.i(value);
-                         XFile? xFile = await picker.pickImage(
-                             source: ImageSource.camera,
-                             preferredCameraDevice: CameraDevice.rear);
-                         if (xFile != null) {
-                           files.add(File(xFile.path));
-                           setState(() {});
-                         }
-                       }
+                          },
+                          child: Text("Upload Pictures",
+                              style: TextStyle(
+                                  color: StaticColors.blueColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  decoration: TextDecoration.underline))),
 
-
-                       },
-
-                     child: Text("Upload Pictures",style:TextStyle(color: StaticColors.blueColor,fontWeight: FontWeight.bold,fontSize: 16,decoration: TextDecoration.underline))),
-                 Text("Upload 360 Picture",style:TextStyle(color: StaticColors.blueColor,fontWeight: FontWeight.bold,fontSize: 16,decoration: TextDecoration.underline)),
-
-
-               ]),
+                    ]),
                 WhiteSpacer.verticalSpace(20),
-                SizedBox(height:files.isNotEmpty? height*.15:0,
-                  child:files.isNotEmpty? ListView.builder(
-
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: files.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Row(
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                width: height * .15,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                        image:
-                                        FileImage(files[index]),
-                                        fit: BoxFit.fill)),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  files.removeAt(index);
-                                  setState(() {});
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.cancel,
-                                    color: StaticColors.orangeColor,
-                                  ),
+                SizedBox(
+                  height: normalSaleProvider.imagesList.isNotEmpty ? height * .15 : 0,
+                  child: normalSaleProvider.imagesList.isNotEmpty
+                      ? ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: normalSaleProvider.imagesList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Row(
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: height * .15,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                              image: FileImage(normalSaleProvider.imagesList[index]),
+                                              fit: BoxFit.fill)),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        normalSaleProvider.imagesList.removeAt(index);
+                                        setState(() {});
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Icon(
+                                          Icons.cancel,
+                                          color: StaticColors.orangeColor,
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
-                          ),
-                          WhiteSpacer.horizontalSpace(10)
-                        ],
-                      );
-                    },
-                  ):null,
+                                WhiteSpacer.horizontalSpace(10)
+                              ],
+                            );
+                          },
+                        )
+                      : null,
                 ),
 
-
                 WhiteSpacer.verticalSpace(30),
-
-
 
                 /// Description
                 Container(
@@ -516,7 +507,9 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10.0),
                       child: TextField(
-                        onChanged: (String value) {},
+                        controller: data.descriptionController,
+                        maxLines: null,
+                        maxLength: null,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Description',
@@ -525,15 +518,16 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                     )),
                 WhiteSpacer.horizontalSpace(35),
 
-                extendedButton(onTap: (){
-                 if(formKey.currentState!.validate()){
-                   data.submitCar();
-                 }
-
-
-                }, buttonColor: StaticColors.orangeColor, textColor: StaticColors.whiteColor,buttonText: "Submit"),
+                extendedButton(
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        data.submitCar();
+                      }
+                    },
+                    buttonColor: StaticColors.orangeColor,
+                    textColor: StaticColors.whiteColor,
+                    buttonText: "Submit"),
                 WhiteSpacer.horizontalSpace(35),
-
               ],
             ),
           );
@@ -541,6 +535,97 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
       )),
     );
   }
+
+  Widget uploadphotosbottomSheet() {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              height: 120,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(15)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        _imgFromCamera();
+                      },
+                      child: Container(
+                        width: Get.width,
+                        child: Center(
+                          child: Text(
+                            'Open Camera'.tr,
+                            style: const TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 0.5,
+                    width: Get.width,
+                    color: Colors.grey,
+                  ),
+                  Expanded(
+                    child: InkWell(
+                        onTap: () {
+                          _imgFromGallery();
+                        },
+                        child: Container(
+                          width: Get.width,
+                          child: Center(
+                            child: Text(
+                              'Photo Roll'.tr,
+                              style: const TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                        )),
+                  ),
+                ],
+              ),
+            ),
+            InkWell(
+              onTap: (){
+                Get.back();
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                height: 60,
+                decoration: BoxDecoration(
+                    color: Colors.white, borderRadius: BorderRadius.circular(15)),
+                alignment: Alignment.center,
+                child: Text(
+                  'Cancel'.tr,
+                  style: const TextStyle(color: Colors.grey),
+                ),
+              ),
+            ),
+            const SizedBox(height: 18)
+          ],
+        ),
+      ),
+    );
+  }
+
+  _imgFromCamera() async {
+    Get.back();
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      normalSaleProvider.setSelectedImage(pickedFile);
+    }
+  }
+
+  _imgFromGallery() async {
+    Get.back();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      normalSaleProvider.setSelectedImage(pickedFile);
+    }
+  }
+
 }
-
-

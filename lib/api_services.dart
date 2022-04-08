@@ -17,6 +17,7 @@ class ApiServices {
   static String PAYMENT_EVIDENCE = 'PaymentEvidence/Upload-Payment-Evidence';
   static String ALL_CAR_SALES = 'CarSales/get-cars';
   static String ALL_CAR_SPECS = 'CarSales/get-car-specs';
+  static String ADD_A_CAR_NORMAL_PURCHASE = 'CarSales/add-car';
 
 
 
@@ -43,13 +44,14 @@ class ApiServices {
     }
   }
 
-  static Future<String> postMultiPartWithFile(String feedUrl, List<File> paths, {Map<String, String>? body}) async {
+  static Future<String> postMultiPartWithFile(String feedUrl, List<File> paths,
+      {Map<String, String>? body, String pathName = "PaymentProof"}) async {
     var request = http.MultipartRequest('POST', Uri.parse(BASE_URL + feedUrl));
 
     if (paths != null) {
       for (var singlePath in paths) {
-        request.files.add(
-            await http.MultipartFile.fromPath('PaymentProof', singlePath.path));
+        request.files
+            .add(await http.MultipartFile.fromPath(pathName, singlePath.path));
       }
     }
 
