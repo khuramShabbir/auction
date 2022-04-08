@@ -264,46 +264,56 @@ class CustomWidget {
   static Future<String> imagePicker()async {
     String value='';
    await  Get.bottomSheet(
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            WhiteSpacer.verticalSpace(20),
-            Text(
-              "Upload Your Receipt",
-              style: StaticTextStyles.subTitleStyleBlack,
-            ),
-            WhiteSpacer.verticalSpace(30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+
+
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius:BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15))),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                customizedButton(
-                    onTap: () {
+                WhiteSpacer.verticalSpace(20),
+                Text(
+                  "Action",
+                  style: StaticTextStyles.subTitleStyleBlack,
+                ),
+                WhiteSpacer.verticalSpace(30),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    extendedButton(
+                        onTap: () {
+                          value= "Gallery";
+                          Get.back(result: value);
+                        },
+                        buttonColor: Colors.transparent,
+                        textColor: StaticColors.greyColor,
 
-                      value= "Gallery";
-                      Get.back(result: value);
+                        buttonText: "Gallery"),
+                    extendedButton(
+                        onTap: () {
+                          value= "Camera";
+                          Get.back(result: value);
+                        },
+                        buttonColor: Colors.transparent,
+                        textColor: StaticColors.greyColor,
 
-
-                    },
-                    buttonColor: StaticColors.blueColor,
-                    textColor: StaticColors.whiteColor,
-                    buttonWidth: .25,
-                    buttonText: "Gallery"),
-                customizedButton(
-                    onTap: () {
-                      value= "Camera";
-                      Get.back(result: value);
-                    },
-                    buttonColor: StaticColors.blueColor,
-                    textColor: StaticColors.whiteColor,
-                    buttonWidth: .25,
-                    buttonText: "Camera"),
+                        buttonText: "Camera"),
+                    WhiteSpacer.verticalSpace(20),
+                  ],
+                ),
+                WhiteSpacer.verticalSpace(30),
               ],
             ),
-            WhiteSpacer.verticalSpace(30),
-          ],
+          ),
         ),
         isDismissible: false,
-        backgroundColor: StaticColors.whiteColor,
+        backgroundColor:Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)));
      return value;
 
@@ -351,7 +361,7 @@ customizedButton(
     child: Container(
       width: width * buttonWidth,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         child: Center(
           child: Text(
             buttonText,
@@ -376,7 +386,7 @@ Widget customTextFormField(
     String hintText = "Hint Text",
     String? labelText,
     Widget? suffixIcon,
-    TextEditingController? controller}) {
+    TextEditingController? controller, Color? borderColor}) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 10.0),
     child: TextFormField(
@@ -411,7 +421,7 @@ Widget customTextFormField(
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide:
-                      BorderSide(color: StaticColors.orangeColor,width: 1.5))
+                      BorderSide(color: borderColor??StaticColors.orangeColor,width: 1.5))
               : null),
     ),
   );

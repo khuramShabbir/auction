@@ -1,19 +1,16 @@
-import 'dart:async';
-import 'dart:io';
+
 import 'package:auction/models/auction/GetAllAuctions.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
-import 'package:auction/views/home/bottom_nav_bar_screens/search_for_cars_screen.dart';
-import 'package:auction/views/home/create_campaign_Screens/car_specs.dart';
+
 import 'package:auction/views/inspection/pdf_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// import 'package:flutter_pdfview/flutter_pdfview.dart';
+
 import 'package:get/get.dart';
 import 'package:panorama/panorama.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
 
 class CarSpecification extends StatefulWidget {
   final Result? result;

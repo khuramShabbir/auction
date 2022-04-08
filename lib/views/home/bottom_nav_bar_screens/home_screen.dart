@@ -1,14 +1,18 @@
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/controllers_providers/dashboard_provider.dart';
+import 'package:auction/controllers_providers/normalSale/normalSaleProvider.dart';
 import 'package:auction/controllers_providers/wallet_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:auction/views/home/all_auctions_screen.dart';
-import 'package:auction/views/home/bottom_nav_bar_screens/search_for_cars_screen.dart';
+import 'package:auction/views/home/bottom_nav_bar_screens/all_cars_screen.dart';
 import 'package:auction/views/wallet/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,7 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     walletProvider.getWallet();
+
   }
   @override
   Widget build(BuildContext context) {
@@ -118,7 +124,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: InkWell(
                   onTap: () {
                     // bottomSheetComingSoon();
-                    Get.to(() => const SearchForCarsScreen());
+
+
+
+
+                    Get.to(() =>    AllCarsScreen(true));
+
                   },
                   child: Container(
                     width: width,

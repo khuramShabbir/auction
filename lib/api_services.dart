@@ -15,6 +15,10 @@ class ApiServices {
   static String GET_WALLET_HISTORY = 'Wallet/Get-Wallet-History?UserId=';
   static String ALL_USERS = 'users';
   static String PAYMENT_EVIDENCE = 'PaymentEvidence/Upload-Payment-Evidence';
+  static String ALL_CAR_SALES = 'CarSales/get-cars';
+  static String ALL_CAR_SPECS = 'CarSales/get-car-specs';
+
+
 
   static Future<String> postMultiPart(String feedUrl, Map<String, String> body, {String errorText = "Something went wrong",}) async {
     var request = http.MultipartRequest("POST", Uri.parse(BASE_URL + feedUrl));

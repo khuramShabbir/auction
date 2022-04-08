@@ -3,15 +3,14 @@ import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/home_screen.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/my_cars_screens.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/profile_settings/profile_setting_screen.dart';
-import 'package:auction/views/home/bottom_nav_bar_screens/auction_availability_screen.dart';
-import 'package:auction/views/home/bottom_nav_bar_screens/add_payment_method_screen.dart';
+
 import 'package:auction/views/home/bottom_nav_bar_screens/wallet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'bottom_nav_bar_screens/search_for_cars_screen.dart';
-import 'check_out_screen.dart';
+import 'bottom_nav_bar_screens/all_cars_screen.dart';
+
 
 PersistentTabController persistentTabController =
     PersistentTabController(initialIndex: 0);
@@ -84,7 +83,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   List<Widget> listScreen() {
     return [
        HomeScreen(),
-       SearchForCarsScreen(),
+       AllCarsScreen(false),
        MyCarsScreen(),
        WalletScreen(),
        ProfileSettingScreen(),
