@@ -1,3 +1,4 @@
+import 'package:auction/controllers_providers/Comments/comments_by_cars.dart';
 import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/controllers_providers/dashboard_provider.dart';
@@ -39,7 +40,8 @@ class _InitAppState extends State<InitApp> {
       providers: [
         ChangeNotifierProvider(
           create: (BuildContext context) => AuthProvider(),
-        ),  ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (BuildContext context) => WalletProvider(),
         ),
         ChangeNotifierProvider(
@@ -50,8 +52,12 @@ class _InitAppState extends State<InitApp> {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => AuctionProvider(),
-        ),  ChangeNotifierProvider(
+        ),
+        ChangeNotifierProvider(
           create: (BuildContext context) => NormalSaleProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => CommentProvider(),
         ),
       ],
       child: const GetMaterialApp(

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
+
 
 class ApiServices {
   static String BASE_URL = 'https://auction.api.deeps.info/api/';
@@ -18,6 +18,7 @@ class ApiServices {
   static String ALL_CAR_SALES = 'CarSales/get-cars';
   static String ALL_CAR_SPECS = 'CarSales/get-car-specs';
   static String ADD_A_CAR_NORMAL_PURCHASE = 'CarSales/add-car';
+
 
 
 
