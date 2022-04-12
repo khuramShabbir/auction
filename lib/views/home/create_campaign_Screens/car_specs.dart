@@ -47,8 +47,8 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
         // logger.i(data.isLoaded);
         return Scaffold(
           appBar: CustomAppBar.appBar(title: result!.model ?? ""),
-          body: data.isLoaded
-              ? StaticKPadding.kPadding(
+          body:
+               StaticKPadding.kPadding(
                   child: SingleChildScrollView(
                   child: Form(
                     key: formKey,
@@ -352,8 +352,8 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                           style: StaticTextStyles.normalGreyTextStyle,
                         ),
                         WhiteSpacer.verticalSpace(20),
-                        data.commentsByCars!.result.isEmpty
-                            ? Text("No Reviews Yet",style: StaticTextStyles.subTitleStyleBlack,)
+                        data.commentsByCars==null
+                            ? Container()
                             : ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
@@ -377,7 +377,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                                 },
                               ),
                         WhiteSpacer.verticalSpace(20),
-                        customTextFormField(
+                        customTextFormField(borderColor: StaticColors.greyColor,
                             controller: textEditingController,
                             isOutLinedBorder: true,
                             hintText: "Post your Comment",
@@ -392,26 +392,26 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Container(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 25, vertical: 15),
-                                child: Icon(
-                                  Icons.favorite,
-                                  color: StaticColors.greyColor.withOpacity(.5),
-                                ),
-                              ),
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: StaticColors.greyColor
-                                            .withOpacity(.3),
-                                        spreadRadius: 1,
-                                        blurRadius: 10)
-                                  ],
-                                  color: StaticColors.whiteColor,
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
+                            // Container(
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.symmetric(
+                            //         horizontal: 25, vertical: 15),
+                            //     child: Icon(
+                            //       Icons.favorite,
+                            //       color: StaticColors.greyColor.withOpacity(.5),
+                            //     ),
+                            //   ),
+                            //   decoration: BoxDecoration(
+                            //       boxShadow: [
+                            //         BoxShadow(
+                            //             color: StaticColors.greyColor
+                            //                 .withOpacity(.3),
+                            //             spreadRadius: 1,
+                            //             blurRadius: 10)
+                            //       ],
+                            //       color: StaticColors.whiteColor,
+                            //       borderRadius: BorderRadius.circular(10)),
+                            // ),
                             customizedButton(
                               onTap: () {
                                 if (formKey.currentState!.validate()) {
@@ -419,16 +419,14 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                                       result!.carSaleId.toString());
                                   textEditingController.clear();
                                   data.getComments(result!.carSaleId);
-                                  setState(() {
-
-                                  });
                                 }
                               },
                               textColor: StaticColors.whiteColor,
                               buttonColor: StaticColors.blueColor,
                               buttonText: "Post",
-                              radius: 15,
-                              buttonWidth: .6,
+                              radius: 20,
+                              buttonWidth: .8
+
                             ),
                           ],
                         ),
@@ -437,10 +435,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                     ),
                   ),
                 ))
-              : Center(
-                  child: CircularProgressIndicator(
-                  color: StaticColors.orangeColor,
-                )),
+
         );
       },
     );

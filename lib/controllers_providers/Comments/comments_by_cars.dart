@@ -22,8 +22,12 @@ class CommentProvider extends ChangeNotifier {
     String body =
         await ApiServices.simpleGet("Comments/get-comments-by-car?carId=$carID");
     if (body.isEmpty) return;
+    commentsByCars=null;
+    isLoaded=false;
+    notifyListeners();
+await Future.delayed(Duration.zero);
 
-     commentsByCars = commentsByCarsFromJson(body);
+    commentsByCars = commentsByCarsFromJson(body);
      isLoaded=true;
      logger.i(isLoaded);
      notifyListeners();
