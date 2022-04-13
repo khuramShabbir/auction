@@ -6,6 +6,7 @@ import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:auction/views/home/all_auctions_screen.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/all_cars_screen.dart';
+import 'package:auction/views/home/CouponScreens/coupen_screen.dart';
 import 'package:auction/views/wallet/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,16 +24,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> carList = [
-    'assets/PngAssets/Car0.png',
-    'assets/PngAssets/Car1.png',
-    'assets/PngAssets/Car2.png'
+    'assets/PngAssets/blackCar.png',
+    'assets/PngAssets/whiteCar.png',
+    'assets/PngAssets/menIC.png'
   ];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
     walletProvider.getWallet();
 
   }
@@ -177,8 +177,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
                 child: InkWell(
                   onTap: () {
-                    bottomSheetComingSoon();
+                    Get.to(()=>const CouponScreen());
 
+
+
+
+                    // bottomSheetComingSoon();
                     // Get.to(() => const SearchForCarsScreen());
                   },
                   child: Container(

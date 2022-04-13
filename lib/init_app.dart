@@ -1,4 +1,6 @@
 import 'package:auction/controllers_providers/Comments/comments_by_cars.dart';
+import 'package:auction/controllers_providers/Comments/comments_by_coupon.dart';
+import 'package:auction/controllers_providers/Coupon/coupon.dart';
 import 'package:auction/controllers_providers/auction_provider.dart';
 import 'package:auction/controllers_providers/auth_provider.dart';
 import 'package:auction/controllers_providers/dashboard_provider.dart';
@@ -58,6 +60,12 @@ class _InitAppState extends State<InitApp> {
         ),
         ChangeNotifierProvider(
           create: (BuildContext context) => CommentProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => CouponProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => CommentByCoupon(),
         ),
       ],
       child: const GetMaterialApp(

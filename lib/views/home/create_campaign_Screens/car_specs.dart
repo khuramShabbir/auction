@@ -37,7 +37,6 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
   void initState() {
     super.initState();
     commentProvider.getComments(result!.carSaleId);
-
   }
 
   @override
@@ -46,397 +45,364 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
       builder: (BuildContext context, data, Widget? child) {
         // logger.i(data.isLoaded);
         return Scaffold(
-          appBar: CustomAppBar.appBar(title: result!.model ?? ""),
-          body:
-               StaticKPadding.kPadding(
-                  child: SingleChildScrollView(
-                  child: Form(
-                    key: formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            appBar: CustomAppBar.appBar(title: result!.model ?? ""),
+            body: StaticKPadding.kPadding(
+                child: SingleChildScrollView(
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: height * .4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                  "https://auction.api.deeps.info/${result!.pictures![imageIndex]}"),
+                              fit: BoxFit.fill)),
+                    ),
+                    WhiteSpacer.verticalSpace(10),
+                    SizedBox(
+                      height: 75,
+                      child: ListView.builder(
+                        itemCount: result!.pictures!.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  imageIndex = index;
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  width: 85,
+                                  height: 85,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              "https://auction.api.deeps.info/${result!.pictures![index]}"),
+                                          fit: BoxFit.fill)),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    WhiteSpacer.verticalSpace(20),
+                    Text("Event By",
+                        style: StaticTextStyles.subTitleStyleBlack),
+                    WhiteSpacer.verticalSpace(10),
+                    Row(
                       children: [
                         Container(
-                          height: height * .4,
+                          height: 50,
+                          width: 50,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(100),
                               image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://auction.api.deeps.info/${result!.pictures![imageIndex]}"),
+                                  image: NetworkImage(imageUrl),
                                   fit: BoxFit.fill)),
                         ),
-                        WhiteSpacer.verticalSpace(10),
-                        SizedBox(
-                          height: 75,
-                          child: ListView.builder(
-                            itemCount: result!.pictures!.length,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      imageIndex = index;
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                      width: 85,
-                                      height: 85,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "https://auction.api.deeps.info/${result!.pictures![index]}"),
-                                              fit: BoxFit.fill)),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                        WhiteSpacer.verticalSpace(20),
-                        Text("Event By",
-                            style: StaticTextStyles.subTitleStyleBlack),
-                        WhiteSpacer.verticalSpace(10),
-                        Row(
+                        WhiteSpacer.horizontalSpace(10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              height: 50,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  image: DecorationImage(
-                                      image: NetworkImage(imageUrl),
-                                      fit: BoxFit.fill)),
-                            ),
-                            WhiteSpacer.horizontalSpace(10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("${result!.user!.name}",
-                                    style: StaticTextStyles.subTitleStyleBlack),
-                                Text("${result!.user!.created}",
-                                    style:
-                                        StaticTextStyles.normalGreyTextStyle),
-                              ],
-                            ),
-                            const Expanded(child: SizedBox()),
-                            InkWell(
-                              onTap: () {
-                                launch("tel://${result!.user!.phoneNumber}");
-                              },
-                              child: CircleAvatar(
-                                  backgroundColor: StaticColors.blueColor,
-                                  radius: 20,
-                                  child: Icon(Icons.phone,
-                                      color: StaticColors.whiteColor)),
-                            ),
-                            WhiteSpacer.horizontalSpace(5),
-                            // CircleAvatar(
-                            //     backgroundColor: StaticColors.blueColor,
-                            //     radius: 20,
-                            //     child: Icon(Icons.mail_outline,
-                            //         color: StaticColors.whiteColor)),
+                            Text("${result!.user!.name}",
+                                style: StaticTextStyles.subTitleStyleBlack),
+                            Text("${result!.user!.created}",
+                                style: StaticTextStyles.normalGreyTextStyle),
                           ],
                         ),
-                        WhiteSpacer.verticalSpace(20),
-                        Text("Specifications",
-                            style: StaticTextStyles.subTitleStyleBlack),
-                        WhiteSpacer.verticalSpace(10),
-                        SizedBox(
-                          width: width,
-                          height: height * .1,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              carFeatures(
-                                  title: "Color", value: result!.color ?? 'NA'),
-                              carFeatures(
-                                  title: "Max Power",
-                                  value: result!.maxPower ?? 'NA',
-                                  icon: Image.asset(
-                                      "assets/PngAssets/maxspeed.png")),
-                              carFeatures(
-                                  title: "Max Speed",
-                                  value: result!.maxSpeed ?? 'NA',
-                                  icon: Image.asset(
-                                      "assets/PngAssets/maxspeed.png")),
-                              carFeatures(
-                                  title: "Fuel Tank",
-                                  value: result!.fuelTank ?? 'NA',
-                                  icon: Image.asset(
-                                      "assets/PngAssets/Petrol.png")),
-                            ],
-                          ),
-                        ),
-                        WhiteSpacer.verticalSpace(10),
-                        SizedBox(
-                          width: width,
-                          height: height * .1,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              carFeatures(
-                                  title: "Year", value: result!.year ?? 'NA'),
-                              carFeatures(
-                                  title: "Milleage",
-                                  value: result!.milleage ?? 'NA',
-                                  icon: Image.asset(
-                                      "assets/PngAssets/millage.png")),
-                              carFeatures(
-                                  title: "Serial No",
-                                  value: result!.serialNo ?? "NA"),
-                              carFeatures(
-                                  title: "Plate", value: result!.plate ?? "NA"),
-                            ],
-                          ),
-                        ),
-                        WhiteSpacer.verticalSpace(10),
-                        SizedBox(
-                          width: width,
-                          height: height * .1,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              carFeatures(
-                                  title: "chassis",
-                                  value: result!.chassis ?? 'NA'),
-                            ],
-                          ),
-                        ),
-                        WhiteSpacer.verticalSpace(20),
-                        Text("Car Feature",
-                            style: StaticTextStyles.subTitleStyleBlack),
-                        WhiteSpacer.verticalSpace(10),
-                        Row(
-                          children: [
-                            Expanded(
-                                flex: 2,
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            'assets/PngAssets/User Account.png',
-                                            height: 20,
-                                          ),
-                                          WhiteSpacer.horizontalSpace(5),
-                                          Text(
-                                              "${result!.passengers ?? ''} Passengers",
-                                              style: StaticTextStyles
-                                                  .normalBlackTextStyle),
-                                          const Expanded(child: SizedBox()),
-                                        ],
-                                      ),
-                                    ),
-                                    WhiteSpacer.verticalSpace(5),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            'assets/PngAssets/Winter.png',
-                                            height: 20,
-                                          ),
-                                          WhiteSpacer.horizontalSpace(5),
-                                          Text(
-                                              result!.isSnowTires!
-                                                  ? "Snow Tires"
-                                                  : "Snow Tires NA",
-                                              style: StaticTextStyles
-                                                  .normalBlackTextStyle),
-                                        ],
-                                      ),
-                                    ),
-                                    WhiteSpacer.verticalSpace(5),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            'assets/PngAssets/Bluetooth.png',
-                                            height: 20,
-                                          ),
-                                          WhiteSpacer.horizontalSpace(5),
-                                          Text(
-                                              result!.isBluetooth!
-                                                  ? "Bluetooth"
-                                                  : "Bluetooth NA",
-                                              style: StaticTextStyles
-                                                  .normalBlackTextStyle),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            Expanded(
-                                flex: 1,
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            'assets/PngAssets/Car Door.png',
-                                            height: 20,
-                                          ),
-                                          WhiteSpacer.horizontalSpace(10),
-                                          Text("${result!.doors ?? ''} Doors",
-                                              style: StaticTextStyles
-                                                  .normalBlackTextStyle),
-                                        ],
-                                      ),
-                                    ),
-                                    WhiteSpacer.verticalSpace(5),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            'assets/PngAssets/GPS.png',
-                                            height: 20,
-                                          ),
-                                          WhiteSpacer.horizontalSpace(10),
-                                          Text(
-                                              result!.isGps! ? "GPS" : "GPS NA",
-                                              style: StaticTextStyles
-                                                  .normalBlackTextStyle),
-                                        ],
-                                      ),
-                                    ),
-                                    WhiteSpacer.verticalSpace(5),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            'assets/PngAssets/Book.png',
-                                            height: 20,
-                                          ),
-                                          WhiteSpacer.horizontalSpace(10),
-                                          Text(
-                                              result!.isManual!
-                                                  ? "Manual"
-                                                  : "Automatic",
-                                              style: StaticTextStyles
-                                                  .normalBlackTextStyle),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                )),
-                          ],
-                        ),
-                        WhiteSpacer.verticalSpace(30),
-                        Text("Information",
-                            style: StaticTextStyles.subTitleStyleBlack),
-                        WhiteSpacer.verticalSpace(10),
-                        Text(
-                          result!.description!,
-                          style: StaticTextStyles.normalGreyTextStyle,
-                        ),
-                        WhiteSpacer.verticalSpace(20),
-                        data.commentsByCars==null
-                            ? Container()
-                            : ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: commentProvider
-                                    .commentsByCars!.result.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  var data = commentProvider
-                                      .commentsByCars!.result[index];
-                                  String timestamp = data.commentDate
-                                      .toString(); // [DateTime] formatted as String.
-                                  DateTime convertedTimestamp = DateTime.parse(
-                                      timestamp); // Converting into [DateTime] object
-                                  var timeResult =
-                                      GetTimeAgo.parse(convertedTimestamp);
-
-                                  return commentSection(
-                                      name: data.username,
-                                      imageUrl: imageUrl,
-                                      comment: data.comment,
-                                      time: timeResult);
-                                },
-                              ),
-                        WhiteSpacer.verticalSpace(20),
-                        customTextFormField(borderColor: StaticColors.greyColor,
-                            controller: textEditingController,
-                            isOutLinedBorder: true,
-                            hintText: "Post your Comment",
-                            validator: (v) {
-                              if (v!.isEmpty) return "Enter something";
-                              return null;
-                            },
-                            onChange: (v) {
-                              commentProvider.commentText = v;
-                            }),
-                        WhiteSpacer.verticalSpace(20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            // Container(
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.symmetric(
-                            //         horizontal: 25, vertical: 15),
-                            //     child: Icon(
-                            //       Icons.favorite,
-                            //       color: StaticColors.greyColor.withOpacity(.5),
-                            //     ),
-                            //   ),
-                            //   decoration: BoxDecoration(
-                            //       boxShadow: [
-                            //         BoxShadow(
-                            //             color: StaticColors.greyColor
-                            //                 .withOpacity(.3),
-                            //             spreadRadius: 1,
-                            //             blurRadius: 10)
-                            //       ],
-                            //       color: StaticColors.whiteColor,
-                            //       borderRadius: BorderRadius.circular(10)),
-                            // ),
-                            customizedButton(
-                              onTap: () {
-                                if (formKey.currentState!.validate()) {
-                                  commentProvider.postComment(
-                                      result!.carSaleId.toString());
-                                  textEditingController.clear();
-                                  data.getComments(result!.carSaleId);
-                                }
-                              },
-                              textColor: StaticColors.whiteColor,
-                              buttonColor: StaticColors.blueColor,
-                              buttonText: "Post",
+                        const Expanded(child: SizedBox()),
+                        InkWell(
+                          onTap: () {
+                            launch("tel://${result!.user!.phoneNumber}");
+                          },
+                          child: CircleAvatar(
+                              backgroundColor: StaticColors.blueColor,
                               radius: 20,
-                              buttonWidth: .8
-
-                            ),
-                          ],
+                              child: Icon(Icons.phone,
+                                  color: StaticColors.whiteColor)),
                         ),
-                        WhiteSpacer.verticalSpace(20),
+                        WhiteSpacer.horizontalSpace(5),
+                        // CircleAvatar(
+                        //     backgroundColor: StaticColors.blueColor,
+                        //     radius: 20,
+                        //     child: Icon(Icons.mail_outline,
+                        //         color: StaticColors.whiteColor)),
                       ],
                     ),
-                  ),
-                ))
+                    WhiteSpacer.verticalSpace(20),
+                    Text("Specifications",
+                        style: StaticTextStyles.subTitleStyleBlack),
+                    WhiteSpacer.verticalSpace(10),
+                    SizedBox(
+                      width: width,
+                      height: height * .1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          carFeatures(
+                              title: "Color", value: result!.color ?? 'NA'),
+                          carFeatures(
+                              title: "Max Power",
+                              value: result!.maxPower ?? 'NA',
+                              icon:
+                                  Image.asset("assets/PngAssets/maxspeed.png")),
+                          carFeatures(
+                              title: "Max Speed",
+                              value: result!.maxSpeed ?? 'NA',
+                              icon:
+                                  Image.asset("assets/PngAssets/maxspeed.png")),
+                          carFeatures(
+                              title: "Fuel Tank",
+                              value: result!.fuelTank ?? 'NA',
+                              icon: Image.asset("assets/PngAssets/Petrol.png")),
+                        ],
+                      ),
+                    ),
+                    WhiteSpacer.verticalSpace(10),
+                    SizedBox(
+                      width: width,
+                      height: height * .1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          carFeatures(
+                              title: "Year", value: result!.year ?? 'NA'),
+                          carFeatures(
+                              title: "Milleage",
+                              value: result!.milleage ?? 'NA',
+                              icon:
+                                  Image.asset("assets/PngAssets/millage.png")),
+                          carFeatures(
+                              title: "Serial No",
+                              value: result!.serialNo ?? "NA"),
+                          carFeatures(
+                              title: "Plate", value: result!.plate ?? "NA"),
+                        ],
+                      ),
+                    ),
+                    WhiteSpacer.verticalSpace(10),
+                    SizedBox(
+                      width: width,
+                      height: height * .1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          carFeatures(
+                              title: "chassis", value: result!.chassis ?? 'NA'),
+                        ],
+                      ),
+                    ),
+                    WhiteSpacer.verticalSpace(20),
+                    Text("Car Feature",
+                        style: StaticTextStyles.subTitleStyleBlack),
+                    WhiteSpacer.verticalSpace(10),
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        'assets/PngAssets/User Account.png',
+                                        height: 20,
+                                      ),
+                                      WhiteSpacer.horizontalSpace(5),
+                                      Text(
+                                          "${result!.passengers ?? ''} Passengers",
+                                          style: StaticTextStyles
+                                              .normalBlackTextStyle),
+                                      const Expanded(child: SizedBox()),
+                                    ],
+                                  ),
+                                ),
+                                WhiteSpacer.verticalSpace(5),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        'assets/PngAssets/Winter.png',
+                                        height: 20,
+                                      ),
+                                      WhiteSpacer.horizontalSpace(5),
+                                      Text(
+                                          result!.isSnowTires!
+                                              ? "Snow Tires"
+                                              : "Snow Tires NA",
+                                          style: StaticTextStyles
+                                              .normalBlackTextStyle),
+                                    ],
+                                  ),
+                                ),
+                                WhiteSpacer.verticalSpace(5),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        'assets/PngAssets/Bluetooth.png',
+                                        height: 20,
+                                      ),
+                                      WhiteSpacer.horizontalSpace(5),
+                                      Text(
+                                          result!.isBluetooth!
+                                              ? "Bluetooth"
+                                              : "Bluetooth NA",
+                                          style: StaticTextStyles
+                                              .normalBlackTextStyle),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )),
+                        Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        'assets/PngAssets/Car Door.png',
+                                        height: 20,
+                                      ),
+                                      WhiteSpacer.horizontalSpace(10),
+                                      Text("${result!.doors ?? ''} Doors",
+                                          style: StaticTextStyles
+                                              .normalBlackTextStyle),
+                                    ],
+                                  ),
+                                ),
+                                WhiteSpacer.verticalSpace(5),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        'assets/PngAssets/GPS.png',
+                                        height: 20,
+                                      ),
+                                      WhiteSpacer.horizontalSpace(10),
+                                      Text(result!.isGps! ? "GPS" : "GPS NA",
+                                          style: StaticTextStyles
+                                              .normalBlackTextStyle),
+                                    ],
+                                  ),
+                                ),
+                                WhiteSpacer.verticalSpace(5),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        'assets/PngAssets/Book.png',
+                                        height: 20,
+                                      ),
+                                      WhiteSpacer.horizontalSpace(10),
+                                      Text(
+                                          result!.isManual!
+                                              ? "Manual"
+                                              : "Automatic",
+                                          style: StaticTextStyles
+                                              .normalBlackTextStyle),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
+                    WhiteSpacer.verticalSpace(30),
+                    Text("Information",
+                        style: StaticTextStyles.subTitleStyleBlack),
+                    WhiteSpacer.verticalSpace(10),
+                    Text(
+                      result!.description!,
+                      style: StaticTextStyles.normalGreyTextStyle,
+                    ),
+                    WhiteSpacer.verticalSpace(20),
+                    data.commentsByCars == null
+                        ? Container()
+                        : ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount:
+                                commentProvider.commentsByCars!.result.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var data =
+                                  commentProvider.commentsByCars!.result[index];
+                              String timestamp = data.commentDate
+                                  .toString(); // [DateTime] formatted as String.
+                              DateTime convertedTimestamp = DateTime.parse(
+                                  timestamp); // Converting into [DateTime] object
+                              var timeResult =
+                                  GetTimeAgo.parse(convertedTimestamp);
 
-        );
+                              return commentSection(
+                                  name: data.username,
+                                  imageUrl: imageUrl,
+                                  comment: data.comment,
+                                  time: timeResult);
+                            },
+                          ),
+                    WhiteSpacer.verticalSpace(20),
+                    customTextFormField(
+                        borderColor: StaticColors.greyColor,
+                        controller: textEditingController,
+                        isOutLinedBorder: true,
+                        hintText: "Post your Comment",
+                        validator: (v) {
+                          if (v!.isEmpty) return "Enter something";
+                          return null;
+                        },
+                        onChange: (v) {
+                          commentProvider.commentText = v;
+                        }),
+                    WhiteSpacer.verticalSpace(20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        customizedButton(
+                            onTap: () {
+                              if (formKey.currentState!.validate()) {
+                                commentProvider
+                                    .postComment(result!.carSaleId.toString());
+                                textEditingController.clear();
+                                data.getComments(result!.carSaleId);
+                              }
+                            },
+                            textColor: StaticColors.whiteColor,
+                            buttonColor: StaticColors.blueColor,
+                            buttonText: "Post",
+                            radius: 20,
+                            buttonWidth: .8),
+                      ],
+                    ),
+                    WhiteSpacer.verticalSpace(20),
+                  ],
+                ),
+              ),
+            )));
       },
     );
   }
@@ -447,7 +413,8 @@ Widget commentSection(
     required String imageUrl,
     required String comment,
     required String time}) {
-  return Column(children: [
+  return Column(
+      children: [
     Row(
       children: [
         CircleAvatar(radius: 25, backgroundImage: NetworkImage(imageUrl)),
@@ -470,21 +437,6 @@ Widget commentSection(
       mainAxisAlignment: MainAxisAlignment.end,
       mainAxisSize: MainAxisSize.max,
       children: [
-        // RatingBar.builder(
-        //   initialRating: 4.5,
-        //   minRating: 1,
-        //   direction: Axis.horizontal,
-        //   allowHalfRating: true,
-        //   itemCount: 5,
-        //   itemSize: 15,
-        //   itemBuilder: (context, _) =>
-        //   const Icon(
-        //     Icons.star,
-        //     color: Colors.amber,
-        //   ),
-        //   onRatingUpdate: (rating) {},
-        // ),
-
         Text(
           time,
           style: StaticTextStyles.normalBlackTextStyle,
