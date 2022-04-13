@@ -413,7 +413,7 @@ Widget commentSection(
     required String imageUrl,
     required String comment,
     required String time}) {
-  return Column(
+  return Column(crossAxisAlignment: CrossAxisAlignment.start,
       children: [
     Row(
       children: [
@@ -427,7 +427,7 @@ Widget commentSection(
     ),
     WhiteSpacer.verticalSpace(10),
     Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.only(left: 30.0),
       child: Text(
         comment,
         style: StaticTextStyles.normalGreyTextStyle,
