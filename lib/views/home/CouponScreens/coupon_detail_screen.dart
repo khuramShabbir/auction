@@ -3,6 +3,7 @@ import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:auction/views/home/CouponScreens/coupon_comment_screen.dart';
 import 'package:auction/views/home/create_campaign_Screens/car_specs.dart';
+import 'package:auction/views/home/shopping_cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -34,7 +35,12 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
   Widget build(BuildContext context) {
     return Consumer<CouponProvider>(builder: (context, data, child) {
       return Scaffold(
-        appBar: CustomAppBar.appBar(title: "Coupon Detail"),
+        appBar: CustomAppBar.appBar(title: "Coupon Detail",action: [
+          InkWell(
+              onTap: (){Get.to(()=>const ShoppingCartScreen());},
+              child:  Icon(Icons.add_shopping_cart_outlined,color: StaticColors.blackColor,)),
+          WhiteSpacer.horizontalSpace(20)
+        ]),
         body: StaticKPadding.kPadding(
             child: Column(
           mainAxisSize: MainAxisSize.min,

@@ -2,6 +2,7 @@ import 'package:auction/controllers_providers/Coupon/coupon.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/CouponScreens/coupon_detail_screen.dart';
 import 'package:auction/views/home/create_campaign_Screens/car_specs.dart';
+import 'package:auction/views/home/shopping_cart_screen.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class _CouponScreenState extends State<CouponScreen> {
           backgroundColor: StaticColors.whiteColor,
           appBar: CustomAppBar.appBar(title: "Discounted Coupon's",action: [
             InkWell(
-                onTap: (){},
+                onTap: (){Get.to(()=>const ShoppingCartScreen());},
                 child:  Icon(Icons.add_shopping_cart_outlined,color: StaticColors.blackColor,)),
           WhiteSpacer.horizontalSpace(20)
           ]),
