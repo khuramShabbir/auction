@@ -1,3 +1,5 @@
+import 'package:auction/ApiServices/api_services.dart';
+import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/controllers_providers/Coupon/coupon.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/CouponScreens/coupon_detail_screen.dart';
@@ -29,11 +31,16 @@ class _CouponScreenState extends State<CouponScreen> {
       builder: (BuildContext context, data, Widget? child) {
         return Scaffold(
           backgroundColor: AppColors.whiteColor,
-          appBar: CustomAppBar.appBar(title: "Discounted Coupon's",action: [
+          appBar: CustomAppBar.appBar(title: "Discount Coupons",action: [
             InkWell(
-                onTap: (){Get.to(()=>const ShoppingCartScreen());},
-                child:  Icon(Icons.add_shopping_cart_outlined,color: AppColors.blackColor,)),
-          WhiteSpacer.horizontalSpace(20)
+                onTap: () {
+                  Get.to(() => const ShoppingCartScreen());
+                },
+                child: Icon(
+                  Icons.add_shopping_cart_outlined,
+                  color: AppColors.blackColor,
+                )),
+            WhiteSpacer.horizontalSpace(20)
           ]),
           body: StaticKPadding.kPadding(
               child: data.couponLoaded
@@ -49,11 +56,14 @@ class _CouponScreenState extends State<CouponScreen> {
                             itemBuilder: (BuildContext context, int index) {
                               Result result = data.getCoupon!.result[index];
                               final value = data.getCoupon!.result[index];
-                              String timeString = value.expiry
-                                  .toString();
-                              DateTime timeDate = DateTime.parse(timeString);
+                              String timeString = value.expiry.toString();
+                              String timeStamp ="";
+                              if(!timeString.contains("null")){
 
-                              String timeStamp = TimeElapsed.fromDateStr(timeString);
+                                  print(timeString);
+                                  timeStamp = TimeElapsed.fromDateStr(timeString);
+
+                              }
 
                               return InkWell(
                                 onTap: () {
@@ -75,7 +85,7 @@ class _CouponScreenState extends State<CouponScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                               image: DecorationImage(
-                                                  image: NetworkImage(imageUrl),
+                                                  image: NetworkImage(result.picturePath!=null?"https://auction.api.deeps.info/${result.picturePath}":imageUrl),
                                                   fit: BoxFit.fill)),
                                         ),
                                         WhiteSpacer.horizontalSpace(10),
@@ -112,7 +122,17 @@ class _CouponScreenState extends State<CouponScreen> {
                                           ],
                                         ),
                                         const Expanded(child: SizedBox()),
-                                        const Icon(Icons.add_shopping_cart_outlined),
+                                        InkWell(
+                                          onTap: (){
+
+                                            addToCart(result);
+
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: const Icon(Icons.add_shopping_cart_outlined),
+                                          ),
+                                        ),
                                         WhiteSpacer.horizontalSpace(5)
                                       ],
                                     ),
@@ -132,4 +152,19 @@ class _CouponScreenState extends State<CouponScreen> {
       },
     );
   }
+
+  void addToCart(Result result) async {
+    List<String> cartList=[];
+    cartList = boxStorage.read(cart);
+    if(cartList!=null){
+      cartList.add(result.toJson().toString());
+    }
+    else {
+      await boxStorage.write(cart, [result.toJson().toString()]);
+    }
+
+    print(boxStorage.read(cart));
+  }
 }
+
+String cart="ADD_TO_CART";

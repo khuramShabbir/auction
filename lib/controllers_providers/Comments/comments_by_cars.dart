@@ -42,7 +42,8 @@ await Future.delayed(Duration.zero);
     };
 
   String result=await  ApiServices.simplePostWithBody("Comments/add-comments", body);
-  if(result.isEmpty){showToast(msg: "Something went wrong");return ;}
+    getComments(carID);
+    if(result.isEmpty){showToast(msg: "Something went wrong");return ;}
 
 
 

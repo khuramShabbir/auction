@@ -115,7 +115,7 @@ class AuctionProvider extends ChangeNotifier {
 
     paymentEvidence = postPaymentEvidenceModelFromJson(bodyResult);
     // showToast(msg: paymentEvidence!.result);
-    dismissDialog();
+    stopProgressCircular();
     return true;
   }
   Future<bool> getPaymentEvidence(user_auction.Result? result) async {
@@ -124,7 +124,7 @@ class AuctionProvider extends ChangeNotifier {
         "PaymentEvidence/Get-Evidence?userId=${getUser().result!.id}&carId=${result!.carInformationId}");
     String body = await ApiServices.simpleGet(
         'PaymentEvidence/Get-Evidence?userId=${getUser().result!.id}&carId=${result.carInformationId}');
-    dismissDialog();
+    stopProgressCircular();
     if (body.isEmpty) {
       // showToast(msg: "No Payment Evidence Found");
       return false;

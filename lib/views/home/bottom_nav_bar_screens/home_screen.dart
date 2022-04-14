@@ -200,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Parts that interest you",
+                            "Discounts that interest you",
                             style: TextStyle(
                                 color: AppColors.whiteColor,
                                 fontWeight: FontWeight.bold),
@@ -209,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: const EdgeInsets.only(left: 15.0),
                             child: Row(
                               children: [
-                                Text("Get Parts",
+                                Text("Get Discount Coupons",
                                     style: TextStyle(
                                         color: AppColors.whiteColor,
                                         fontWeight: FontWeight.bold)),

@@ -13,8 +13,7 @@ class CouponCommentScreen extends StatefulWidget {
   const CouponCommentScreen({Key? key, this.result}) : super(key: key);
 
   @override
-  State<CouponCommentScreen> createState() =>
-      _CouponCommentScreenState(this.result);
+  State<CouponCommentScreen> createState() => _CouponCommentScreenState(result);
 }
 
 class _CouponCommentScreenState extends State<CouponCommentScreen> {
@@ -30,9 +29,6 @@ class _CouponCommentScreenState extends State<CouponCommentScreen> {
     super.initState();
     commentByCouponProvider.getComments(result!.id.toString());
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +51,8 @@ class _CouponCommentScreenState extends State<CouponCommentScreen> {
                           Expanded(
                             child: ListView.builder(
                               shrinkWrap: true,
-                              itemCount: data.getCouponComments!.result.length,
+                              itemCount: data.loaded &&  data.getCouponComments!=null ?
+                              data.getCouponComments!.result.length: 0,
                               physics: const ScrollPhysics(),
                               itemBuilder: (BuildContext context, int index) {
                                 var value =
@@ -90,26 +87,26 @@ class _CouponCommentScreenState extends State<CouponCommentScreen> {
                           WhiteSpacer.verticalSpace(10),
                           customizedButton(
                               buttonText: "Post Comment",
-                              buttonWidth: .5,
+                              buttonWidth: .9,
                               radius: 15,
                               buttonColor: AppColors.blueColor,
-                              onTap: () {
+                              onTap: () async {
                                 if (formKey.currentState!.validate()) {
-                                  data.postComment(result!.id.toString());
+                                  await data.postComment(result!.id.toString());
                                   textEditingController.clear();
-                                  commentByCouponProvider
-                                      .getComments(result!.id.toString());
+                                  commentByCouponProvider.getComments(result!.id.toString());
                                 }
                               },
                               textColor: AppColors.whiteColor)
                         ],
                       ),
                     )
-                  : Center(
-                      child: CircularProgressIndicator(
-                        color: AppColors.orangeColor,
-                      ),
-                    )),
+
+                      : Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.orangeColor,
+                          ),
+                        )),
         );
       },
     );

@@ -432,7 +432,7 @@ Widget customTextFormField(
   ));
 }
 
-dismissDialog() {
+stopProgressCircular() {
   if (Get.isDialogOpen!) {
     Get.back();
   }

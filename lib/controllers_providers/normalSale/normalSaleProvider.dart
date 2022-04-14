@@ -119,7 +119,7 @@ class NormalSaleProvider extends ChangeNotifier{
     showProgressCircular();
 
     String response = await ApiServices.postMultiPartWithFile(ApiServices.ADD_A_CAR_NORMAL_PURCHASE, imagesList,pathName: "Pictures",body: body);
-    dismissDialog();
+    stopProgressCircular();
     imagesList.clear();
     getAllCars();
     getMyUploadedCars();

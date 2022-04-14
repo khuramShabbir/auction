@@ -29,6 +29,8 @@ class GetCoupon {
 class Result {
   Result({
     this.id,
+    this.price,
+    this.rating,
     this.couponTitle,
     this.couponCode,
     this.couponDescription,
@@ -38,7 +40,6 @@ class Result {
     this.created,
     this.expiry,
     this.picturePath,
-    this.picture,
   });
 
   int id;
@@ -51,10 +52,13 @@ class Result {
   DateTime created;
   DateTime expiry;
   String picturePath;
-  dynamic picture;
+  dynamic rating;
+  dynamic price;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-    id: json["id"],
+    id: json["couponId"],
+    price: json["price"],
+    rating: json["rating"],
     couponTitle: json["couponTitle"],
     couponCode: json["couponCode"],
     couponDescription: json["couponDescription"],
@@ -62,22 +66,22 @@ class Result {
     isPercent: json["isPercent"],
     usage: json["usage"],
     created: DateTime.parse(json["created"]),
-    expiry: DateTime.parse(json["expiry"]),
+    expiry:json["expiry"]==null?null: DateTime.parse(json["expiry"]),
     picturePath: json["picturePath"] == null ? null : json["picturePath"],
-    picture: json["picture"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
+    "couponId": id,
+    "price": price,
+    "rating": rating,
     "couponTitle": couponTitle,
     "couponCode": couponCode,
     "couponDescription": couponDescription,
     "couponDiscount": couponDiscount,
     "isPercent": isPercent,
     "usage": usage,
-    "created": created.toIso8601String(),
-    "expiry": expiry.toIso8601String(),
+    "created": created.toString(),
+    "expiry": expiry.toString(),
     "picturePath": picturePath == null ? null : picturePath,
-    "picture": picture,
   };
 }

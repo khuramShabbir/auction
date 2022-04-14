@@ -19,24 +19,28 @@ class CommentByCoupon extends ChangeNotifier {
   String? comment;
 
   void getComments(String couponId) async {
-    String body = await ApiServices.simpleGet(
-        "Coupon/comments-by-coupon?couponId=$couponId");
-    if (body.isEmpty) return;
+    String body = await ApiServices.simpleGet("Coupon/comments-by-coupon?couponId=$couponId");
+    print(body);
+
     getCouponComments = null;
-    loaded = false;
+    loaded = true;
     notifyListeners();
+    if (body.isEmpty) return;
+
     await Future.delayed(Duration.zero);
     getCouponComments = getCouponCommentsFromJson(body);
     loaded = true;
     notifyListeners();
   }
 
-  void postComment(String couponID) async {
+  Future<void> postComment(String couponID) async {
     Map<String, String> commentBody = {
       "comment": comment!,
       "userId": getUser().result!.id.toString(),
       "couponId": couponID
     };
+
+    print(commentBody);
     String body = await ApiServices.simplePostWithBody(
         "Coupon/add-coupon-comments", commentBody);
     if (body.isEmpty) return showToast(msg: "Something Went Wrong");

@@ -22,7 +22,7 @@ class CouponDetailScreen extends StatefulWidget {
 
 class _CouponDetailScreenState extends State<CouponDetailScreen> {
   Result? result;
-  bool usage=false;
+  bool usage = false;
 
   _CouponDetailScreenState(this.result);
 
@@ -35,10 +35,15 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
   Widget build(BuildContext context) {
     return Consumer<CouponProvider>(builder: (context, data, child) {
       return Scaffold(
-        appBar: CustomAppBar.appBar(title: "Coupon Detail",action: [
+        appBar: CustomAppBar.appBar(title: "Coupon Detail", action: [
           InkWell(
-              onTap: (){Get.to(()=>const ShoppingCartScreen());},
-              child:  Icon(Icons.add_shopping_cart_outlined,color: AppColors.blackColor,)),
+              onTap: () {
+                Get.to(() => const ShoppingCartScreen());
+              },
+              child: Icon(
+                Icons.add_shopping_cart_outlined,
+                color: AppColors.blackColor,
+              )),
           WhiteSpacer.horizontalSpace(20)
         ]),
         body: StaticKPadding.kPadding(
@@ -50,25 +55,32 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
               height: height * .25,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(imageUrl), fit: BoxFit.fill),
+                      image: NetworkImage(result!.picturePath != null
+                          ? "https://auction.api.deeps.info/${result!.picturePath}"
+                          : imageUrl),
+                      fit: BoxFit.fill),
                   borderRadius: BorderRadius.circular(10)),
             ),
             WhiteSpacer.verticalSpace(20),
             Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
               InkWell(
-                  onTap: () {usage=false;setState(() {
-
-                  });},
+                  onTap: () {
+                    usage = false;
+                    setState(() {});
+                  },
                   child: Text("Description",
                       style: AppTextStyles.subTitleStyleBlack)),
               InkWell(
-                  onTap: () {usage=true;setState(() {
-
-                  });},
-                  child: Text("Usage",
-                      style: AppTextStyles.subTitleStyleBlack)),
+                  onTap: () {
+                    usage = true;
+                    setState(() {});
+                  },
+                  child:
+                      Text("Usage", style: AppTextStyles.subTitleStyleBlack)),
               InkWell(
-                  onTap: () {Get.to(()=> CouponCommentScreen(result:result));},
+                  onTap: () {
+                    Get.to(() => CouponCommentScreen(result: result));
+                  },
                   child: Text("Comments",
                       style: AppTextStyles.subTitleStyleBlack)),
             ]),
@@ -77,32 +89,44 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                    child:
-                        Container(height: 2, color:usage? AppColors.greyColor.withOpacity(.1):AppColors.orangeColor)),
+                    child: Container(
+                        height: 2,
+                        color: usage
+                            ? AppColors.greyColor.withOpacity(.1)
+                            : AppColors.orangeColor)),
                 Expanded(
                     child: Container(
                         height: 2,
-                        color:usage?AppColors.orangeColor: AppColors.greyColor.withOpacity(.1))),
+                        color: usage
+                            ? AppColors.orangeColor
+                            : AppColors.greyColor.withOpacity(.1))),
                 Expanded(
                     child: Container(
-                        height: 2,
-                        color: AppColors.greyColor.withOpacity(.1))),
+                        height: 2, color: AppColors.greyColor.withOpacity(.1))),
               ],
             ),
             WhiteSpacer.verticalSpace(20),
             Container(
-              child:   usage==false? Text(
-                result!.couponDescription ?? "",
-                style: AppTextStyles.normalGreyTextStyle,
-              ):
-              Text(result!.usage??"",style:AppTextStyles.normalGreyTextStyle,),
-              constraints: BoxConstraints(minHeight: height*.15)),
+                child: usage == false
+                    ? Text(
+                        result!.couponDescription ?? "",
+                        style: AppTextStyles.normalGreyTextStyle,
+                      )
+                    : Text(
+                        result!.usage ?? "",
+                        style: AppTextStyles.normalGreyTextStyle,
+                      ),
+                constraints: BoxConstraints(minHeight: height * .15)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text("Coupon Code:",style: AppTextStyles.normalGreyTextStyle),
-              Text(result!.couponCode??"",style:TextStyle(color: AppColors.orangeColor,fontWeight: FontWeight.bold))
-            ],),
+                const Text("Coupon Code:", style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold,fontSize: 16)),
+                Text("*******",
+                    style: TextStyle(
+                        color: AppColors.orangeColor,
+                        fontWeight: FontWeight.bold))
+              ],
+            ),
             WhiteSpacer.verticalSpace(30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -110,7 +134,9 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
                 RatingBar.builder(
                     unratedColor: AppColors.greyColor.withOpacity(.2),
                     itemSize: 25,
-                    initialRating: 4,
+                    initialRating: double.parse(result!.rating == null
+                        ? "0"
+                        : result!.rating.toString()),
                     glowColor: AppColors.orangeColor,
                     onRatingUpdate: (double value) {},
                     itemBuilder: (BuildContext context, int index) {
@@ -125,13 +151,7 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("SAR 10",
-                    style: TextStyle(
-                        decoration: TextDecoration.lineThrough,
-                        color: AppColors.greyColor,
-                        fontWeight: FontWeight.bold)),
-                WhiteSpacer.horizontalSpace(10),
-                Text("SAR 5",
+                Text("${result!.couponDiscount}% OFF",
                     style: TextStyle(
                         color: AppColors.orangeColor,
                         fontWeight: FontWeight.bold)),
@@ -156,7 +176,7 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text(
-                    couponProvider.couponValue.toString(),
+                    couponProvider.couponQuantity.toString(),
                     style: TextStyle(
                         fontSize: 20,
                         color: AppColors.orangeColor,
@@ -183,10 +203,12 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
               children: [
                 customizedButton(
                     buttonColor: AppColors.blueColor,
-                    onTap: () {},
+                    onTap: () {
+                      data.purchaseCouponCode(result!);
+                    },
                     textColor: AppColors.whiteColor,
                     radius: 15,
-                    buttonText: "Order Now",
+                    buttonText: "Purchase Now",
                     buttonWidth: .5)
               ],
             ),

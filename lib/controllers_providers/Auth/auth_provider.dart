@@ -128,7 +128,7 @@ import '../../utils/widgets.dart';
     String bodyResponse =
         await ApiServices.postMultiPart(ApiServices.REGISTER, body);
 
-    dismissDialog();
+    stopProgressCircular();
     saveUser(bodyResponse);
   }
 
@@ -140,7 +140,7 @@ import '../../utils/widgets.dart';
 
     var bodyResponse = await ApiServices.simplePostWithBody(ApiServices.SIGN_IN, body);
 
-    dismissDialog();
+    stopProgressCircular();
 
     saveUser(bodyResponse);
 

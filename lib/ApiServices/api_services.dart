@@ -18,6 +18,7 @@ class ApiServices {
   static String ALL_CAR_SALES = 'CarSales/get-cars';
   static String ALL_CAR_SPECS = 'CarSales/get-car-specs';
   static String ADD_A_CAR_NORMAL_PURCHASE = 'CarSales/add-car';
+  static String PURCHASE_A_COUPON = 'Coupon/Purchase-Coupon';
 
 
 
@@ -37,7 +38,7 @@ class ApiServices {
       var data = await jsonDecode(resBody);
       String msg =
           data["responseException"]["exceptionMessage"][0]["description"];
-      dismissDialog();
+      stopProgressCircular();
 
       await showCustomDialog(msg);
 
@@ -75,7 +76,7 @@ class ApiServices {
     var response = await request.send();
 
     String resBody = await response.stream.bytesToString();
-    dismissDialog;
+    stopProgressCircular;
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       return resBody;
@@ -103,7 +104,7 @@ class ApiServices {
 
   static Future<String> simplePost(String feedUrl) async {
     http.Response response = await http.post(Uri.parse(BASE_URL + feedUrl));
-    dismissDialog();
+    stopProgressCircular();
     if (response.statusCode == 200) {
       return response.body;
     }
