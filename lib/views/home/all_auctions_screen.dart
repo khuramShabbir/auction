@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:auction/controllers_providers/auction_provider.dart';
+import 'package:auction/controllers_providers/Auction/auction_provider.dart';
 import 'package:auction/models/auction/GetAllAuctions.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/car_specification.dart';

@@ -1,4 +1,4 @@
-import 'package:auction/controllers_providers/auction_provider.dart';
+import 'package:auction/controllers_providers/Auction/auction_provider.dart';
 
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../../controllers_providers/auth_provider.dart';
+import '../../../controllers_providers/Auth/auth_provider.dart';
 
 class MyCarsScreen extends StatefulWidget {
 

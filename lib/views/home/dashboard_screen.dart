@@ -1,4 +1,4 @@
-import 'package:auction/controllers_providers/dashboard_provider.dart';
+import 'package:auction/controllers_providers/Dashboard/dashboard_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/home_screen.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/my_cars_screens.dart';

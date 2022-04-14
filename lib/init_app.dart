@@ -1,12 +1,12 @@
 import 'package:auction/controllers_providers/Comments/comments_by_cars.dart';
 import 'package:auction/controllers_providers/Comments/comments_by_coupon.dart';
 import 'package:auction/controllers_providers/Coupon/coupon.dart';
-import 'package:auction/controllers_providers/auction_provider.dart';
-import 'package:auction/controllers_providers/auth_provider.dart';
-import 'package:auction/controllers_providers/dashboard_provider.dart';
+import 'package:auction/controllers_providers/Auction/auction_provider.dart';
+import 'package:auction/controllers_providers/Auth/auth_provider.dart';
+import 'package:auction/controllers_providers/Dashboard/dashboard_provider.dart';
 import 'package:auction/controllers_providers/normalSale/normalSaleProvider.dart';
-import 'package:auction/controllers_providers/payment_method_provider.dart';
-import 'package:auction/controllers_providers/wallet_provider.dart';
+import 'package:auction/controllers_providers/PaymentMethod/payment_method_provider.dart';
+import 'package:auction/controllers_providers/Wallet/wallet_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

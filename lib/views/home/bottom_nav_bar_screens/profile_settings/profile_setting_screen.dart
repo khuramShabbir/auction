@@ -1,5 +1,5 @@
-import 'package:auction/controllers_providers/auth_provider.dart';
-import 'package:auction/controllers_providers/wallet_provider.dart';
+import 'package:auction/controllers_providers/Auth/auth_provider.dart';
+import 'package:auction/controllers_providers/Wallet/wallet_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/profile_settings/profile_editting_screen.dart';
 import 'package:auction/views/wallet/wallet.dart';

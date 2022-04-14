@@ -1,5 +1,5 @@
 
-import 'package:auction/controllers_providers/auth_provider.dart';
+import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/models/user/UserModelPojo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

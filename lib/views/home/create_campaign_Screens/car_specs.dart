@@ -1,5 +1,5 @@
 import 'package:auction/controllers_providers/Comments/comments_by_cars.dart';
-import 'package:auction/controllers_providers/auth_provider.dart';
+import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:flutter/material.dart';

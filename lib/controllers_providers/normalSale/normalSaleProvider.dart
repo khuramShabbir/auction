@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:auction/api_services.dart';
-import 'package:auction/controllers_providers/auth_provider.dart';
+import 'package:auction/ApiServices/api_services.dart';
+import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/models/AllCars/AllCarsSpecs.dart';
 import 'package:auction/models/AllCars/all_cars_model.dart';
 import 'package:auction/utils/const.dart';

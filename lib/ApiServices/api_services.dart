@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:auction/controllers_providers/auth_provider.dart';
+import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:http/http.dart' as http;
 

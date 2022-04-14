@@ -1,4 +1,4 @@
-import 'package:auction/controllers_providers/payment_method_provider.dart';
+import 'package:auction/controllers_providers/PaymentMethod/payment_method_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:flutter/material.dart';

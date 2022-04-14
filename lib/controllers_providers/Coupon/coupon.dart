@@ -1,5 +1,5 @@
-import 'package:auction/api_services.dart';
-import 'package:auction/controllers_providers/auth_provider.dart';
+import 'package:auction/ApiServices/api_services.dart';
+import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/models/GetCoupon/getCoupons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,4 @@
-import 'package:auction/controllers_providers/auction_provider.dart';
+import 'package:auction/controllers_providers/Auction/auction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'const.dart';

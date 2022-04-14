@@ -1,5 +1,5 @@
-import 'package:auction/controllers_providers/dashboard_provider.dart';
-import 'package:auction/controllers_providers/wallet_provider.dart';
+import 'package:auction/controllers_providers/Dashboard/dashboard_provider.dart';
+import 'package:auction/controllers_providers/Wallet/wallet_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

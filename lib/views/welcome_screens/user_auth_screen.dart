@@ -1,4 +1,4 @@
-import 'package:auction/controllers_providers/auth_provider.dart';
+import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/user_credentials_screens/login_screen.dart';
 import 'package:auction/views/user_credentials_screens/signup_screen.dart';

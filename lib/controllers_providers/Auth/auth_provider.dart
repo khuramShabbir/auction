@@ -1,5 +1,5 @@
 
-import 'package:auction/api_services.dart';
+import 'package:auction/ApiServices/api_services.dart';
 import 'package:auction/views/home/dashboard_screen.dart';
 import 'package:auction/views/user_credentials_screens/otp_screen.dart';
 import 'package:auction/views/welcome_screens/user_auth_screen.dart';
@@ -11,8 +11,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
-import '../utils/const.dart';
-import '../utils/widgets.dart';
+import '../../utils/const.dart';
+import '../../utils/widgets.dart';
 
   Logger logger = Logger();
 
