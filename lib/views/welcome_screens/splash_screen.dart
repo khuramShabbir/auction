@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: StaticColors.whiteColor,
+      backgroundColor: AppColors.whiteColor,
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 'Choose Your teacher and course over +100K online e-learning with new additions published every days',
-                style: StaticTextStyles.normalGreyTextStyle,
+                style: AppTextStyles.normalGreyTextStyle,
               ),
             )
           ],

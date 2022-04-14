@@ -43,10 +43,10 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             floatingActionButton: myCarsLoaded == false
                 ? FloatingActionButton(
-                    backgroundColor: StaticColors.blueColor,
+                    backgroundColor: AppColors.blueColor,
                     child: Icon(
                       Icons.add,
-                      color: StaticColors.orangeColor,
+                      color: AppColors.orangeColor,
                     ),
                     onPressed: () {
                       Get.to(() => const UploadCarScreen());
@@ -66,7 +66,7 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                         },
                         child: Icon(
                           Icons.arrow_back,
-                          color: StaticColors.blackColor,
+                          color: AppColors.blackColor,
                         )),
                     WhiteSpacer.horizontalSpace(5),
                     Expanded(
@@ -78,22 +78,22 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                                   children: [
                                     SvgPicture.asset(
                                       'assets/SvgAssets/filter.svg',
-                                      color: StaticColors.blackColor,
+                                      color: AppColors.blackColor,
                                     ),
                                     WhiteSpacer.horizontalSpace(5),
                                     Icon(
                                       Icons.cancel,
-                                      color: StaticColors.greyColor
+                                      color: AppColors.greyColor
                                           .withOpacity(.4),
                                     ),
                                     WhiteSpacer.horizontalSpace(5),
                                   ]),
                               prefixIcon: Icon(
                                 Icons.search,
-                                color: StaticColors.blackColor,
+                                color: AppColors.blackColor,
                               ),
                               filled: true,
-                              fillColor: StaticColors.greyColor.withOpacity(.1),
+                              fillColor: AppColors.greyColor.withOpacity(.1),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide.none,
                                   borderRadius: BorderRadius.circular(100)),
@@ -104,7 +104,7 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                     WhiteSpacer.horizontalSpace(5),
                     Text(
                       "cancel",
-                      style: StaticTextStyles.normalGreyTextStyle,
+                      style: AppTextStyles.normalGreyTextStyle,
                     )
                   ],
                 ),
@@ -133,7 +133,7 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                                   width: width * .25,
                                   height: width * .18,
                                   decoration: BoxDecoration(
-                                      color: StaticColors.greyColor
+                                      color: AppColors.greyColor
                                           .withOpacity(0.15),
                                       borderRadius: BorderRadius.circular(8),
                                       image: DecorationImage(
@@ -148,19 +148,19 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                                   children: [
                                     Text(
                                       singleCarDetail.model ?? "",
-                                      style: StaticTextStyles.subTitleStyleBlack,
+                                      style: AppTextStyles.subTitleStyleBlack,
                                     ),
                                     Text(
                                       "Color : ${singleCarDetail.color ?? ""}",
-                                      style: StaticTextStyles.normalGreyTextStyle,
+                                      style: AppTextStyles.normalGreyTextStyle,
                                     ),
                                     Text(
                                       "Milleage : ${singleCarDetail.milleage ?? ""}",
-                                      style: StaticTextStyles.normalGreyTextStyle,
+                                      style: AppTextStyles.normalGreyTextStyle,
                                     ),
                                     Text(
                                       "year : ${singleCarDetail.year ?? ""}",
-                                      style: StaticTextStyles.normalGreyTextStyle,
+                                      style: AppTextStyles.normalGreyTextStyle,
                                     )
                                   ],
                                 ),
@@ -171,10 +171,10 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                                   children: [
                                     Text("SAR",
                                         style:
-                                            StaticTextStyles.subTitleStyleBlack),
+                                            AppTextStyles.subTitleStyleBlack),
                                     Text(singleCarDetail.price ?? "",
                                         style:
-                                            StaticTextStyles.subTitleStyleBlack)
+                                            AppTextStyles.subTitleStyleBlack)
                                   ],
                                 )
                               ],

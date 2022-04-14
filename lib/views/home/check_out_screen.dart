@@ -21,7 +21,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           padding: const EdgeInsets.only(right: 15.0),
           child: Icon(
             Icons.menu,
-            color: StaticColors.blackColor,
+            color: AppColors.blackColor,
           ),
         )
       ]),
@@ -34,38 +34,38 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
             children: [
               CircleAvatar(
                   backgroundColor: index == 0
-                      ? StaticColors.blueColor
-                      : StaticColors.greyColor,
+                      ? AppColors.blueColor
+                      : AppColors.greyColor,
                   child: index == 0
-                      ? Icon(Icons.check, color: StaticColors.whiteColor)
+                      ? Icon(Icons.check, color: AppColors.whiteColor)
                       : null),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                     width: 50,
                     height: 1.5,
-                    color: StaticColors.greyColor.withOpacity(.5)),
+                    color: AppColors.greyColor.withOpacity(.5)),
               ),
               CircleAvatar(
                   backgroundColor: index == 2
-                      ? StaticColors.blueColor
-                      : StaticColors.greyColor,
+                      ? AppColors.blueColor
+                      : AppColors.greyColor,
                   child: index == 1
-                      ? Icon(Icons.check, color: StaticColors.whiteColor)
+                      ? Icon(Icons.check, color: AppColors.whiteColor)
                       : null),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                     width: 50,
                     height: 1.5,
-                    color: StaticColors.greyColor.withOpacity(.5)),
+                    color: AppColors.greyColor.withOpacity(.5)),
               ),
               CircleAvatar(
                   backgroundColor: index == 2
-                      ? StaticColors.blueColor
-                      : StaticColors.greyColor,
+                      ? AppColors.blueColor
+                      : AppColors.greyColor,
                   child: index == 2
-                      ? Icon(Icons.check, color: StaticColors.whiteColor)
+                      ? Icon(Icons.check, color: AppColors.whiteColor)
                       : null),
             ],
           ),
@@ -86,13 +86,13 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   child: Center(
                     child: Text(
                       "Top",
-                      style: TextStyle(color: StaticColors.whiteColor),
+                      style: TextStyle(color: AppColors.whiteColor),
                     ),
                   ),
                   height: 35,
                   width: 60,
                   decoration: BoxDecoration(
-                      color: StaticColors.blueColor,
+                      color: AppColors.blueColor,
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(15),
                           bottomRight: Radius.circular(15))),
@@ -102,10 +102,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           ),
           Container(
             decoration: BoxDecoration(
-                color: StaticColors.whiteColor,
+                color: AppColors.whiteColor,
                 boxShadow: [
                   BoxShadow(
-                      color: StaticColors.greyColor.withOpacity(.2),
+                      color: AppColors.greyColor.withOpacity(.2),
                       blurRadius: 10,
                       spreadRadius: 1)
                 ],
@@ -155,7 +155,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                   ),
                   WhiteSpacer.verticalSpace(5),
                   Text("Riyadh - Full Time",
-                      style: StaticTextStyles.normalBlackTextStyle),
+                      style: AppTextStyles.normalBlackTextStyle),
                   WhiteSpacer.verticalSpace(5),
                 ],
               ),
@@ -166,8 +166,8 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           extendedButton(
               onTap: () {},
               buttonText: "Next",
-              buttonColor: StaticColors.blueColor,
-              textColor: StaticColors.whiteColor)
+              buttonColor: AppColors.blueColor,
+              textColor: AppColors.whiteColor)
         ],
       )),
     );

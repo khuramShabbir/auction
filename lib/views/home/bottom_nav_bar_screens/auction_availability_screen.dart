@@ -14,7 +14,7 @@ class _AuctionAvailabilityState extends State<AuctionAvailability> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: StaticColors.whiteColor,
+        backgroundColor: AppColors.whiteColor,
         appBar: CustomAppBar.appBar(),
         body: StaticKPadding.kPadding(
             child: ListView.builder(
@@ -27,10 +27,10 @@ class _AuctionAvailabilityState extends State<AuctionAvailability> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: StaticColors.whiteColor,
+                      color: AppColors.whiteColor,
                       boxShadow: [
                         BoxShadow(
-                            color: StaticColors.greyColor.withOpacity(.1),
+                            color: AppColors.greyColor.withOpacity(.1),
                             spreadRadius: 0,
                             blurRadius: 20)
                       ]),
@@ -61,7 +61,7 @@ class _AuctionAvailabilityState extends State<AuctionAvailability> {
                           children: [
                             Text(
                               'Mercedes jeep',
-                              style: StaticTextStyles.subTitleStyleBlack,
+                              style: AppTextStyles.subTitleStyleBlack,
                             ),
                             const Text(
                               'Check available',
@@ -72,7 +72,7 @@ class _AuctionAvailabilityState extends State<AuctionAvailability> {
                               style: TextStyle(
                                   fontSize: 10,
                                   color:
-                                      StaticColors.greyColor.withOpacity(.3)),
+                                      AppColors.greyColor.withOpacity(.3)),
                             ),
                           ],
                         ),
@@ -84,12 +84,12 @@ class _AuctionAvailabilityState extends State<AuctionAvailability> {
                             children: [
                               Icon(
                                 Icons.bookmark_border_outlined,
-                                color: StaticColors.blueColor,
+                                color: AppColors.blueColor,
                               ),
                               Text(
                                 "\$2.350",
                                 style: TextStyle(
-                                    color: StaticColors.blueColor,
+                                    color: AppColors.blueColor,
                                     fontWeight: FontWeight.bold),
                               )
                             ],

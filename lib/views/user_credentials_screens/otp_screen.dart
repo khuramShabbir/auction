@@ -18,13 +18,13 @@ class _OtpScreenState extends State<OtpScreen> {
       builder: (BuildContext context, value, Widget? child) {
         return SafeArea(
             child: Scaffold(
-          backgroundColor: StaticColors.whiteColor,
+          backgroundColor: AppColors.whiteColor,
           appBar: AppBar(
               centerTitle: true,
               elevation: 0,
-              backgroundColor: StaticColors.whiteColor,
+              backgroundColor: AppColors.whiteColor,
               leading: StaticAssets.leftArrow,
-              title: Text("Verify OTP", style: StaticTextStyles.appBarStyle)),
+              title: Text("Verify OTP", style: AppTextStyles.appBarStyle)),
           body: SizedBox(
             width: width,
             height: height,
@@ -39,22 +39,22 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                   Text(
                     "Phone Verification",
-                    style: StaticTextStyles.headingStyle,
+                    style: AppTextStyles.headingStyle,
                   ),
                   const SizedBox(width: 5),
                   Text(
                     "Please enter the 6-digit code send to you at",
-                    style: StaticTextStyles.normalGreyTextStyle,
+                    style: AppTextStyles.normalGreyTextStyle,
                   ),
                   const SizedBox(height: 5),
                   Text(
                     "+61 44 535 235",
-                    style: StaticTextStyles.normalBlackTextStyle,
+                    style: AppTextStyles.normalBlackTextStyle,
                   ),
                   const SizedBox(height: 20),
                   Text(
                     "Resend Code",
-                    style: StaticTextStyles.normalGreyTextStyle,
+                    style: AppTextStyles.normalGreyTextStyle,
                   ),
                   const SizedBox(height: 20),
                   Expanded(
@@ -65,7 +65,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       fieldWidth: 40,
                       keyboardType: TextInputType.phone,
                       borderRadius: BorderRadius.circular(100),
-                      borderColor: StaticColors.orangeColor,
+                      borderColor: AppColors.orangeColor,
                       onCodeChanged: (String code) {},
                       onSubmit: (String verificationCode) async {
                         value.otpCode = verificationCode;

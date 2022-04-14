@@ -1,8 +1,4 @@
-import 'package:auction/api_services.dart';
 import 'package:auction/controllers_providers/auction_provider.dart';
-import 'package:auction/controllers_providers/auth_provider.dart';
-import 'package:auction/models/auction/GetAllAuctions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'const.dart';
@@ -12,7 +8,7 @@ class CustomWidget {
   static addWalletBottomSheet() {
     Get.bottomSheet(Container(
       decoration: BoxDecoration(
-          color: StaticColors.whiteColor,
+          color: AppColors.whiteColor,
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15))),
       child: StaticKPadding.kPadding(
@@ -22,7 +18,7 @@ class CustomWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(Icons.arrow_back, color: StaticColors.blackColor),
+              Icon(Icons.arrow_back, color: AppColors.blackColor),
               /*Align(
                       alignment: Alignment.topCenter,
                       child: Container(width: 50,height: 1.5,color: StaticColors.greyColor))*/
@@ -39,14 +35,14 @@ class CustomWidget {
                   child: Image.asset('assets/PngAssets/masterCard.png'),
                 ),
                 decoration: BoxDecoration(
-                  color: StaticColors.blueColor.withOpacity(.01),
+                  color: AppColors.blueColor.withOpacity(.01),
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
               WhiteSpacer.horizontalSpace(10),
               Text(
                 "Credit Card",
-                style: StaticTextStyles.subTitleStyleBlack,
+                style: AppTextStyles.subTitleStyleBlack,
               ),
               const Expanded(child: SizedBox()),
               Container(
@@ -55,7 +51,7 @@ class CustomWidget {
                     width: 10,
                     height: 10,
                     decoration: BoxDecoration(
-                        color: StaticColors.blackColor,
+                        color: AppColors.blackColor,
                         borderRadius: BorderRadius.circular(100)),
                   ),
                 ),
@@ -64,7 +60,7 @@ class CustomWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     border:
-                        Border.all(width: 1, color: StaticColors.blackColor)),
+                        Border.all(width: 1, color: AppColors.blackColor)),
               )
             ],
           ),
@@ -103,8 +99,8 @@ class CustomWidget {
                 walletChargeBottomSheet();
               },
               buttonText: "Save",
-              buttonColor: StaticColors.blueColor,
-              textColor: StaticColors.whiteColor)
+              buttonColor: AppColors.blueColor,
+              textColor: AppColors.whiteColor)
         ],
       )),
     ));
@@ -113,7 +109,7 @@ class CustomWidget {
   static walletChargeBottomSheet() {
     Get.bottomSheet(Container(
       decoration: BoxDecoration(
-          color: StaticColors.whiteColor,
+          color: AppColors.whiteColor,
           borderRadius: const BorderRadius.only(
               topRight: Radius.circular(15), topLeft: Radius.circular(15))),
       child: StaticKPadding.kPadding(
@@ -123,7 +119,7 @@ class CustomWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(Icons.arrow_back, color: StaticColors.blackColor),
+              Icon(Icons.arrow_back, color: AppColors.blackColor),
               /*Align(
                       alignment: Alignment.topCenter,
                       child: Container(width: 50,height: 1.5,color: StaticColors.greyColor))*/
@@ -140,14 +136,14 @@ class CustomWidget {
                   child: Image.asset('assets/PngAssets/masterCard.png'),
                 ),
                 decoration: BoxDecoration(
-                  color: StaticColors.blueColor.withOpacity(.01),
+                  color: AppColors.blueColor.withOpacity(.01),
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
               WhiteSpacer.horizontalSpace(10),
               Text(
                 "Credit Card",
-                style: StaticTextStyles.subTitleStyleBlack,
+                style: AppTextStyles.subTitleStyleBlack,
               ),
               const Expanded(child: SizedBox()),
               Container(
@@ -156,7 +152,7 @@ class CustomWidget {
                     width: 10,
                     height: 10,
                     decoration: BoxDecoration(
-                        color: StaticColors.blackColor,
+                        color: AppColors.blackColor,
                         borderRadius: BorderRadius.circular(100)),
                   ),
                 ),
@@ -165,7 +161,7 @@ class CustomWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     border:
-                        Border.all(width: 1, color: StaticColors.blackColor)),
+                        Border.all(width: 1, color: AppColors.blackColor)),
               )
             ],
           ),
@@ -173,35 +169,35 @@ class CustomWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Account", style: StaticTextStyles.normalGreyTextStyle),
+              Text("Account", style: AppTextStyles.normalGreyTextStyle),
               Text(".... .... ..... ",
-                  style: StaticTextStyles.normalBlackTextStyle),
+                  style: AppTextStyles.normalBlackTextStyle),
               Text(auctionProvider.cardNumber,
-                  style: StaticTextStyles.normalBlackTextStyle),
+                  style: AppTextStyles.normalBlackTextStyle),
             ],
           ),
           WhiteSpacer.verticalSpace(20),
           Row(
             children: [
-              Text("Sub total", style: StaticTextStyles.normalBlackTextStyle),
+              Text("Sub total", style: AppTextStyles.normalBlackTextStyle),
               const Expanded(child: SizedBox()),
-              Text("\$ 29.96", style: StaticTextStyles.subTitleStyleBlack),
+              Text("\$ 29.96", style: AppTextStyles.subTitleStyleBlack),
             ],
           ),
           WhiteSpacer.verticalSpace(10),
           Row(
             children: [
-              Text("vat", style: StaticTextStyles.normalBlackTextStyle),
+              Text("vat", style: AppTextStyles.normalBlackTextStyle),
               const Expanded(child: SizedBox()),
-              Text("\$ 2.99", style: StaticTextStyles.subTitleStyleBlack),
+              Text("\$ 2.99", style: AppTextStyles.subTitleStyleBlack),
             ],
           ),
           WhiteSpacer.verticalSpace(10),
           Row(
             children: [
-              Text("Total", style: StaticTextStyles.normalBlackTextStyle),
+              Text("Total", style: AppTextStyles.normalBlackTextStyle),
               const Expanded(child: SizedBox()),
-              Text("\$ 32.95", style: StaticTextStyles.headingStyle),
+              Text("\$ 32.95", style: AppTextStyles.headingStyle),
             ],
           ),
           const Expanded(child: SizedBox()),
@@ -211,8 +207,8 @@ class CustomWidget {
                 walletStatus();
               },
               buttonText: "Charge Your Wallet",
-              buttonColor: StaticColors.blueColor,
-              textColor: StaticColors.whiteColor)
+              buttonColor: AppColors.blueColor,
+              textColor: AppColors.whiteColor)
         ],
       )),
     ));
@@ -221,7 +217,7 @@ class CustomWidget {
   static walletStatus() {
     Get.bottomSheet(Container(
       decoration: BoxDecoration(
-          color: StaticColors.whiteColor,
+          color: AppColors.whiteColor,
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15))),
       child: StaticKPadding.kPadding(
@@ -232,10 +228,10 @@ class CustomWidget {
           CircleAvatar(
             backgroundColor: Colors.green,
             radius: 40,
-            child: Icon(Icons.check, color: StaticColors.whiteColor, size: 25),
+            child: Icon(Icons.check, color: AppColors.whiteColor, size: 25),
           ),
           Text("Your wallet charge successfully",
-              style: StaticTextStyles.headingStyle),
+              style: AppTextStyles.headingStyle),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -243,8 +239,8 @@ class CustomWidget {
               Text(
                   "You are able"
                   " to make bidding now! ",
-                  style: StaticTextStyles.normalGreyTextStyle),
-              Text("Good luck", style: StaticTextStyles.normalGreyTextStyle),
+                  style: AppTextStyles.normalGreyTextStyle),
+              Text("Good luck", style: AppTextStyles.normalGreyTextStyle),
             ],
           ),
           extendedButton(
@@ -252,8 +248,8 @@ class CustomWidget {
                 Get.back();
               },
               buttonText: "Done",
-              buttonColor: StaticColors.blueColor,
-              textColor: StaticColors.whiteColor)
+              buttonColor: AppColors.blueColor,
+              textColor: AppColors.whiteColor)
         ],
       )),
     ));
@@ -280,7 +276,7 @@ class CustomWidget {
                 WhiteSpacer.verticalSpace(20),
                 Text(
                   "Action",
-                  style: StaticTextStyles.subTitleStyleBlack,
+                  style: AppTextStyles.subTitleStyleBlack,
                 ),
                 WhiteSpacer.verticalSpace(30),
                 Column(
@@ -292,7 +288,7 @@ class CustomWidget {
                           Get.back(result: value);
                         },
                         buttonColor: Colors.transparent,
-                        textColor: StaticColors.greyColor,
+                        textColor: AppColors.greyColor,
 
                         buttonText: "Gallery"),
                     extendedButton(
@@ -301,7 +297,7 @@ class CustomWidget {
                           Get.back(result: value);
                         },
                         buttonColor: Colors.transparent,
-                        textColor: StaticColors.greyColor,
+                        textColor: AppColors.greyColor,
 
                         buttonText: "Camera"),
                     WhiteSpacer.verticalSpace(20),
@@ -398,30 +394,30 @@ Widget customTextFormField(
       controller: controller,
       enabled: enabled,
       decoration: InputDecoration(
-          hintStyle: TextStyle(color: StaticColors.greyColor.withOpacity(.4)),
+          hintStyle: TextStyle(color: AppColors.greyColor.withOpacity(.4)),
           suffixIcon: suffixIcon,
           hintText: hintText,
-          errorStyle: TextStyle(color: StaticColors.orangeColor),
+          errorStyle: TextStyle(color: AppColors.orangeColor),
           focusedErrorBorder: isOutLinedBorder
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: StaticColors.orangeColor,width: 1.5))
+                  borderSide: BorderSide(color: AppColors.orangeColor,width: 1.5))
               : null,
           errorBorder: isOutLinedBorder
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: StaticColors.orangeColor,width: 1.5))
+                  borderSide: BorderSide(color: AppColors.orangeColor,width: 1.5))
               : null,
           focusedBorder: isOutLinedBorder
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(color: StaticColors.orangeColor,width: 1.5))
+                  borderSide: BorderSide(color: AppColors.orangeColor,width: 1.5))
               : null,
           enabledBorder: isOutLinedBorder
               ? OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide:
-                      BorderSide(color: borderColor??StaticColors.orangeColor,width: 1.5))
+                      BorderSide(color: borderColor??AppColors.orangeColor,width: 1.5))
               : null),
     ),
   );
@@ -430,8 +426,8 @@ Widget customTextFormField(
  showProgressCircular() async {
   Get.dialog(Center(
     child: CircularProgressIndicator(
-      backgroundColor: StaticColors.greyColor.withOpacity(.2),
-      color: StaticColors.orangeColor,
+      backgroundColor: AppColors.greyColor.withOpacity(.2),
+      color: AppColors.orangeColor,
     ),
   ));
 }
@@ -448,16 +444,16 @@ showCustomDialog(String msgText) async {
     padding: const EdgeInsets.all(25),
     child: Column(
       children: [
-        Text(msgText, style: StaticTextStyles.subTitleStyleBlack),
+        Text(msgText, style: AppTextStyles.subTitleStyleBlack),
         WhiteSpacer.verticalSpace(35),
         customizedButton(
             buttonText: "OK",
-            buttonColor: StaticColors.orangeColor.withOpacity(.5),
+            buttonColor: AppColors.orangeColor.withOpacity(.5),
             onTap: () {
               Get.back();
               Get.back();
             },
-            textColor: StaticColors.whiteColor)
+            textColor: AppColors.whiteColor)
       ],
     ),
   ));
@@ -468,8 +464,8 @@ Future showToast({required msg}) async {
       msg: msg,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
-      backgroundColor: StaticColors.greyColor,
-      textColor: StaticColors.whiteColor,
+      backgroundColor: AppColors.greyColor,
+      textColor: AppColors.whiteColor,
       fontSize: 16.0);
 }
 
@@ -480,11 +476,11 @@ Widget stepper(int activeStep, String title) {
       Container(
           width: width,
           height: 1,
-          color: StaticColors.greyColor.withOpacity(.3)),
+          color: AppColors.greyColor.withOpacity(.3)),
       WhiteSpacer.verticalSpace(10),
       Text(
         title,
-        style: StaticTextStyles.subTitleStyleBlack,
+        style: AppTextStyles.subTitleStyleBlack,
       ),
       WhiteSpacer.verticalSpace(10),
       Row(
@@ -494,63 +490,63 @@ Widget stepper(int activeStep, String title) {
               child: Text(
                 "1",
                 style: activeStep == 1
-                    ? StaticTextStyles.normalWhiteTextStyle
-                    : StaticTextStyles.normalBlackTextStyle,
+                    ? AppTextStyles.normalWhiteTextStyle
+                    : AppTextStyles.normalBlackTextStyle,
               ),
               backgroundColor: activeStep == 1
-                  ? StaticColors.orangeColor.withOpacity(.4)
-                  : StaticColors.greyColor),
-          Container(height: 1, color: StaticColors.greyColor, width: 20),
+                  ? AppColors.orangeColor.withOpacity(.4)
+                  : AppColors.greyColor),
+          Container(height: 1, color: AppColors.greyColor, width: 20),
           CircleAvatar(
               child: Text(
                 "2",
                 style: activeStep == 2
-                    ? StaticTextStyles.normalWhiteTextStyle
-                    : StaticTextStyles.normalBlackTextStyle,
+                    ? AppTextStyles.normalWhiteTextStyle
+                    : AppTextStyles.normalBlackTextStyle,
               ),
               backgroundColor: activeStep == 2
-                  ? StaticColors.orangeColor.withOpacity(.4)
-                  : StaticColors.greyColor),
-          Container(height: 1, color: StaticColors.greyColor, width: 20),
+                  ? AppColors.orangeColor.withOpacity(.4)
+                  : AppColors.greyColor),
+          Container(height: 1, color: AppColors.greyColor, width: 20),
           CircleAvatar(
               child: Text(
                 "3",
                 style: activeStep == 3
-                    ? StaticTextStyles.normalWhiteTextStyle
-                    : StaticTextStyles.normalBlackTextStyle,
+                    ? AppTextStyles.normalWhiteTextStyle
+                    : AppTextStyles.normalBlackTextStyle,
               ),
               backgroundColor: activeStep == 3
-                  ? StaticColors.orangeColor.withOpacity(.4)
-                  : StaticColors.greyColor),
-          Container(height: 1, color: StaticColors.greyColor, width: 20),
+                  ? AppColors.orangeColor.withOpacity(.4)
+                  : AppColors.greyColor),
+          Container(height: 1, color: AppColors.greyColor, width: 20),
           CircleAvatar(
               child: Text(
                 "4",
                 style: activeStep == 4
-                    ? StaticTextStyles.normalWhiteTextStyle
-                    : StaticTextStyles.normalBlackTextStyle,
+                    ? AppTextStyles.normalWhiteTextStyle
+                    : AppTextStyles.normalBlackTextStyle,
               ),
               backgroundColor: activeStep == 4
-                  ? StaticColors.orangeColor.withOpacity(.4)
-                  : StaticColors.greyColor),
-          Container(height: 1, color: StaticColors.greyColor, width: 20),
+                  ? AppColors.orangeColor.withOpacity(.4)
+                  : AppColors.greyColor),
+          Container(height: 1, color: AppColors.greyColor, width: 20),
           CircleAvatar(
               child: Text(
                 "5",
                 style: activeStep == 5
-                    ? StaticTextStyles.normalWhiteTextStyle
-                    : StaticTextStyles.normalBlackTextStyle,
+                    ? AppTextStyles.normalWhiteTextStyle
+                    : AppTextStyles.normalBlackTextStyle,
               ),
               backgroundColor: activeStep == 5
-                  ? StaticColors.orangeColor.withOpacity(.4)
-                  : StaticColors.greyColor),
+                  ? AppColors.orangeColor.withOpacity(.4)
+                  : AppColors.greyColor),
         ],
       ),
       WhiteSpacer.verticalSpace(10),
       Container(
           width: width,
           height: 1,
-          color: StaticColors.greyColor.withOpacity(.1)),
+          color: AppColors.greyColor.withOpacity(.1)),
     ],
   );
 }
@@ -566,7 +562,7 @@ Widget profileEditingModule(String title) {
         const Expanded(child: SizedBox()),
         Icon(
           Icons.keyboard_arrow_right,
-          color: StaticColors.greyColor,
+          color: AppColors.greyColor,
         )
       ],
     ),

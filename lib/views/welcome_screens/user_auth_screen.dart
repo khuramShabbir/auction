@@ -50,7 +50,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                 padding:
                                 const EdgeInsets.symmetric(horizontal: 25),
                                 child: Text(textListHeadline[index],
-                                    style: StaticTextStyles.headingStyle),
+                                    style: AppTextStyles.headingStyle),
                               ),
                               const SizedBox(height: 20),
                               Padding(
@@ -58,7 +58,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                 const EdgeInsets.symmetric(horizontal: 25),
                                 child: Text(subTitleTextList[index],
                                     style:
-                                    StaticTextStyles.normalGreyTextStyle),
+                                    AppTextStyles.normalGreyTextStyle),
                               ),
                               const SizedBox(height: 20),
                             ],
@@ -70,18 +70,18 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                     children: [
                       dots(
                           color: index == 0
-                              ? StaticColors.blueColor
-                              : StaticColors.lightOrangeColor,
+                              ? AppColors.blueColor
+                              : AppColors.lightOrangeColor,
                           radius: index == 0 ? 5.0 : 3.0),
                       dots(
                           color: index == 1
-                              ? StaticColors.blueColor
-                              : StaticColors.lightOrangeColor,
+                              ? AppColors.blueColor
+                              : AppColors.lightOrangeColor,
                           radius: index == 1 ? 5.0 : 3.0),
                       dots(
                           color: index == 2
-                              ? StaticColors.blueColor
-                              : StaticColors.lightOrangeColor,
+                              ? AppColors.blueColor
+                              : AppColors.lightOrangeColor,
                           radius: index == 2 ? 5.0 : 3.0),
                     ],
                   ),
@@ -92,16 +92,16 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                     onTap: () {
                       Get.to(() => const SignUpScreen());
                     },
-                    buttonColor: StaticColors.blueColor,
+                    buttonColor: AppColors.blueColor,
                     buttonText: "Sign Up",
-                    textColor: StaticColors.whiteColor),
+                    textColor: AppColors.whiteColor),
                 extendedButton(
                     onTap: () {
                       Get.to(() => const LoginScreen());
                     },
                     buttonText: "Login",
-                    buttonColor: StaticColors.orangeColor,
-                    textColor: StaticColors.whiteColor),
+                    buttonColor: AppColors.orangeColor,
+                    textColor: AppColors.whiteColor),
               ],
             )),
           ),
@@ -137,7 +137,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
         width: 15,
         height: 15,
         decoration: BoxDecoration(
-            border: Border.all(color: StaticColors.orangeColor, width: 3),
+            border: Border.all(color: AppColors.orangeColor, width: 3),
             borderRadius: BorderRadius.circular(100)),
         child: CircleAvatar(
           radius: radius,

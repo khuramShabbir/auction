@@ -38,7 +38,7 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
         appBar: CustomAppBar.appBar(title: "Coupon Detail",action: [
           InkWell(
               onTap: (){Get.to(()=>const ShoppingCartScreen());},
-              child:  Icon(Icons.add_shopping_cart_outlined,color: StaticColors.blackColor,)),
+              child:  Icon(Icons.add_shopping_cart_outlined,color: AppColors.blackColor,)),
           WhiteSpacer.horizontalSpace(20)
         ]),
         body: StaticKPadding.kPadding(
@@ -60,17 +60,17 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
 
                   });},
                   child: Text("Description",
-                      style: StaticTextStyles.subTitleStyleBlack)),
+                      style: AppTextStyles.subTitleStyleBlack)),
               InkWell(
                   onTap: () {usage=true;setState(() {
 
                   });},
                   child: Text("Usage",
-                      style: StaticTextStyles.subTitleStyleBlack)),
+                      style: AppTextStyles.subTitleStyleBlack)),
               InkWell(
                   onTap: () {Get.to(()=> CouponCommentScreen(result:result));},
                   child: Text("Comments",
-                      style: StaticTextStyles.subTitleStyleBlack)),
+                      style: AppTextStyles.subTitleStyleBlack)),
             ]),
             WhiteSpacer.verticalSpace(20),
             Row(
@@ -78,45 +78,45 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
               children: [
                 Expanded(
                     child:
-                        Container(height: 2, color:usage? StaticColors.greyColor.withOpacity(.1):StaticColors.orangeColor)),
+                        Container(height: 2, color:usage? AppColors.greyColor.withOpacity(.1):AppColors.orangeColor)),
                 Expanded(
                     child: Container(
                         height: 2,
-                        color:usage?StaticColors.orangeColor: StaticColors.greyColor.withOpacity(.1))),
+                        color:usage?AppColors.orangeColor: AppColors.greyColor.withOpacity(.1))),
                 Expanded(
                     child: Container(
                         height: 2,
-                        color: StaticColors.greyColor.withOpacity(.1))),
+                        color: AppColors.greyColor.withOpacity(.1))),
               ],
             ),
             WhiteSpacer.verticalSpace(20),
             Container(
               child:   usage==false? Text(
                 result!.couponDescription ?? "",
-                style: StaticTextStyles.normalGreyTextStyle,
+                style: AppTextStyles.normalGreyTextStyle,
               ):
-              Text(result!.usage??"",style:StaticTextStyles.normalGreyTextStyle,),
+              Text(result!.usage??"",style:AppTextStyles.normalGreyTextStyle,),
               constraints: BoxConstraints(minHeight: height*.15)),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Text("Coupon Code:",style: StaticTextStyles.normalGreyTextStyle),
-              Text(result!.couponCode??"",style:TextStyle(color: StaticColors.orangeColor,fontWeight: FontWeight.bold))
+              Text("Coupon Code:",style: AppTextStyles.normalGreyTextStyle),
+              Text(result!.couponCode??"",style:TextStyle(color: AppColors.orangeColor,fontWeight: FontWeight.bold))
             ],),
             WhiteSpacer.verticalSpace(30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RatingBar.builder(
-                    unratedColor: StaticColors.greyColor.withOpacity(.2),
+                    unratedColor: AppColors.greyColor.withOpacity(.2),
                     itemSize: 25,
                     initialRating: 4,
-                    glowColor: StaticColors.orangeColor,
+                    glowColor: AppColors.orangeColor,
                     onRatingUpdate: (double value) {},
                     itemBuilder: (BuildContext context, int index) {
                       return Icon(
                         Icons.star,
-                        color: StaticColors.orangeColor,
+                        color: AppColors.orangeColor,
                       );
                     }),
               ],
@@ -128,12 +128,12 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
                 Text("SAR 10",
                     style: TextStyle(
                         decoration: TextDecoration.lineThrough,
-                        color: StaticColors.greyColor,
+                        color: AppColors.greyColor,
                         fontWeight: FontWeight.bold)),
                 WhiteSpacer.horizontalSpace(10),
                 Text("SAR 5",
                     style: TextStyle(
-                        color: StaticColors.orangeColor,
+                        color: AppColors.orangeColor,
                         fontWeight: FontWeight.bold)),
               ],
             ),
@@ -146,10 +146,10 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
                     couponProvider.addValue();
                   },
                   child: CircleAvatar(
-                    backgroundColor: StaticColors.orangeColor,
+                    backgroundColor: AppColors.orangeColor,
                     child: Icon(
                       Icons.add,
-                      color: StaticColors.whiteColor,
+                      color: AppColors.whiteColor,
                     ),
                   ),
                 ),
@@ -159,7 +159,7 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
                     couponProvider.couponValue.toString(),
                     style: TextStyle(
                         fontSize: 20,
-                        color: StaticColors.orangeColor,
+                        color: AppColors.orangeColor,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -168,10 +168,10 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
                     couponProvider.couponRemove();
                   },
                   child: CircleAvatar(
-                    backgroundColor: StaticColors.orangeColor,
+                    backgroundColor: AppColors.orangeColor,
                     child: Icon(
                       Icons.remove,
-                      color: StaticColors.whiteColor,
+                      color: AppColors.whiteColor,
                     ),
                   ),
                 ),
@@ -182,9 +182,9 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 customizedButton(
-                    buttonColor: StaticColors.blueColor,
+                    buttonColor: AppColors.blueColor,
                     onTap: () {},
-                    textColor: StaticColors.whiteColor,
+                    textColor: AppColors.whiteColor,
                     radius: 15,
                     buttonText: "Order Now",
                     buttonWidth: .5)

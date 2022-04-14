@@ -69,30 +69,30 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                 },
                 title: 'Profile',
                 leading: SvgPicture.asset('assets/SvgAssets/Profile.svg',
-                    color: StaticColors.blackColor)),
+                    color: AppColors.blackColor)),
             profileModules(
                 onTap: () {},
                 title: 'Notifications',
                 leading: SvgPicture.asset('assets/SvgAssets/notification.svg',
-                    color: StaticColors.blackColor)),
+                    color: AppColors.blackColor)),
             profileModules(
                 onTap: () {
                   Get.to(const UserWallet());
                 },
                 title: 'Your wallet',
                 leading: SvgPicture.asset('assets/SvgAssets/Wallet.svg',
-                    color: StaticColors.blackColor)),
+                    color: AppColors.blackColor)),
             profileModules(
               onTap: () {},
               title: 'Login Setting',
               leading: SvgPicture.asset('assets/SvgAssets/loginSetting.svg',
-                  color: StaticColors.blackColor),
+                  color: AppColors.blackColor),
             ),
             profileModules(
                 onTap: () {},
                 title: 'Service Centre',
                 leading: SvgPicture.asset('assets/SvgAssets/callServices.svg',
-                    color: StaticColors.blackColor)),
+                    color: AppColors.blackColor)),
             WhiteSpacer.verticalSpace(20),
             InkWell(
               onTap: () async {
@@ -105,26 +105,26 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   padding: const EdgeInsets.all(15.0),
                   child: SvgPicture.asset(
                     'assets/SvgAssets/logOut.svg',
-                    color: StaticColors.blackColor,
+                    color: AppColors.blackColor,
                   ),
                 ),
                 width: 55,
                 height: 55,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: StaticColors.whiteColor,
+                    color: AppColors.whiteColor,
                     boxShadow: [
                       BoxShadow(
                           blurRadius: 10,
                           spreadRadius: 1,
-                          color: StaticColors.greyColor.withOpacity(.1))
+                          color: AppColors.greyColor.withOpacity(.1))
                     ]),
               ),
             ),
             WhiteSpacer.verticalSpace(20),
             Text(
               "Log Out",
-              style: StaticTextStyles.subTitleStyleBlack,
+              style: AppTextStyles.subTitleStyleBlack,
             )
           ],
         )),
@@ -152,16 +152,16 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                 ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: StaticColors.whiteColor,
+                    color: AppColors.whiteColor,
                     boxShadow: [
                       BoxShadow(
-                          color: StaticColors.greyColor.withOpacity(.1),
+                          color: AppColors.greyColor.withOpacity(.1),
                           blurRadius: 10,
                           spreadRadius: 1)
                     ]),
               ),
               WhiteSpacer.horizontalSpace(30),
-              Text(title, style: StaticTextStyles.subTitleStyleBlack),
+              Text(title, style: AppTextStyles.subTitleStyleBlack),
               const Expanded(child: SizedBox()),
               const Icon(Icons.keyboard_arrow_right)
             ],

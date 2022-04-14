@@ -7,7 +7,6 @@ import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:time_elapsed/time_elapsed.dart';
-
 import '../../../models/GetCoupon/getCoupons.dart';
 
 class CouponScreen extends StatefulWidget {
@@ -29,11 +28,11 @@ class _CouponScreenState extends State<CouponScreen> {
     return Consumer<CouponProvider>(
       builder: (BuildContext context, data, Widget? child) {
         return Scaffold(
-          backgroundColor: StaticColors.whiteColor,
+          backgroundColor: AppColors.whiteColor,
           appBar: CustomAppBar.appBar(title: "Discounted Coupon's",action: [
             InkWell(
                 onTap: (){Get.to(()=>const ShoppingCartScreen());},
-                child:  Icon(Icons.add_shopping_cart_outlined,color: StaticColors.blackColor,)),
+                child:  Icon(Icons.add_shopping_cart_outlined,color: AppColors.blackColor,)),
           WhiteSpacer.horizontalSpace(20)
           ]),
           body: StaticKPadding.kPadding(
@@ -65,7 +64,7 @@ class _CouponScreenState extends State<CouponScreen> {
                                       vertical: 10.0),
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: StaticColors.whiteColor,
+                                      color: AppColors.whiteColor,
                                     ),
                                     child: Row(
                                       children: [
@@ -85,25 +84,25 @@ class _CouponScreenState extends State<CouponScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(value.couponTitle ?? "",
-                                                style: StaticTextStyles
+                                                style: AppTextStyles
                                                     .subTitleStyleBlack),
                                             WhiteSpacer.verticalSpace(5),
                                             Row(
                                               children: [
                                               value.isPercent ? Text(
                                                     "Discount  ${value.couponDiscount??""}%",
-                                                    style: StaticTextStyles
-                                                        .normalGreyTextStyle):Text("Discount price",style: StaticTextStyles.normalGreyTextStyle,),
+                                                    style: AppTextStyles
+                                                        .normalGreyTextStyle):Text("Discount price",style: AppTextStyles.normalGreyTextStyle,),
                                                 WhiteSpacer.horizontalSpace(5),
                                                 CircleAvatar(
                                                     backgroundColor:
-                                                        StaticColors.greyColor,
+                                                        AppColors.greyColor,
                                                     radius: 1.5),
                                                 WhiteSpacer.horizontalSpace(5),
                                                 Text(
                                                   timeStamp,
                                                   style: TextStyle(
-                                                      color: StaticColors
+                                                      color: AppColors
                                                           .greyColor,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -127,7 +126,7 @@ class _CouponScreenState extends State<CouponScreen> {
                     )
                   : Center(
                       child: CircularProgressIndicator(
-                          color: StaticColors.orangeColor),
+                          color: AppColors.orangeColor),
                     )),
         );
       },

@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
       builder: (BuildContext context, data, Widget? child) {
         return SafeArea(
           child: Scaffold(
-            backgroundColor: StaticColors.whiteColor,
+            backgroundColor: AppColors.whiteColor,
             appBar: CustomAppBar.appBar(title: "Login"),
             body: StaticKPadding.kPadding(
                 child: Form(
@@ -70,8 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Icon(
                           Icons.remove_red_eye,
                           color: obscure
-                              ? StaticColors.greyColor
-                              : StaticColors.orangeColor,
+                              ? AppColors.greyColor
+                              : AppColors.orangeColor,
                         ),
                       )),
                   extendedButton(
@@ -80,8 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
                            data.loginUser();
                         }
                       },
-                      buttonColor: StaticColors.orangeColor,
-                      textColor: StaticColors.whiteColor,
+                      buttonColor: AppColors.orangeColor,
+                      textColor: AppColors.whiteColor,
                       buttonText: "Login")
                 ],
               ),

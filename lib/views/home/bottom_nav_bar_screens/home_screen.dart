@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.grey.withOpacity(.5),
                       fontWeight: FontWeight.bold,
                       fontSize: 17)),
-              Text("${getUser().result!.name}", style: StaticTextStyles.headingStyle),
+              Text("${getUser().result!.name}", style: AppTextStyles.headingStyle),
               Expanded(
                   child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             "auction that interest you",
                             style: TextStyle(
-                                color: StaticColors.whiteColor,
+                                color: AppColors.whiteColor,
                                 fontWeight: FontWeight.bold),
                           ),
                           Padding(
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text("Get Bid",
                                     style: TextStyle(
-                                        color: StaticColors.whiteColor,
+                                        color: AppColors.whiteColor,
                                         fontWeight: FontWeight.bold)),
                                 const SizedBox(
                                   width: 15,
@@ -148,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             "Car that interest you",
                             style: TextStyle(
-                                color: StaticColors.whiteColor,
+                                color: AppColors.whiteColor,
                                 fontWeight: FontWeight.bold),
                           ),
                           Padding(
@@ -157,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text("Search Car",
                                     style: TextStyle(
-                                        color: StaticColors.whiteColor,
+                                        color: AppColors.whiteColor,
                                         fontWeight: FontWeight.bold)),
                                 const SizedBox(
                                   width: 15,
@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             "Parts that interest you",
                             style: TextStyle(
-                                color: StaticColors.whiteColor,
+                                color: AppColors.whiteColor,
                                 fontWeight: FontWeight.bold),
                           ),
                           Padding(
@@ -211,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text("Get Parts",
                                     style: TextStyle(
-                                        color: StaticColors.whiteColor,
+                                        color: AppColors.whiteColor,
                                         fontWeight: FontWeight.bold)),
                                 const SizedBox(
                                   width: 15,
@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Get.back();
                   },
                   textColor: Colors.white,
-                  buttonColor: StaticColors.orangeColor,
+                  buttonColor: AppColors.orangeColor,
                   buttonText: "Ok"),
               SizedBox(
                 height: 25,

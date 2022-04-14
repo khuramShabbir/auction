@@ -30,48 +30,48 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
 
       PersistentBottomNavBarItem(
-        activeColorPrimary: StaticColors.whiteColor,
-        activeColorSecondary: StaticColors.blackColor,
-        inactiveColorPrimary: StaticColors.blueColor,
+        activeColorPrimary: AppColors.whiteColor,
+        activeColorSecondary: AppColors.blackColor,
+        inactiveColorPrimary: AppColors.blueColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Home.svg',
-          color: index == 0 ? StaticColors.blueColor : null,
+          color: index == 0 ? AppColors.blueColor : null,
         ),
         title: "Home",
       ),
       PersistentBottomNavBarItem(
-        activeColorPrimary: StaticColors.whiteColor,
-        activeColorSecondary: StaticColors.blackColor,
+        activeColorPrimary: AppColors.whiteColor,
+        activeColorSecondary: AppColors.blackColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Search.svg',
-          color: index == 1 ? StaticColors.blueColor : null,
+          color: index == 1 ? AppColors.blueColor : null,
         ),
         title: "Search",
       ),
       PersistentBottomNavBarItem(
-        activeColorPrimary: StaticColors.whiteColor,
-        activeColorSecondary: StaticColors.blackColor,
+        activeColorPrimary: AppColors.whiteColor,
+        activeColorSecondary: AppColors.blackColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Paper.svg',
-          color: index == 2 ? StaticColors.blueColor : null,
+          color: index == 2 ? AppColors.blueColor : null,
         ),
         title: "My Cars",
       ),
       PersistentBottomNavBarItem(
-        activeColorPrimary: StaticColors.whiteColor,
-        activeColorSecondary: StaticColors.blackColor,
+        activeColorPrimary: AppColors.whiteColor,
+        activeColorSecondary: AppColors.blackColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Wallet.svg',
-          color: index == 3 ? StaticColors.blueColor : null,
+          color: index == 3 ? AppColors.blueColor : null,
         ),
         title: "Wallet",
       ),
       PersistentBottomNavBarItem(
-        activeColorPrimary: StaticColors.whiteColor,
-        activeColorSecondary: StaticColors.blackColor,
+        activeColorPrimary: AppColors.whiteColor,
+        activeColorSecondary: AppColors.blackColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Profile.svg',
-          color: index == 4 ? StaticColors.blueColor : null,
+          color: index == 4 ? AppColors.blueColor : null,
         ),
         title: "Profile",
       ),

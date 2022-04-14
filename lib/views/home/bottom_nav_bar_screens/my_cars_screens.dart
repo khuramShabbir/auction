@@ -36,7 +36,7 @@ class _MyCarsState extends State<MyCarsScreen> {
     return Consumer<AuctionProvider>(
       builder: (BuildContext context, data, Widget? child) {
         return Scaffold(
-          backgroundColor: StaticColors.whiteColor,
+          backgroundColor: AppColors.whiteColor,
           appBar:AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
@@ -97,7 +97,7 @@ class _MyCarsState extends State<MyCarsScreen> {
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
-                                          color: StaticColors.blackColor),
+                                          color: AppColors.blackColor),
                                     ),
                                     const SizedBox(height: 5),
                                     Row(
@@ -106,7 +106,7 @@ class _MyCarsState extends State<MyCarsScreen> {
                                           "Power",
                                           style: TextStyle(
                                               fontSize: 15,
-                                              color: StaticColors.blackColor),
+                                              color: AppColors.blackColor),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -114,13 +114,13 @@ class _MyCarsState extends State<MyCarsScreen> {
                                           child: Container(
                                               height: 20,
                                               width: 1,
-                                              color: StaticColors.blackColor),
+                                              color: AppColors.blackColor),
                                         ),
                                         Text(
                                           "${data.auctionByUser!.result[index].maxPower}",
                                           style: TextStyle(
                                               fontSize: 15,
-                                              color: StaticColors.blackColor),
+                                              color: AppColors.blackColor),
                                         ),
                                       ],
                                     ),
@@ -129,7 +129,7 @@ class _MyCarsState extends State<MyCarsScreen> {
                                       "Riyadh",
                                       style: TextStyle(
                                           fontSize: 15,
-                                          color: StaticColors.blackColor),
+                                          color: AppColors.blackColor),
                                     ),
                                     const SizedBox(height: 5),
                                     Row(
@@ -187,7 +187,7 @@ class _MyCarsState extends State<MyCarsScreen> {
                                         Text(
                                           "${data.auctionByUser!.result[index].biddingList.last.biddingAmount} / SAR",
                                           style: TextStyle(
-                                              color: StaticColors.blackColor,
+                                              color: AppColors.blackColor,
                                               fontWeight: FontWeight.bold),
                                         )
                                       ],
@@ -200,7 +200,7 @@ class _MyCarsState extends State<MyCarsScreen> {
                     )
                   : Center(
                       child: CircularProgressIndicator(
-                        color: StaticColors.orangeColor,
+                        color: AppColors.orangeColor,
                       ),
                     )),
         );

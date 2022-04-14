@@ -17,7 +17,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       appBar: CustomAppBar.appBar(title: "Cart", action: [
         Icon(
           Icons.add_shopping_cart,
-          color: StaticColors.blackColor,
+          color: AppColors.blackColor,
         ),
         WhiteSpacer.horizontalSpace(20)
       ]),
@@ -50,100 +50,107 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text("Title",
-                              style: StaticTextStyles.subTitleStyleBlack),
+                              style: AppTextStyles.subTitleStyleBlack),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text("Discount Coupon",
-                                  style: StaticTextStyles.normalGreyTextStyle),
+                                  style: AppTextStyles.normalGreyTextStyle),
                               CircleAvatar(
                                 backgroundColor:
-                                    StaticColors.greyColor.withOpacity(.3),
+                                    AppColors.greyColor.withOpacity(.3),
                                 radius: 1.5,
                               ),
                               Text("10%",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: StaticColors.greyColor)),
+                                      color: AppColors.greyColor)),
                             ],
                           )
                         ],
                       ),
                       const Expanded(child: SizedBox()),
-                      CircleAvatar(backgroundColor: StaticColors.orangeColor,radius: 15,child: Icon(Icons.add,color: StaticColors.whiteColor)),
+                      CircleAvatar(
+                          backgroundColor: AppColors.orangeColor,
+                          radius: 15,
+                          child:
+                              Icon(Icons.add, color: AppColors.whiteColor)),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text("1",style: TextStyle(color: StaticColors.orangeColor,fontWeight: FontWeight.bold),),
+                        child: Text(
+                          "1",
+                          style: TextStyle(
+                              color: AppColors.orangeColor,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      CircleAvatar(backgroundColor: StaticColors.orangeColor,radius: 15,child: Icon(Icons.remove,color: StaticColors.whiteColor))
-
-
-
-
-
+                      CircleAvatar(
+                          backgroundColor: AppColors.orangeColor,
+                          radius: 15,
+                          child: Icon(Icons.remove,
+                              color: AppColors.whiteColor))
                     ],
                   ),
                 );
               },
             ),
           ),
-
-          Container(color: StaticColors.greyColor.withOpacity(.3),height: 1.5),
+          Container(color: AppColors.greyColor.withOpacity(.3), height: 1.5),
           WhiteSpacer.verticalSpace(10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-            Text("Coupon Price",style: StaticTextStyles.subTitleStyleBlack),
-            Text("29.96",style: TextStyle(color: StaticColors.greyColor,fontWeight: FontWeight.bold)),
-          ],),
+              Text("Coupon Price", style: AppTextStyles.subTitleStyleBlack),
+              Text("29.96",
+                  style: TextStyle(
+                      color: AppColors.greyColor,
+                      fontWeight: FontWeight.bold)),
+            ],
+          ),
           WhiteSpacer.verticalSpace(20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-            Text("Discount",style: StaticTextStyles.subTitleStyleBlack,),
-            const Text("-29.96 SAR",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold)),
-          ],),
+              Text(
+                "Discount",
+                style: AppTextStyles.subTitleStyleBlack,
+              ),
+              const Text("-29.96 SAR",
+                  style: TextStyle(
+                      color: Colors.red, fontWeight: FontWeight.bold)),
+            ],
+          ),
           WhiteSpacer.verticalSpace(20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-            Text("VAT",style: StaticTextStyles.subTitleStyleBlack),
-            Text("29.96",style: TextStyle(color: StaticColors.greyColor,fontWeight: FontWeight.bold),),
-          ],),
+              Text("VAT", style: AppTextStyles.subTitleStyleBlack),
+              Text(
+                "29.96",
+                style: TextStyle(
+                    color: AppColors.greyColor, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
           WhiteSpacer.verticalSpace(20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Total",style: StaticTextStyles.headingStyle),
-              Text("29.96",style: StaticTextStyles.headingStyle,),
-            ],),
+              Text("Total", style: AppTextStyles.headingStyle),
+              Text(
+                "29.96",
+                style: AppTextStyles.headingStyle,
+              ),
+            ],
+          ),
           WhiteSpacer.verticalSpace(50),
-
           customizedButton(
-            radius: 15,
-            buttonText: "Exit",
+              radius: 15,
+              buttonText: "Exit",
               buttonWidth: .5,
-              buttonColor: StaticColors.blueColor,
-              onTap: (){}, textColor: StaticColors.whiteColor)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              buttonColor: AppColors.blueColor,
+              onTap: () {},
+              textColor: AppColors.whiteColor)
         ],
       )),
     );

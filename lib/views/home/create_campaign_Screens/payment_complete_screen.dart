@@ -25,7 +25,7 @@ class _PaymentCompleteScreenState extends State<PaymentCompleteScreen> {
               child: Center(
                 child: Text(
                   "",
-                  style: TextStyle(color: StaticColors.blueColor),
+                  style: TextStyle(color: AppColors.blueColor),
                 ),
               ),
             )
@@ -42,13 +42,13 @@ class _PaymentCompleteScreenState extends State<PaymentCompleteScreen> {
                     backgroundColor: Colors.green,
                     child: Icon(
                       Icons.check,
-                      color: StaticColors.whiteColor,
+                      color: AppColors.whiteColor,
                     ),
                   ),
                   WhiteSpacer.verticalSpace(15),
                   Text(
                     "Create successful campaign",
-                    style: StaticTextStyles.subTitleStyleBlack,
+                    style: AppTextStyles.subTitleStyleBlack,
                   ),
                 ],
               ),
@@ -57,7 +57,7 @@ class _PaymentCompleteScreenState extends State<PaymentCompleteScreen> {
                 "Fundria will verify your campaign as soon as you publish"
                 ". This can take 12-48 hours."
                 " If there is any problem, we will notify you.",
-                style: StaticTextStyles.normalGreyTextStyle,
+                style: AppTextStyles.normalGreyTextStyle,
               ),
               WhiteSpacer.verticalSpace(20),
               // extendedButton(

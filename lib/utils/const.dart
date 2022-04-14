@@ -17,7 +17,7 @@ class StorageKey {
   static const IS_USE_LOGGED_IN = 'IS_USE_LOGGED_IN';
 }
 
-class StaticColors {
+class AppColors {
   static Color orangeColor = const Color(0xFFFF5e00);
   static Color blueColor = const Color(0xFF0000fe);
   static Color lightOrangeColor = const Color(0xFFFFDFCC);
@@ -26,25 +26,25 @@ class StaticColors {
   static Color blackColor = Colors.black;
 }
 
-class StaticTextStyles {
+class AppTextStyles {
   static final TextStyle normalGreyTextStyle =
-      TextStyle(color: StaticColors.greyColor, fontSize: 13);
+      TextStyle(color: AppColors.greyColor, fontSize: 13);
   static final TextStyle normalBlackTextStyle =
-      TextStyle(color: StaticColors.blackColor, fontSize: 13);
+      TextStyle(color: AppColors.blackColor, fontSize: 13);
   static final normalWhiteTextStyle =
-      TextStyle(color: StaticColors.whiteColor, fontSize: 13);
+      TextStyle(color: AppColors.whiteColor, fontSize: 13);
 
   static final TextStyle headingStyle = TextStyle(
-      color: StaticColors.blackColor,
+      color: AppColors.blackColor,
       fontSize: 22,
       fontWeight: FontWeight.bold);
   static final TextStyle appBarStyle = TextStyle(
-      color: StaticColors.blackColor,
+      color: AppColors.blackColor,
       fontSize: 16,
       fontWeight: FontWeight.bold);
 
   static final TextStyle subTitleStyleBlack = TextStyle(
-      color: StaticColors.blackColor,
+      color: AppColors.blackColor,
       fontWeight: FontWeight.w500,
       fontSize: 16);
 }
@@ -53,9 +53,9 @@ class StaticAssets {
   static final notificationIcon =SvgPicture.asset('assets/SvgAssets/notification.svg');
   static final walletSvg =SvgPicture.asset('assets/SvgAssets/Wallet.svg',color: Colors.black,);
   static final leftArrow =
-      Icon(Icons.arrow_back, color: StaticColors.blackColor);
+      Icon(Icons.arrow_back, color: AppColors.blackColor);
 
-  static final rightArrow =Icon(Icons.arrow_forward, color: StaticColors.whiteColor);
+  static final rightArrow =Icon(Icons.arrow_forward, color: AppColors.whiteColor);
 }
 
 class CustomAppBar {
@@ -65,14 +65,14 @@ class CustomAppBar {
   }) {
     return AppBar(
       elevation: 0,
-      backgroundColor: StaticColors.whiteColor,
+      backgroundColor: AppColors.whiteColor,
       centerTitle: true,
       leading: InkWell(
           onTap: () {
             Get.back();
           },
           child: StaticAssets.leftArrow),
-      title: Text(title, style: StaticTextStyles.appBarStyle),
+      title: Text(title, style: AppTextStyles.appBarStyle),
       actions:action,
     );
   }

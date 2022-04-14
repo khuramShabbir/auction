@@ -130,7 +130,7 @@ class _UserWalletState extends State<UserWallet> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text("${result.status}",
-                                      style: TextStyle(color: StaticColors.blueColor,fontWeight: FontWeight.w500,fontSize: 17)),
+                                      style: TextStyle(color: AppColors.blueColor,fontWeight: FontWeight.w500,fontSize: 17)),
                                   Text("SAR ${result.amountPaid}",
                                       style:
                                       const TextStyle(fontWeight: FontWeight.bold,color: Colors.black))

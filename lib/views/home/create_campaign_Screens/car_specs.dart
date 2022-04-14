@@ -97,7 +97,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                     ),
                     WhiteSpacer.verticalSpace(20),
                     Text("Event By",
-                        style: StaticTextStyles.subTitleStyleBlack),
+                        style: AppTextStyles.subTitleStyleBlack),
                     WhiteSpacer.verticalSpace(10),
                     Row(
                       children: [
@@ -116,9 +116,9 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("${result!.user!.name}",
-                                style: StaticTextStyles.subTitleStyleBlack),
+                                style: AppTextStyles.subTitleStyleBlack),
                             Text("${result!.user!.created}",
-                                style: StaticTextStyles.normalGreyTextStyle),
+                                style: AppTextStyles.normalGreyTextStyle),
                           ],
                         ),
                         const Expanded(child: SizedBox()),
@@ -127,10 +127,10 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                             launch("tel://${result!.user!.phoneNumber}");
                           },
                           child: CircleAvatar(
-                              backgroundColor: StaticColors.blueColor,
+                              backgroundColor: AppColors.blueColor,
                               radius: 20,
                               child: Icon(Icons.phone,
-                                  color: StaticColors.whiteColor)),
+                                  color: AppColors.whiteColor)),
                         ),
                         WhiteSpacer.horizontalSpace(5),
                         // CircleAvatar(
@@ -142,7 +142,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                     ),
                     WhiteSpacer.verticalSpace(20),
                     Text("Specifications",
-                        style: StaticTextStyles.subTitleStyleBlack),
+                        style: AppTextStyles.subTitleStyleBlack),
                     WhiteSpacer.verticalSpace(10),
                     SizedBox(
                       width: width,
@@ -205,7 +205,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                     ),
                     WhiteSpacer.verticalSpace(20),
                     Text("Car Feature",
-                        style: StaticTextStyles.subTitleStyleBlack),
+                        style: AppTextStyles.subTitleStyleBlack),
                     WhiteSpacer.verticalSpace(10),
                     Row(
                       children: [
@@ -225,7 +225,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                                       WhiteSpacer.horizontalSpace(5),
                                       Text(
                                           "${result!.passengers ?? ''} Passengers",
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalBlackTextStyle),
                                       const Expanded(child: SizedBox()),
                                     ],
@@ -246,7 +246,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                                           result!.isSnowTires!
                                               ? "Snow Tires"
                                               : "Snow Tires NA",
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalBlackTextStyle),
                                     ],
                                   ),
@@ -266,7 +266,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                                           result!.isBluetooth!
                                               ? "Bluetooth"
                                               : "Bluetooth NA",
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalBlackTextStyle),
                                     ],
                                   ),
@@ -288,7 +288,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                                       ),
                                       WhiteSpacer.horizontalSpace(10),
                                       Text("${result!.doors ?? ''} Doors",
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalBlackTextStyle),
                                     ],
                                   ),
@@ -304,7 +304,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                                       ),
                                       WhiteSpacer.horizontalSpace(10),
                                       Text(result!.isGps! ? "GPS" : "GPS NA",
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalBlackTextStyle),
                                     ],
                                   ),
@@ -323,7 +323,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                                           result!.isManual!
                                               ? "Manual"
                                               : "Automatic",
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalBlackTextStyle),
                                     ],
                                   ),
@@ -334,11 +334,11 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                     ),
                     WhiteSpacer.verticalSpace(30),
                     Text("Information",
-                        style: StaticTextStyles.subTitleStyleBlack),
+                        style: AppTextStyles.subTitleStyleBlack),
                     WhiteSpacer.verticalSpace(10),
                     Text(
                       result!.description!,
-                      style: StaticTextStyles.normalGreyTextStyle,
+                      style: AppTextStyles.normalGreyTextStyle,
                     ),
                     WhiteSpacer.verticalSpace(20),
                     data.commentsByCars == null
@@ -367,7 +367,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                           ),
                     WhiteSpacer.verticalSpace(20),
                     customTextFormField(
-                        borderColor: StaticColors.greyColor,
+                        borderColor: AppColors.greyColor,
                         controller: textEditingController,
                         isOutLinedBorder: true,
                         hintText: "Post your Comment",
@@ -391,8 +391,8 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                                 data.getComments(result!.carSaleId);
                               }
                             },
-                            textColor: StaticColors.whiteColor,
-                            buttonColor: StaticColors.blueColor,
+                            textColor: AppColors.whiteColor,
+                            buttonColor: AppColors.blueColor,
                             buttonText: "Post",
                             radius: 20,
                             buttonWidth: .8),
@@ -421,7 +421,7 @@ Widget commentSection(
         WhiteSpacer.horizontalSpace(10),
         Text(
           name,
-          style: StaticTextStyles.subTitleStyleBlack,
+          style: AppTextStyles.subTitleStyleBlack,
         )
       ],
     ),
@@ -430,7 +430,7 @@ Widget commentSection(
       padding: const EdgeInsets.only(left: 30.0),
       child: Text(
         comment,
-        style: StaticTextStyles.normalGreyTextStyle,
+        style: AppTextStyles.normalGreyTextStyle,
       ),
     ),
     Row(
@@ -439,7 +439,7 @@ Widget commentSection(
       children: [
         Text(
           time,
-          style: StaticTextStyles.normalBlackTextStyle,
+          style: AppTextStyles.normalBlackTextStyle,
         ),
       ],
     )
@@ -453,7 +453,7 @@ Widget carFeatures(
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         border: Border.all(
-            color: StaticColors.greyColor.withOpacity(.5), width: 2)),
+            color: AppColors.greyColor.withOpacity(.5), width: 2)),
     child: Padding(
       padding: const EdgeInsets.all(5.0),
       child: Column(
@@ -462,9 +462,9 @@ Widget carFeatures(
           children: [
             icon,
             const Expanded(child: SizedBox()),
-            Text(title, style: StaticTextStyles.normalGreyTextStyle),
+            Text(title, style: AppTextStyles.normalGreyTextStyle),
             Text(value,
-                style: TextStyle(color: StaticColors.blackColor, fontSize: 13)),
+                style: TextStyle(color: AppColors.blackColor, fontSize: 13)),
           ]),
     ),
   );

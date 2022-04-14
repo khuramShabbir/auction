@@ -14,7 +14,7 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: StaticColors.whiteColor,
+      backgroundColor: AppColors.whiteColor,
       appBar: CustomAppBar.appBar(title: "Create Campaign"),
       body: StaticKPadding.kPadding(
           child: Column(
@@ -30,7 +30,7 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
                       blurRadius: 20,
                       spreadRadius: 10),
                 ],
-                color: StaticColors.whiteColor,
+                color: AppColors.whiteColor,
                 borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -40,7 +40,7 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
                   WhiteSpacer.verticalSpace(10),
                   Text(
                     "Shipping Campaign",
-                    style: StaticTextStyles.normalBlackTextStyle,
+                    style: AppTextStyles.normalBlackTextStyle,
                   ),
                   WhiteSpacer.verticalSpace(10),
                   SizedBox(
@@ -82,7 +82,7 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
                                   ),
                                   Text("2-3 days",
                                       style:
-                                          StaticTextStyles.normalGreyTextStyle),
+                                          AppTextStyles.normalGreyTextStyle),
                                 ],
                               ),
                             ),
@@ -106,7 +106,7 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
                       blurRadius: 20,
                       spreadRadius: 10),
                 ],
-                color: StaticColors.whiteColor,
+                color: AppColors.whiteColor,
                 borderRadius: BorderRadius.circular(10)),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -116,7 +116,7 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
                   WhiteSpacer.verticalSpace(10),
                   Text(
                     "Vehicle insurance",
-                    style: StaticTextStyles.normalBlackTextStyle,
+                    style: AppTextStyles.normalBlackTextStyle,
                   ),
                   WhiteSpacer.verticalSpace(10),
                   SizedBox(
@@ -158,7 +158,7 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
                                   ),
                                   Text("2-3 days",
                                       style:
-                                          StaticTextStyles.normalGreyTextStyle),
+                                          AppTextStyles.normalGreyTextStyle),
                                 ],
                               ),
                             ),
@@ -178,11 +178,11 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
             children: [
               Text(
                 "Delivery Cost",
-                style: StaticTextStyles.normalGreyTextStyle,
+                style: AppTextStyles.normalGreyTextStyle,
               ),
               Text(
                 "\$ 29.9",
-                style: StaticTextStyles.subTitleStyleBlack,
+                style: AppTextStyles.subTitleStyleBlack,
               ),
             ],
           ),
@@ -192,11 +192,11 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
             children: [
               Text(
                 "Vat",
-                style: StaticTextStyles.normalGreyTextStyle,
+                style: AppTextStyles.normalGreyTextStyle,
               ),
               Text(
                 "\$ 29.9",
-                style: StaticTextStyles.subTitleStyleBlack,
+                style: AppTextStyles.subTitleStyleBlack,
               ),
             ],
           ),
@@ -206,11 +206,11 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
             children: [
               Text(
                 "Total",
-                style: StaticTextStyles.normalGreyTextStyle,
+                style: AppTextStyles.normalGreyTextStyle,
               ),
               Text(
                 "\$ 32.95",
-                style: StaticTextStyles.headingStyle,
+                style: AppTextStyles.headingStyle,
               ),
             ],
           ),
@@ -218,8 +218,8 @@ class _ViewReceiptScreenState extends State<ViewReceiptScreen> {
           extendedButton(
               onTap: () {},
               buttonText: "Next",
-              buttonColor: StaticColors.orangeColor.withOpacity(.3),
-              textColor: StaticColors.greyColor)
+              buttonColor: AppColors.orangeColor.withOpacity(.3),
+              textColor: AppColors.greyColor)
         ],
       )),
     ));

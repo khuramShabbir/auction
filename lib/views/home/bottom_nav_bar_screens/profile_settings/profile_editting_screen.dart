@@ -27,10 +27,10 @@ class _ProfileEditingScreenState extends State<ProfileEditingScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Khaled", style: StaticTextStyles.subTitleStyleBlack),
+            Text("Khaled", style: AppTextStyles.subTitleStyleBlack),
             WhiteSpacer.horizontalSpace(5),
             SvgPicture.asset('assets/SvgAssets/edit.svg',
-                color: StaticColors.greyColor.withOpacity(.5)),
+                color: AppColors.greyColor.withOpacity(.5)),
           ],
         ),
         WhiteSpacer.verticalSpace(15),
@@ -46,7 +46,7 @@ class _ProfileEditingScreenState extends State<ProfileEditingScreen> {
                   SvgPicture.asset('assets/SvgAssets/trash.svg'),
                   WhiteSpacer.verticalSpace(15),
                   Text("Delete Account",
-                      style: StaticTextStyles.subTitleStyleBlack)
+                      style: AppTextStyles.subTitleStyleBlack)
                 ],
               ),
             ))

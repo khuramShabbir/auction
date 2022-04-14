@@ -63,13 +63,13 @@ class _WalletScreenState extends State<WalletScreen> {
                   width: 8,
                   decoration: BoxDecoration(
                       color: index == 0
-                          ? StaticColors.blueColor
-                          : StaticColors.whiteColor,
+                          ? AppColors.blueColor
+                          : AppColors.whiteColor,
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(
                           color: index == 0
-                              ? StaticColors.blueColor
-                              : StaticColors.greyColor)),
+                              ? AppColors.blueColor
+                              : AppColors.greyColor)),
                 ),
               ),
               Padding(
@@ -79,13 +79,13 @@ class _WalletScreenState extends State<WalletScreen> {
                   width: 8,
                   decoration: BoxDecoration(
                       color: index == 1
-                          ? StaticColors.blueColor
-                          : StaticColors.whiteColor,
+                          ? AppColors.blueColor
+                          : AppColors.whiteColor,
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(
                           color: index == 1
-                              ? StaticColors.blueColor
-                              : StaticColors.greyColor)),
+                              ? AppColors.blueColor
+                              : AppColors.greyColor)),
                 ),
               ),
               Padding(
@@ -95,13 +95,13 @@ class _WalletScreenState extends State<WalletScreen> {
                   width: 8,
                   decoration: BoxDecoration(
                       color: index == 2
-                          ? StaticColors.blueColor
-                          : StaticColors.whiteColor,
+                          ? AppColors.blueColor
+                          : AppColors.whiteColor,
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(
                           color: index == 2
-                              ? StaticColors.blueColor
-                              : StaticColors.greyColor)),
+                              ? AppColors.blueColor
+                              : AppColors.greyColor)),
                 ),
               ),
             ]),
@@ -124,8 +124,8 @@ class _WalletScreenState extends State<WalletScreen> {
                       onTap: () {
                         Get.to(() => const AddPaymentMethodScreen());
                       },
-                      buttonColor: StaticColors.blueColor,
-                      textColor: StaticColors.whiteColor,
+                      buttonColor: AppColors.blueColor,
+                      textColor: AppColors.whiteColor,
                       buttonText: "Add Card")
                 ],
               ),

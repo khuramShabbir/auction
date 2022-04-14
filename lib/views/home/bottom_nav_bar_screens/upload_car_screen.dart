@@ -221,11 +221,11 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                 data.isBluetooth = v!;
                                 setState(() {});
                               },
-                              checkColor: StaticColors.orangeColor,
-                              activeColor: StaticColors.orangeColor),
+                              checkColor: AppColors.orangeColor,
+                              activeColor: AppColors.orangeColor),
                           Text(
                             "Bluetooth",
-                            style: StaticTextStyles.normalBlackTextStyle,
+                            style: AppTextStyles.normalBlackTextStyle,
                           ),
                         ],
                       ),
@@ -240,11 +240,11 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                 data.isGPS = v!;
                                 setState(() {});
                               },
-                              checkColor: StaticColors.orangeColor,
-                              activeColor: StaticColors.orangeColor),
+                              checkColor: AppColors.orangeColor,
+                              activeColor: AppColors.orangeColor),
                           Text(
                             "GPS",
-                            style: StaticTextStyles.normalBlackTextStyle,
+                            style: AppTextStyles.normalBlackTextStyle,
                           ),
                         ],
                       ),
@@ -264,11 +264,11 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                 data.isSnowTiers = v!;
                                 setState(() {});
                               },
-                              checkColor: StaticColors.orangeColor,
-                              activeColor: StaticColors.orangeColor),
+                              checkColor: AppColors.orangeColor,
+                              activeColor: AppColors.orangeColor),
                           Text(
                             "Snow Tiers",
-                            style: StaticTextStyles.normalBlackTextStyle,
+                            style: AppTextStyles.normalBlackTextStyle,
                           ),
                         ],
                       ),
@@ -283,11 +283,11 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                 data.isManual = v!;
                                 setState(() {});
                               },
-                              checkColor: StaticColors.orangeColor,
-                              activeColor: StaticColors.orangeColor),
+                              checkColor: AppColors.orangeColor,
+                              activeColor: AppColors.orangeColor),
                           Text(
                             "Manual",
-                            style: StaticTextStyles.normalBlackTextStyle,
+                            style: AppTextStyles.normalBlackTextStyle,
                           ),
                         ],
                       ),
@@ -444,7 +444,7 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                           },
                           child: Text("Upload Pictures",
                               style: TextStyle(
-                                  color: StaticColors.blueColor,
+                                  color: AppColors.blueColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                   decoration: TextDecoration.underline))),
@@ -481,7 +481,7 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Icon(
                                           Icons.cancel,
-                                          color: StaticColors.orangeColor,
+                                          color: AppColors.orangeColor,
                                         ),
                                       ),
                                     )
@@ -502,7 +502,7 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                     height: height * .2,
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: StaticColors.greyColor.withOpacity(.5)),
+                            color: AppColors.greyColor.withOpacity(.5)),
                         borderRadius: BorderRadius.circular(15)),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10.0),
@@ -513,7 +513,7 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Description',
-                            hintStyle: StaticTextStyles.normalGreyTextStyle),
+                            hintStyle: AppTextStyles.normalGreyTextStyle),
                       ),
                     )),
                 WhiteSpacer.horizontalSpace(35),
@@ -524,8 +524,8 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                         data.submitCar();
                       }
                     },
-                    buttonColor: StaticColors.orangeColor,
-                    textColor: StaticColors.whiteColor,
+                    buttonColor: AppColors.orangeColor,
+                    textColor: AppColors.whiteColor,
                     buttonText: "Submit"),
                 WhiteSpacer.horizontalSpace(35),
               ],

@@ -64,7 +64,7 @@ class _BankReceiptScreenState extends State<BankReceiptScreen> {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                      color: StaticColors.whiteColor,
+                      color: AppColors.whiteColor,
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +75,7 @@ class _BankReceiptScreenState extends State<BankReceiptScreen> {
                         child: Text(
                           "Upload Cover Photo",
                           style: TextStyle(
-                              color: StaticColors.blackColor,
+                              color: AppColors.blackColor,
                               fontWeight: FontWeight.w300),
                         ),
                       ),
@@ -87,17 +87,17 @@ class _BankReceiptScreenState extends State<BankReceiptScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(Icons.upload_outlined,
-                                  color: StaticColors.greyColor),
+                                  color: AppColors.greyColor),
                               Text(
                                 "Upload",
-                                style: StaticTextStyles.normalGreyTextStyle,
+                                style: AppTextStyles.normalGreyTextStyle,
                               )
                             ],
                           ),
                         ),
                         height: height * .2,
                         decoration: BoxDecoration(
-                            color: StaticColors.greyColor.withOpacity(.2),
+                            color: AppColors.greyColor.withOpacity(.2),
                             borderRadius: BorderRadius.circular(10)),
                       )),
                     ],
@@ -113,7 +113,7 @@ class _BankReceiptScreenState extends State<BankReceiptScreen> {
                   Text(
                     "Receipt",
                     style: TextStyle(
-                        color: StaticColors.blackColor,
+                        color: AppColors.blackColor,
                         fontWeight: FontWeight.w300),
                   ),
                   WhiteSpacer.verticalSpace(10),
@@ -150,7 +150,7 @@ class _BankReceiptScreenState extends State<BankReceiptScreen> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Icon(
                                           Icons.cancel,
-                                          color: StaticColors.orangeColor,
+                                          color: AppColors.orangeColor,
                                         ),
                                       ),
                                     )
@@ -183,8 +183,8 @@ class _BankReceiptScreenState extends State<BankReceiptScreen> {
                   }
                 },
                 buttonText: "Next",
-                buttonColor: StaticColors.orangeColor.withOpacity(.3),
-                textColor: StaticColors.greyColor),
+                buttonColor: AppColors.orangeColor.withOpacity(.3),
+                textColor: AppColors.greyColor),
           )
         ],
       );

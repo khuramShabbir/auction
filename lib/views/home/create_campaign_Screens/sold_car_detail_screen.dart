@@ -52,11 +52,11 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Car value",
-                            style: StaticTextStyles.normalGreyTextStyle),
+                            style: AppTextStyles.normalGreyTextStyle),
                         Text(
                             result!.biddingList.last.biddingAmount.toString() +
                                 " SAR",
-                            style: StaticTextStyles.normalBlackTextStyle)
+                            style: AppTextStyles.normalBlackTextStyle)
                       ],
                     ),
                     WhiteSpacer.verticalSpace(10),
@@ -64,9 +64,9 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Mazad Commission",
-                            style: StaticTextStyles.normalGreyTextStyle),
+                            style: AppTextStyles.normalGreyTextStyle),
                         Text("${double.parse(result!.muzadCommission.toString()).toInt()} SAR",
-                            style: StaticTextStyles.normalBlackTextStyle)
+                            style: AppTextStyles.normalBlackTextStyle)
                       ],
                     ),
                     WhiteSpacer.verticalSpace(10),
@@ -84,9 +84,9 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("VAT",
-                            style: StaticTextStyles.normalGreyTextStyle),
+                            style: AppTextStyles.normalGreyTextStyle),
                         Text("(${result!.vatPercent??0}%) ${(double.parse(result!.biddingList.last.biddingAmount.toString())*((double.parse(result!.vatPercent))/100.0))} SAR",
-                            style: StaticTextStyles.normalBlackTextStyle)
+                            style: AppTextStyles.normalBlackTextStyle)
                       ],
                     ),
                     WhiteSpacer.verticalSpace(10),
@@ -94,7 +94,7 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Total",
-                            style: StaticTextStyles.normalGreyTextStyle),
+                            style: AppTextStyles.normalGreyTextStyle),
                         Text(
                             "${
                                 (double.parse(result!.biddingList.last.biddingAmount.toString()) +
@@ -105,12 +105,12 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
 
 
                             } SAR",
-                            style: StaticTextStyles.subTitleStyleBlack)
+                            style: AppTextStyles.subTitleStyleBlack)
                       ],
                     ),
                     WhiteSpacer.verticalSpace(20),
                     Text("Payment Info",
-                        style: StaticTextStyles.subTitleStyleBlack),
+                        style: AppTextStyles.subTitleStyleBlack),
                     data.isBankDetailLoaded
                         ? Column(
                             children: [
@@ -126,18 +126,18 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                                 height: 75,
                                 width: 150,
                                 decoration: BoxDecoration(
-                                    color: StaticColors.whiteColor,
+                                    color: AppColors.whiteColor,
                                     borderRadius: BorderRadius.circular(15)),
                               ),
                               WhiteSpacer.verticalSpace(20),
                               Row(
                                 children: [
                                   Text("NAME : ",
-                                      style: StaticTextStyles
+                                      style: AppTextStyles
                                           .normalBlackTextStyle),
                                   Text(
                                     data.bankAccount!.result[0].accountName,
-                                    style: StaticTextStyles.normalGreyTextStyle,
+                                    style: AppTextStyles.normalGreyTextStyle,
                                   )
                                 ],
                               ),
@@ -145,11 +145,11 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                               Row(
                                 children: [
                                   Text("BANK : ",
-                                      style: StaticTextStyles
+                                      style: AppTextStyles
                                           .normalBlackTextStyle),
                                   Text(
                                     data.bankAccount!.result[0].bankName,
-                                    style: StaticTextStyles.normalGreyTextStyle,
+                                    style: AppTextStyles.normalGreyTextStyle,
                                   )
                                 ],
                               ),
@@ -157,11 +157,11 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                               Row(
                                 children: [
                                   Text("Account Number : ",
-                                      style: StaticTextStyles
+                                      style: AppTextStyles
                                           .normalBlackTextStyle),
                                   Text(
                                     data.bankAccount!.result[0].accountNumber,
-                                    style: StaticTextStyles.normalGreyTextStyle,
+                                    style: AppTextStyles.normalGreyTextStyle,
                                   )
                                 ],
                               ),
@@ -169,11 +169,11 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                               Row(
                                 children: [
                                   Text("IBAN : ",
-                                      style: StaticTextStyles
+                                      style: AppTextStyles
                                           .normalBlackTextStyle),
                                   Text(
                                     data.bankAccount!.result[0].iban,
-                                    style: StaticTextStyles.normalGreyTextStyle,
+                                    style: AppTextStyles.normalGreyTextStyle,
                                   )
                                 ],
                               ),
@@ -207,7 +207,7 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                         }
                       },
                       buttonText: "Next",
-                      buttonColor: StaticColors.orangeColor.withOpacity(.3),
+                      buttonColor: AppColors.orangeColor.withOpacity(.3),
                       textColor: Colors.black),
                 ),
                 WhiteSpacer.verticalSpace(20)

@@ -138,7 +138,7 @@ int index=0;
 
 
                   const SizedBox(height: 10),
-                  Text("Specifications", style: StaticTextStyles.headingStyle),
+                  Text("Specifications", style: AppTextStyles.headingStyle),
                   const SizedBox(height: 10),
                   const SizedBox(height: 10),
                   result!.inspectionPdf == null
@@ -165,8 +165,8 @@ int index=0;
               onTap: () {
                 bottomSheet();
               },
-              buttonColor: StaticColors.blueColor,
-              textColor: StaticColors.whiteColor,
+              buttonColor: AppColors.blueColor,
+              textColor: AppColors.whiteColor,
               buttonText: "Status")
         ],
       )),
@@ -211,7 +211,7 @@ int index=0;
     return Get.bottomSheet(
         Container(
           decoration: BoxDecoration(
-              color: StaticColors.whiteColor,
+              color: AppColors.whiteColor,
               borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(15), topLeft: Radius.circular(15))),
           child: Column(
@@ -222,7 +222,7 @@ int index=0;
                 width: 75,
                 height: 5,
                 decoration: BoxDecoration(
-                    color: StaticColors.greyColor,
+                    color: AppColors.greyColor,
                     borderRadius: BorderRadius.circular(100)),
               ),
               const SizedBox(height: 20),
@@ -246,7 +246,7 @@ int index=0;
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
-                                color: StaticColors.whiteColor),
+                                color: AppColors.whiteColor),
                           ),
                           const SizedBox(height: 5),
                           Row(
@@ -256,7 +256,7 @@ int index=0;
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w200,
-                                    color: StaticColors.whiteColor),
+                                    color: AppColors.whiteColor),
                               ),
                               Padding(
                                 padding:
@@ -264,14 +264,14 @@ int index=0;
                                 child: Container(
                                     height: 20,
                                     width: 1,
-                                    color: StaticColors.whiteColor),
+                                    color: AppColors.whiteColor),
                               ),
                               Text(
                                 result!.maxPower,
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w200,
-                                    color: StaticColors.whiteColor),
+                                    color: AppColors.whiteColor),
                               ),
                             ],
                           ),
@@ -281,7 +281,7 @@ int index=0;
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w200,
-                                color: StaticColors.whiteColor),
+                                color: AppColors.whiteColor),
                           ),
                           const SizedBox(height: 5),
                           Row(
@@ -332,7 +332,7 @@ int index=0;
                       )))),
               // const Icon(Icons.cancel, size: 100, color: Colors.red),
               const SizedBox(height: 15),
-              Text("Good Luck", style: StaticTextStyles.headingStyle),
+              Text("Good Luck", style: AppTextStyles.headingStyle),
               // Padding(
               //   padding: const EdgeInsets.symmetric(horizontal: 50.0),
               //   child: Text("Sorry the car was rejected from the owner, and the down payment will be refunded to your wallet",
@@ -346,8 +346,8 @@ int index=0;
                       Get.back();
                       // Get.to(() => const SearchForCarsScreen());
                     },
-                    buttonColor: StaticColors.blueColor,
-                    textColor: StaticColors.whiteColor,
+                    buttonColor: AppColors.blueColor,
+                    textColor: AppColors.whiteColor,
                     buttonText: "OK"),
               ),
               const SizedBox(height: 20)

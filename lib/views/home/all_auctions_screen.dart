@@ -34,7 +34,7 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
       builder: (BuildContext context, data, Widget? child) {
         return Scaffold(
             resizeToAvoidBottomInset: true,
-            backgroundColor: StaticColors.whiteColor,
+            backgroundColor: AppColors.whiteColor,
             appBar: CustomAppBar.appBar(),
             body: data.isAuctionLoaded
                 ? StaticKPadding.kPadding(
@@ -44,7 +44,7 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                       WhiteSpacer.verticalSpace(20),
                       Text(
                         "Auction",
-                        style: StaticTextStyles.headingStyle,
+                        style: AppTextStyles.headingStyle,
                       ),
                       WhiteSpacer.verticalSpace(10),
                       Expanded(
@@ -70,10 +70,10 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(color: Colors.black),
-                                        color: StaticColors.whiteColor,
+                                        color: AppColors.whiteColor,
                                         boxShadow: [
                                           BoxShadow(
-                                              color: StaticColors.greyColor
+                                              color: AppColors.greyColor
                                                   .withOpacity(.1),
                                               spreadRadius: 1,
                                               blurRadius: 2)
@@ -118,7 +118,7 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                                                     .split('.')[0],
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: StaticColors
+                                                    color: AppColors
                                                         .blackColor),
                                               ),
                                               WhiteSpacer.verticalSpace(5),
@@ -138,7 +138,7 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                                                       child: Text(
                                                         "BID ${double.parse(result.bidding.biddingAmount.toString()).toInt()}",
                                                         style: TextStyle(
-                                                            color: StaticColors
+                                                            color: AppColors
                                                                 .whiteColor),
                                                       ),
                                                     ),
@@ -148,9 +148,9 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                                                                   .result!
                                                                   .id !=
                                                               result.user.userId
-                                                          ? StaticColors
+                                                          ? AppColors
                                                               .orangeColor
-                                                          : StaticColors
+                                                          : AppColors
                                                               .blueColor,
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -219,7 +219,7 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                   ))
                 : Center(
                     child: CircularProgressIndicator(
-                        color: StaticColors.orangeColor,
+                        color: AppColors.orangeColor,
                         backgroundColor: Colors.transparent),
                   ));
       },

@@ -31,6 +31,9 @@ class _CouponCommentScreenState extends State<CouponCommentScreen> {
     commentByCouponProvider.getComments(result!.id.toString());
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CommentByCoupon>(
@@ -46,22 +49,21 @@ class _CouponCommentScreenState extends State<CouponCommentScreen> {
               child: data.loaded
                   ? Form(
                       key: formKey,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            WhiteSpacer.verticalSpace(20),
-                            ListView.builder(
+                      child: Column(
+                        children: [
+                          WhiteSpacer.verticalSpace(20),
+                          Expanded(
+                            child: ListView.builder(
                               shrinkWrap: true,
                               itemCount: data.getCouponComments!.result.length,
-                              physics: const NeverScrollableScrollPhysics(),
+                              physics: const ScrollPhysics(),
                               itemBuilder: (BuildContext context, int index) {
                                 var value =
                                     data.getCouponComments!.result[index];
 
-                                String timestamp = value.created
-                                    .toString(); // [DateTime] formatted as String.
-                                DateTime convertedTimestamp = DateTime.parse(
-                                    timestamp); // Converting into [DateTime] object
+                                String timestamp = value.created.toString();
+                                DateTime convertedTimestamp =
+                                    DateTime.parse(timestamp);
                                 var timeResult =
                                     GetTimeAgo.parse(convertedTimestamp);
                                 return commentSection(
@@ -71,42 +73,41 @@ class _CouponCommentScreenState extends State<CouponCommentScreen> {
                                     time: timeResult);
                               },
                             ),
-                            customTextFormField(
-                              controller: textEditingController,
-                              isOutLinedBorder: true,
-                              onChange: (v) {
-                                data.comment = v;
+                          ),
+                          customTextFormField(
+                            controller: textEditingController,
+                            isOutLinedBorder: true,
+                            onChange: (v) {
+                              data.comment = v;
+                            },
+                            validator: (v) {
+                              if (v!.isEmpty) return "Please Write Something";
+                              return null;
+                            },
+                            hintText: "Type here",
+                            borderColor: AppColors.greyColor,
+                          ),
+                          WhiteSpacer.verticalSpace(10),
+                          customizedButton(
+                              buttonText: "Post Comment",
+                              buttonWidth: .5,
+                              radius: 15,
+                              buttonColor: AppColors.blueColor,
+                              onTap: () {
+                                if (formKey.currentState!.validate()) {
+                                  data.postComment(result!.id.toString());
+                                  textEditingController.clear();
+                                  commentByCouponProvider
+                                      .getComments(result!.id.toString());
+                                }
                               },
-                              validator: (v) {
-                                if (v!.isEmpty) return "Please Write Something";
-                                return null;
-                              },
-                              hintText: "Type here",
-                              borderColor: StaticColors.greyColor,
-                            ),
-                            WhiteSpacer.verticalSpace(10),
-                            customizedButton(
-                                buttonText: "Post Comment",
-                                buttonWidth: .5,
-                                radius: 15,
-                                buttonColor: StaticColors.blueColor,
-                                onTap: () {
-                                  if (formKey.currentState!.validate()) {
-                                    data.postComment(result!.id.toString());
-                                    textEditingController.clear();
-                                    commentByCouponProvider
-                                        .getComments(result!.id.toString());
-
-                                  }
-                                },
-                                textColor: StaticColors.whiteColor)
-                          ],
-                        ),
+                              textColor: AppColors.whiteColor)
+                        ],
                       ),
                     )
                   : Center(
                       child: CircularProgressIndicator(
-                        color: StaticColors.orangeColor,
+                        color: AppColors.orangeColor,
                       ),
                     )),
         );

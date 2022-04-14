@@ -21,7 +21,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
           child: Container(
             height: height * .95,
             decoration: BoxDecoration(
-                color: StaticColors.whiteColor,
+                color: AppColors.whiteColor,
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(35),
                     topRight: Radius.circular(35))),
@@ -33,7 +33,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                   height: 4,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: StaticColors.greyColor.withOpacity(.3)),
+                      color: AppColors.greyColor.withOpacity(.3)),
                 ),
                 WhiteSpacer.verticalSpace(10),
                 CustomAppBar.appBar(title: "Add Payment Method"),
@@ -51,17 +51,17 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                         children: [
                           Icon(
                             Icons.add,
-                            color: StaticColors.blackColor,
+                            color: AppColors.blackColor,
                           ),
                           Text(
                             "Add Card",
-                            style: StaticTextStyles.normalBlackTextStyle,
+                            style: AppTextStyles.normalBlackTextStyle,
                           ),
                         ],
                       ),
                     ),
                     decoration: BoxDecoration(
-                        color: StaticColors.greyColor.withOpacity(.1),
+                        color: AppColors.greyColor.withOpacity(.1),
                         borderRadius: BorderRadius.circular(15)),
                   ),
                 )),
@@ -83,7 +83,7 @@ addPayment() {
             return Container(
               height: height * .95,
               decoration: BoxDecoration(
-                  color: StaticColors.whiteColor,
+                  color: AppColors.whiteColor,
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(35),
                       topRight: Radius.circular(35))),
@@ -95,7 +95,7 @@ addPayment() {
                     height: 4,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        color: StaticColors.greyColor.withOpacity(.3)),
+                        color: AppColors.greyColor.withOpacity(.3)),
                   ),
                   WhiteSpacer.verticalSpace(15),
                   CustomAppBar.appBar(title: "Add Card"),
@@ -108,15 +108,15 @@ addPayment() {
                         "credit card details."
                         "Everything will update"
                         " according to your data.",
-                        style: StaticTextStyles.normalGreyTextStyle,
+                        style: AppTextStyles.normalGreyTextStyle,
                       ),
                       WhiteSpacer.verticalSpace(15),
                       Container(
                         decoration: BoxDecoration(
-                            color: StaticColors.whiteColor,
+                            color: AppColors.whiteColor,
                             boxShadow: [
                               BoxShadow(
-                                  color: StaticColors.greyColor.withOpacity(.3),
+                                  color: AppColors.greyColor.withOpacity(.3),
                                   spreadRadius: 1,
                                   blurRadius: 10)
                             ],
@@ -130,7 +130,7 @@ addPayment() {
                               Image.asset('assets/PngAssets/masterCard.png'),
                               WhiteSpacer.verticalSpace(30),
                               Text('1244 1234 1345 3255',
-                                  style: StaticTextStyles.subTitleStyleBlack),
+                                  style: AppTextStyles.subTitleStyleBlack),
                               WhiteSpacer.verticalSpace(30),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -141,10 +141,10 @@ addPayment() {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text("Card Holder",
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalGreyTextStyle),
                                       Text(value.name,
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalBlackTextStyle),
                                     ],
                                   )),
@@ -154,10 +154,10 @@ addPayment() {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text("Expiry",
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalGreyTextStyle),
                                       Text("02/25",
-                                          style: StaticTextStyles
+                                          style: AppTextStyles
                                               .normalBlackTextStyle),
                                     ],
                                   )),
@@ -187,11 +187,11 @@ addPayment() {
                   )),
                   const Expanded(child: SizedBox()),
                   customizedButton(
-                      buttonColor: StaticColors.orangeColor,
+                      buttonColor: AppColors.orangeColor,
                       onTap: () {},
                       buttonText: "Next",
                       radius: 15,
-                      textColor: StaticColors.whiteColor),
+                      textColor: AppColors.whiteColor),
                   WhiteSpacer.verticalSpace(20)
                 ],
               ),

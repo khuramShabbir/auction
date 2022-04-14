@@ -26,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: CustomAppBar.appBar(title: "Sign Up"),
-          backgroundColor: StaticColors.whiteColor,
+          backgroundColor: AppColors.whiteColor,
           body: StaticKPadding.kPadding(
               child: Form(
             key: formKey,
@@ -83,8 +83,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Icon(
                           Icons.remove_red_eye,
                           color: isObscure
-                              ? StaticColors.greyColor
-                              : StaticColors.orangeColor,
+                              ? AppColors.greyColor
+                              : AppColors.orangeColor,
                         )),
                     obscureText: isObscure ? true : false,
                     hintText: "Password",
@@ -104,23 +104,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     dropdownIconPosition: IconPosition.trailing,
                     flagsButtonPadding: const EdgeInsets.only(left: 10),
                     decoration: InputDecoration(
-                      errorStyle: TextStyle(color: StaticColors.orangeColor),
+                      errorStyle: TextStyle(color: AppColors.orangeColor),
                       errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide:
-                              BorderSide(color: StaticColors.orangeColor,width: 1.5)),
+                              BorderSide(color: AppColors.orangeColor,width: 1.5)),
                       focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide:
-                              BorderSide(color: StaticColors.orangeColor,width: 1.5)),
+                              BorderSide(color: AppColors.orangeColor,width: 1.5)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide:
-                              BorderSide(color: StaticColors.orangeColor,width: 1.5)),
+                              BorderSide(color: AppColors.orangeColor,width: 1.5)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide(
-                              color: StaticColors.orangeColor,width: 1.5)),
+                              color: AppColors.orangeColor,width: 1.5)),
                     )),
 
                 extendedButton(
@@ -135,13 +135,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                       return;
                     },
-                    buttonColor: StaticColors.blueColor,
-                    textColor: StaticColors.whiteColor,
+                    buttonColor: AppColors.blueColor,
+                    textColor: AppColors.whiteColor,
                     buttonText: "Sign Up"),
                 Text(
                   "Or with",
                   style: TextStyle(
-                      color: StaticColors.greyColor,
+                      color: AppColors.greyColor,
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 5),
@@ -167,7 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ])),
                       decoration: BoxDecoration(
                         border: Border.all(
-                            color: StaticColors.greyColor.withOpacity(.2)),
+                            color: AppColors.greyColor.withOpacity(.2)),
                         borderRadius: BorderRadius.circular(15),
                       )),
                 ),
@@ -177,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     Text(
                       "Already have an account?",
-                      style: StaticTextStyles.normalGreyTextStyle,
+                      style: AppTextStyles.normalGreyTextStyle,
                     ),
                     const SizedBox(width: 5),
                     InkWell(
@@ -189,7 +189,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text(
                           "Login",
                           style: TextStyle(
-                            color: StaticColors.orangeColor,
+                            color: AppColors.orangeColor,
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,
                           ),
