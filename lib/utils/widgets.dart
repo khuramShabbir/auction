@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'const.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class CustomWidget {
   static addWalletBottomSheet() {
@@ -567,4 +568,10 @@ Widget profileEditingModule(String title) {
       ],
     ),
   );
+}
+
+getTimeAgo(DateTime dateTime) {
+  final now = DateTime.now();
+  final difference = now.difference(dateTime);
+  return timeago.format(now.subtract(difference), locale: 'en');
 }
