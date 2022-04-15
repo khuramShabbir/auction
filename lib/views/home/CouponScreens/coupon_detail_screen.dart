@@ -163,7 +163,7 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    couponProvider.addValue();
+                    couponProvider.increaseCouponValue(1);
                   },
                   child: CircleAvatar(
                     backgroundColor: AppColors.orangeColor,
@@ -185,7 +185,7 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    couponProvider.couponRemove();
+                    couponProvider.decreaseCouponValue(1);
                   },
                   child: CircleAvatar(
                     backgroundColor: AppColors.orangeColor,

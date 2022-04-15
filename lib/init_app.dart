@@ -15,11 +15,10 @@ import 'package:provider/provider.dart';
 import 'views/welcome_screens/splash_screen.dart';
 
 void initApp() async {
-
-
   await GetStorage.init();
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 }
 
 class InitApp extends StatefulWidget {

@@ -1,5 +1,4 @@
-import 'package:auction/ApiServices/api_services.dart';
-import 'package:auction/controllers_providers/Auth/auth_provider.dart';
+
 import 'package:auction/controllers_providers/Coupon/coupon.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/CouponScreens/coupon_detail_screen.dart';
@@ -31,7 +30,7 @@ class _CouponScreenState extends State<CouponScreen> {
       builder: (BuildContext context, data, Widget? child) {
         return Scaffold(
           backgroundColor: AppColors.whiteColor,
-          appBar: CustomAppBar.appBar(title: "Discount Coupons",action: [
+          appBar: CustomAppBar.appBar(title: "Discount Coupons", action: [
             InkWell(
                 onTap: () {
                   Get.to(() => const ShoppingCartScreen());
@@ -57,17 +56,16 @@ class _CouponScreenState extends State<CouponScreen> {
                               Result result = data.getCoupon!.result[index];
                               final value = data.getCoupon!.result[index];
                               String timeString = value.expiry.toString();
-                              String timeStamp ="";
-                              if(!timeString.contains("null")){
+                              String timeStamp = "";
+                              if (!timeString.contains("null")) {
 
-                                  print(timeString);
-                                  timeStamp = TimeElapsed.fromDateStr(timeString);
-
+                                timeStamp = TimeElapsed.fromDateStr(timeString);
                               }
 
                               return InkWell(
                                 onTap: () {
-                                  Get.to(() =>  CouponDetailScreen(result: result));
+                                  Get.to(
+                                      () => CouponDetailScreen(result: result));
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -85,7 +83,11 @@ class _CouponScreenState extends State<CouponScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                               image: DecorationImage(
-                                                  image: NetworkImage(result.picturePath!=null?"https://auction.api.deeps.info/${result.picturePath}":imageUrl),
+                                                  image: NetworkImage(result
+                                                              .picturePath !=
+                                                          null
+                                                      ? "https://auction.api.deeps.info/${result.picturePath}"
+                                                      : imageUrl),
                                                   fit: BoxFit.fill)),
                                         ),
                                         WhiteSpacer.horizontalSpace(10),
@@ -99,10 +101,16 @@ class _CouponScreenState extends State<CouponScreen> {
                                             WhiteSpacer.verticalSpace(5),
                                             Row(
                                               children: [
-                                              value.isPercent ? Text(
-                                                    "Discount  ${value.couponDiscount??""}%",
-                                                    style: AppTextStyles
-                                                        .normalGreyTextStyle):Text("Discount price",style: AppTextStyles.normalGreyTextStyle,),
+                                                value.isPercent
+                                                    ? Text(
+                                                        "Discount  ${value.couponDiscount ?? ""}%",
+                                                        style: AppTextStyles
+                                                            .normalGreyTextStyle)
+                                                    : Text(
+                                                        "Discount price",
+                                                        style: AppTextStyles
+                                                            .normalGreyTextStyle,
+                                                      ),
                                                 WhiteSpacer.horizontalSpace(5),
                                                 CircleAvatar(
                                                     backgroundColor:
@@ -112,8 +120,8 @@ class _CouponScreenState extends State<CouponScreen> {
                                                 Text(
                                                   timeStamp,
                                                   style: TextStyle(
-                                                      color: AppColors
-                                                          .greyColor,
+                                                      color:
+                                                          AppColors.greyColor,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
@@ -123,14 +131,13 @@ class _CouponScreenState extends State<CouponScreen> {
                                         ),
                                         const Expanded(child: SizedBox()),
                                         InkWell(
-                                          onTap: (){
-
-                                            addToCart(result);
-
+                                          onTap: () {
+                                           couponProvider.addCartByUser(result.id.toString());
                                           },
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: const Icon(Icons.add_shopping_cart_outlined),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: Icon(Icons
+                                                .add_shopping_cart_outlined),
                                           ),
                                         ),
                                         WhiteSpacer.horizontalSpace(5)
@@ -153,18 +160,7 @@ class _CouponScreenState extends State<CouponScreen> {
     );
   }
 
-  void addToCart(Result result) async {
-    List<String> cartList=[];
-    cartList = boxStorage.read(cart);
-    if(cartList!=null){
-      cartList.add(result.toJson().toString());
-    }
-    else {
-      await boxStorage.write(cart, [result.toJson().toString()]);
-    }
 
-    print(boxStorage.read(cart));
-  }
 }
 
-String cart="ADD_TO_CART";
+
