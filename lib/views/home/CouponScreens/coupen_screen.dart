@@ -1,6 +1,6 @@
-
 import 'package:auction/controllers_providers/Coupon/coupon.dart';
 import 'package:auction/utils/const.dart';
+import 'package:auction/utils/widgets.dart';
 import 'package:auction/views/home/CouponScreens/coupon_detail_screen.dart';
 import 'package:auction/views/home/create_campaign_Screens/car_specs.dart';
 import 'package:auction/views/home/shopping_cart_screen.dart';
@@ -58,7 +58,6 @@ class _CouponScreenState extends State<CouponScreen> {
                               String timeString = value.expiry.toString();
                               String timeStamp = "";
                               if (!timeString.contains("null")) {
-
                                 timeStamp = TimeElapsed.fromDateStr(timeString);
                               }
 
@@ -131,8 +130,13 @@ class _CouponScreenState extends State<CouponScreen> {
                                         ),
                                         const Expanded(child: SizedBox()),
                                         InkWell(
-                                          onTap: () {
-                                           couponProvider.addCartByUser(result.id.toString());
+                                          onTap: () async {
+                                            showProgressCircular();
+                                            await couponProvider.addCartByUser(
+                                                result.id.toString());
+                                            stopProgressCircular();
+                                            Get.to(() =>
+                                                const ShoppingCartScreen());
                                           },
                                           child: const Padding(
                                             padding: EdgeInsets.all(8.0),
@@ -159,8 +163,4 @@ class _CouponScreenState extends State<CouponScreen> {
       },
     );
   }
-
-
 }
-
-

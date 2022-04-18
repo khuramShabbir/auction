@@ -203,8 +203,10 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
               children: [
                 customizedButton(
                     buttonColor: AppColors.blueColor,
-                    onTap: () {
-                      data.purchaseCouponCode(result!);
+                    onTap: () async {
+                      await data.purchaseCouponCode(result!);
+                      Get.back();
+                      Get.back();
                     },
                     textColor: AppColors.whiteColor,
                     radius: 15,
