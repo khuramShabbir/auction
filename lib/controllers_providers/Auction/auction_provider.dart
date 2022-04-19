@@ -42,6 +42,7 @@ class AuctionProvider extends ChangeNotifier {
   bool isAuctionByUserLoaded = false;
   bool isBankDetailLoaded = false;
   static TextEditingController biddingController = TextEditingController();
+
   getAuction() async {
     logger.e("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
     String body = await ApiServices.simpleGet("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
@@ -52,13 +53,13 @@ class AuctionProvider extends ChangeNotifier {
     isAuctionLoaded = true;
     notifyListeners();
   }
+
   getWallet(r.Result? result) async {
     if(result!.alreadyBid){
       payBid(result);
     }
     else {
-    String body = await ApiServices.simplePost(
-        "${ApiServices.GET_WALLET}${getUser().result!.id.toString()}");
+    String body = await ApiServices.simplePost("${ApiServices.GET_WALLET}${getUser().result!.id.toString()}");
     if (body.isEmpty) {
       showToast(msg: "Some thing went wrong! please try again later");
       return;
@@ -81,6 +82,8 @@ class AuctionProvider extends ChangeNotifier {
     }
     }
   }
+
+
   void payBid(r.Result result) async {
     biddingController.text=(double.parse(result.bidding.biddingAmount.toString()) + double.parse(result.bidIncrement.toString())).toString();
     String body = await ApiServices.simplePost("Bidding/Bid?userId=${getUser().result!.id}&carId=${result.carInformationId}&amount=${biddingController.text}&lastUserId=${result.user.userId}");
@@ -159,7 +162,4 @@ class AuctionProvider extends ChangeNotifier {
 
 
   }
-
-
-
 }

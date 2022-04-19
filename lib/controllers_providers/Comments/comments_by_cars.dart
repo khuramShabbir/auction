@@ -19,8 +19,8 @@ class CommentProvider extends ChangeNotifier {
 
   void getComments(carID) async {
     // commentsByCars=null;
-    String body =
-        await ApiServices.simpleGet("Comments/get-comments-by-car?carId=$carID");
+    dynamic body =await ApiServices.simpleGet("Comments/get-comments-by-car?carId=$carID",isBytesRequired: true);
+    print(body);
     if (body.isEmpty) return;
     commentsByCars=null;
     isLoaded=false;
@@ -33,15 +33,16 @@ await Future.delayed(Duration.zero);
      notifyListeners();
   }
 
-  void postComment(carID)async{
+  Future<void> postComment(carID)async{
     Map<String,String> body={
       "comment": commentText!,
       "userId": getUser().result!.id.toString(),
       "carId": carID,
       "commentDate": DateTime.now().toString()
     };
-
+print(body);
   String result=await  ApiServices.simplePostWithBody("Comments/add-comments", body);
+  print(result);
     getComments(carID);
     if(result.isEmpty){showToast(msg: "Something went wrong");return ;}
 

@@ -2,6 +2,7 @@ import 'package:auction/ApiServices/api_services.dart';
 import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/models/Cart/get_cart.dart' as get_cart_result;
 import 'package:auction/models/GetCoupon/getCoupons.dart';
+import 'package:auction/models/GetCoupon/getRevealedCoupons.dart' as revealedCoupon;
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
 import 'package:auction/views/payment_method_screens/web_view_screen.dart';
@@ -24,8 +25,6 @@ class CouponProvider extends ChangeNotifier {
   dynamic averageDiscount = 0;
 
   int increaseCouponValue(int index) {
-    couponQuantity = getCart!.result[index].quantity;
-
     couponQuantity++;
     notifyListeners();
     return couponQuantity;
@@ -33,8 +32,6 @@ class CouponProvider extends ChangeNotifier {
 
   int decreaseCouponValue(int index) {
     if (couponQuantity > 1) {
-      couponQuantity = getCart!.result[index].quantity;
-
       couponQuantity--;
     }
     notifyListeners();
@@ -96,8 +93,7 @@ class CouponProvider extends ChangeNotifier {
           _purchaseCouponCodeNow(Result.fromJson(getCart!.result[i].toJson()),
               getCart!.result[i].quantity * getCart!.result[i].coupon.price);
         }
-      }
-      else {
+      } else {
         /// go to web-view here
         print("goto direct purchase");
         var resultBool = await Get.to(() => PaymentWebView(
@@ -110,18 +106,13 @@ class CouponProvider extends ChangeNotifier {
           }
         }
       }
-
-
-
-
     }
-    getCart=null;
-    cartLoaded=false;
-     couponTotalPrice = 0;
-     averageDiscount = 0;
+    getCart = null;
+    cartLoaded = false;
+    couponTotalPrice = 0;
+    averageDiscount = 0;
 
     notifyListeners();
-
   }
 
   void _purchaseCouponCodeNow(
@@ -139,7 +130,6 @@ class CouponProvider extends ChangeNotifier {
     });
     stopProgressCircular();
     if (body.contains("successful")) {
-
       showToast(msg: "Coupon Code Purchased");
     }
     print(body);
@@ -219,9 +209,28 @@ class CouponProvider extends ChangeNotifier {
     return;
   }
 
-Future<dynamic>  clearCart() async {
-    String body = await ApiServices.simplePost("Cart/Delete-all-cart?userId=${getUser().result!.id}");
+  Future<dynamic> clearCart() async {
+    String body = await ApiServices.simplePost(
+        "Cart/Delete-all-cart?userId=${getUser().result!.id}");
+  }
 
+  revealedCoupon.GetRevealedCoupons? getRevealedCoupon;
 
+  void getRevealedCoupons() async {
+    var body = await ApiServices.simpleGet("Coupon/Coupon-Code?id=${getUser().result!.id}",isBytesRequired: true);
+    print(body);
+
+    if (body.isEmpty) {
+      showToast(msg: "Something went wrong");
+      return;
+    }
+
+    // if (body.contains("successful")) {
+      getRevealedCoupon = null;
+      notifyListeners();
+      await Future.delayed(Duration.zero);
+      getRevealedCoupon = revealedCoupon.getRevealedCouponsFromJson(body);
+      notifyListeners();
+    // }
   }
 }

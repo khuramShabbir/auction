@@ -92,10 +92,13 @@ class ApiServices {
     }
   }
 
-  static Future<String> simpleGet(String feedUrl) async {
+  static Future<dynamic> simpleGet(String feedUrl,{bool isBytesRequired=false}) async {
     http.Response response = await http.get(Uri.parse(BASE_URL + feedUrl));
     // logger.e(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
+      if(isBytesRequired){
+        return response.bodyBytes;
+      }
       return response.body;
     } else {
       return '';
@@ -108,8 +111,8 @@ class ApiServices {
     if (response.statusCode == 200) {
       return response.body;
     }
-    logger.e(response.statusCode);
-    logger.e(response.body);
+    print(response.statusCode);
+    print(response.body);
     return "";
   }
 

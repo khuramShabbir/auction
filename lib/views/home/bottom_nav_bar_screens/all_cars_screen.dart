@@ -32,7 +32,10 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
     if (myCarsLoaded == true) {
       normalSaleProvider.getAllCars();
     }
+    else{
+
     normalSaleProvider.getMyUploadedCars();
+    }
   }
 
   @override
@@ -43,10 +46,10 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             floatingActionButton: myCarsLoaded == false
                 ? FloatingActionButton(
-                    backgroundColor: AppColors.blueColor,
+                    backgroundColor: AppColors.orangeColor,
                     child: Icon(
                       Icons.add,
-                      color: AppColors.orangeColor,
+                      color: Colors.white,
                     ),
                     onPressed: () {
                       Get.to(() => const UploadCarScreen());
@@ -60,6 +63,7 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                 ),
                 Row(
                   children: [
+                    myCarsLoaded==false?
                     InkWell(
                         onTap: () {
                           Get.back();
@@ -67,8 +71,7 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                         child: Icon(
                           Icons.arrow_back,
                           color: AppColors.blackColor,
-                        )),
-                    WhiteSpacer.horizontalSpace(5),
+                        )):Container(),
                     Expanded(
                       child: SearchField(
                           suggestions: [],
@@ -76,10 +79,10 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                               suffixIcon: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    SvgPicture.asset(
-                                      'assets/SvgAssets/filter.svg',
-                                      color: AppColors.blackColor,
-                                    ),
+                                    // SvgPicture.asset(
+                                    //   'assets/SvgAssets/filter.svg',
+                                    //   color: AppColors.blackColor,
+                                    // ),
                                     WhiteSpacer.horizontalSpace(5),
                                     Icon(
                                       Icons.cancel,
@@ -101,11 +104,7 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                                   borderSide: BorderSide.none,
                                   borderRadius: BorderRadius.circular(100)))),
                     ),
-                    WhiteSpacer.horizontalSpace(5),
-                    Text(
-                      "cancel",
-                      style: AppTextStyles.normalGreyTextStyle,
-                    )
+
                   ],
                 ),
                 WhiteSpacer.verticalSpace(15),
@@ -142,29 +141,31 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                                           fit: BoxFit.fill)),
                                 ),
                                 WhiteSpacer.horizontalSpace(5),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      singleCarDetail.model ?? "",
-                                      style: AppTextStyles.subTitleStyleBlack,
-                                    ),
-                                    Text(
-                                      "Color : ${singleCarDetail.color ?? ""}",
-                                      style: AppTextStyles.normalGreyTextStyle,
-                                    ),
-                                    Text(
-                                      "Milleage : ${singleCarDetail.milleage ?? ""}",
-                                      style: AppTextStyles.normalGreyTextStyle,
-                                    ),
-                                    Text(
-                                      "year : ${singleCarDetail.year ?? ""}",
-                                      style: AppTextStyles.normalGreyTextStyle,
-                                    )
-                                  ],
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        singleCarDetail.model ?? "",
+                                        style: AppTextStyles.subTitleStyleBlack,
+                                      ),
+                                      Text(
+                                        "Color : ${singleCarDetail.color ?? ""}",
+                                        style: AppTextStyles.normalGreyTextStyle,
+                                      ),
+                                      Text(
+                                        "Mileage : ${singleCarDetail.milleage ?? ""}",
+                                        style: AppTextStyles.normalGreyTextStyle,
+                                      ),
+                                      Text(
+                                        "year : ${singleCarDetail.year ?? ""}",
+                                        style: AppTextStyles.normalGreyTextStyle,
+                                      )
+                                    ],
+                                  ),
                                 ),
-                                const Expanded(child: SizedBox()),
+
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.end,

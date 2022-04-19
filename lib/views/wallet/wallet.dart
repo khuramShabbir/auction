@@ -38,14 +38,14 @@ class _UserWalletState extends State<UserWallet> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            )),
+        // leading: InkWell(
+        //     onTap: () {
+        //       Get.back();
+        //     },
+        //     child: const Icon(
+        //       Icons.arrow_back,
+        //       color: Colors.black,
+        //     )),
       ),
       body: SizedBox(
         width: Get.width,

@@ -19,7 +19,7 @@ class CommentByCoupon extends ChangeNotifier {
   String? comment;
 
   void getComments(String couponId) async {
-    String body = await ApiServices.simpleGet("Coupon/comments-by-coupon?couponId=$couponId");
+    dynamic body = await ApiServices.simpleGet("Coupon/comments-by-coupon?couponId=$couponId",isBytesRequired: true);
     print(body);
 
     getCouponComments = null;

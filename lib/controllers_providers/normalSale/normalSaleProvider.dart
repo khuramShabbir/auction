@@ -42,6 +42,7 @@ class NormalSaleProvider extends ChangeNotifier{
   List<File> imagesList=[];
 
   TextEditingController priceController=TextEditingController();
+  TextEditingController carNameController=TextEditingController();
   TextEditingController discountedPRiceController=TextEditingController();
   TextEditingController passengerController=TextEditingController();
   TextEditingController doorsController=TextEditingController();
@@ -87,14 +88,14 @@ class NormalSaleProvider extends ChangeNotifier{
     print(companyId);
     print(imagesList);
 
-    if(cartypeId==-1 || carModelYearId==-1 || colorId==-1 || companyId==-1 || imagesList.isEmpty){
+    if(cartypeId==-1 || carModelYearId==-1 || colorId==-1 || companyId==-1 || imagesList.isEmpty || carNameController.text.isEmpty){
       return;
     }
 
     Map<String, String> body={
       "userId":"${getUser().result!.id}",
       "MakeCompanyId":"$companyId",
-      "Model":"$carModelYearId",
+      "Model":"${compannName} ${carNameController.text}",
       "TypeId":"$cartypeId",
       "YearId":"$carModelYearId",
       "ColorId":"$colorId",

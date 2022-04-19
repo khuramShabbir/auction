@@ -33,6 +33,7 @@ class _CouponScreenState extends State<CouponScreen> {
           appBar: CustomAppBar.appBar(title: "Discount Coupons", action: [
             InkWell(
                 onTap: () {
+
                   Get.to(() => const ShoppingCartScreen());
                 },
                 child: Icon(
@@ -85,7 +86,7 @@ class _CouponScreenState extends State<CouponScreen> {
                                                   image: NetworkImage(result
                                                               .picturePath !=
                                                           null
-                                                      ? "https://auction.api.deeps.info/${result.picturePath}"
+                                                      ? "${result.picturePath}"
                                                       : imageUrl),
                                                   fit: BoxFit.fill)),
                                         ),

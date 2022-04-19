@@ -5,6 +5,7 @@ import 'package:auction/views/home/bottom_nav_bar_screens/my_cars_screens.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/profile_settings/profile_setting_screen.dart';
 
 import 'package:auction/views/home/bottom_nav_bar_screens/wallet_screen.dart';
+import 'package:auction/views/wallet/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -85,7 +86,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
        HomeScreen(),
        AllCarsScreen(false),
        MyCarsScreen(),
-       WalletScreen(),
+        UserWallet(),
+       // WalletScreen(),
        ProfileSettingScreen(),
     ];
   }

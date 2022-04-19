@@ -42,6 +42,155 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
             key: formKey,
             child: Column(
               children: [
+                WhiteSpacer.horizontalSpace(20),
+                data.allCarsSpecs != null
+                    ? Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: Text(data.compannName),
+                              items: data.allCarsSpecs!.result!.companies!
+                                  .map((value) {
+                                return DropdownMenuItem<String>(
+                                  value: value.id.toString(),
+                                  child: Text(
+                                    value.name ?? "",
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (v) {
+                                setState(() {
+                                  var where = data
+                                      .allCarsSpecs!.result!.companies!
+                                      .where((element) =>
+                                  element.id.toString() ==
+                                      v.toString());
+                                  if (where.isNotEmpty) {
+                                    data.compannName = where.first.name!;
+                                    data.companyId = where.first.id!;
+                                  }
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: Text(data.colorName),
+                              items: data.allCarsSpecs!.result!.colors!
+                                  .map((value) {
+                                return DropdownMenuItem<String>(
+                                  value: value.id.toString(),
+                                  child: Text(value.name ?? ""),
+                                );
+                              }).toList(),
+                              onChanged: (v) {
+                                var where = data
+                                    .allCarsSpecs!.result!.colors!
+                                    .where((element) =>
+                                element.id.toString() ==
+                                    v.toString());
+                                if (where.isNotEmpty) {
+                                  data.colorName = where.first.name!;
+                                  data.colorId = where.first.id!;
+                                }
+                                // data.colorName = v.toString();
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    WhiteSpacer.horizontalSpace(20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: Text(data.carModelYearName),
+                              items: data.allCarsSpecs!.result!.models!
+                                  .map((value) {
+                                return DropdownMenuItem<String>(
+                                  value: value.id.toString(),
+                                  child: Text(value.name ?? ""),
+                                );
+                              }).toList(),
+                              onChanged: (v) {
+                                setState(() {
+                                  var where = data
+                                      .allCarsSpecs!.result!.models!
+                                      .where((element) =>
+                                  element.id.toString() ==
+                                      v.toString());
+                                  if (where.isNotEmpty) {
+                                    data.carModelYearName =
+                                    where.first.name!;
+                                    data.carModelYearId = where.first.id!;
+                                  }
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              hint: Text(data.carTypeName),
+                              items: data.allCarsSpecs!.result!.types!
+                                  .map((value) {
+                                return DropdownMenuItem<String>(
+                                  value: value.carTypeId.toString(),
+                                  child: Text(value.typeName ?? ""),
+                                );
+                              }).toList(),
+                              onChanged: (v) {
+                                var where = data
+                                    .allCarsSpecs!.result!.types!
+                                    .where((element) =>
+                                element.carTypeId.toString() ==
+                                    v.toString());
+                                if (where.isNotEmpty) {
+                                  data.carTypeName = where.first.typeName!;
+                                  data.cartypeId = where.first.carTypeId!;
+                                }
+
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    WhiteSpacer.verticalSpace(10),
+                  ],
+                )
+                    : Container(),
+                customTextFormField(
+                    inputType: TextInputType.text,
+                    controller: data.carNameController,
+                    validator: (v) {
+                      if (v!.isEmpty) {
+                        return "Invalid Information";
+                      }
+                      return null;
+                    },
+                    isOutLinedBorder: true,
+                    hintText: "Car Name",
+                    borderColor: Colors.grey),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -295,143 +444,7 @@ class _UploadCarScreenState extends State<UploadCarScreen> {
                   ],
                 ),
 
-                WhiteSpacer.horizontalSpace(20),
-                data.allCarsSpecs != null
-                    ? Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Text(data.compannName),
-                                    items: data.allCarsSpecs!.result!.companies!
-                                        .map((value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value.id.toString(),
-                                        child: Text(
-                                          value.name ?? "",
-                                          style: const TextStyle(color: Colors.black),
-                                        ),
-                                      );
-                                    }).toList(),
-                                    onChanged: (v) {
-                                      setState(() {
-                                        var where = data
-                                            .allCarsSpecs!.result!.companies!
-                                            .where((element) =>
-                                                element.id.toString() ==
-                                                v.toString());
-                                        if (where.isNotEmpty) {
-                                          data.compannName = where.first.name!;
-                                          data.companyId = where.first.id!;
-                                        }
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Text(data.colorName),
-                                    items: data.allCarsSpecs!.result!.colors!
-                                        .map((value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value.id.toString(),
-                                        child: Text(value.name ?? ""),
-                                      );
-                                    }).toList(),
-                                    onChanged: (v) {
-                                      var where = data
-                                          .allCarsSpecs!.result!.colors!
-                                          .where((element) =>
-                                              element.id.toString() ==
-                                              v.toString());
-                                      if (where.isNotEmpty) {
-                                        data.colorName = where.first.name!;
-                                        data.colorId = where.first.id!;
-                                      }
-                                      // data.colorName = v.toString();
-                                      setState(() {});
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          WhiteSpacer.horizontalSpace(20),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Text(data.carModelYearName),
-                                    items: data.allCarsSpecs!.result!.models!
-                                        .map((value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value.id.toString(),
-                                        child: Text(value.name ?? ""),
-                                      );
-                                    }).toList(),
-                                    onChanged: (v) {
-                                      setState(() {
-                                        var where = data
-                                            .allCarsSpecs!.result!.models!
-                                            .where((element) =>
-                                                element.id.toString() ==
-                                                v.toString());
-                                        if (where.isNotEmpty) {
-                                          data.carModelYearName =
-                                              where.first.name!;
-                                          data.carModelYearId = where.first.id!;
-                                        }
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: DropdownButton(
-                                    isExpanded: true,
-                                    hint: Text(data.carTypeName),
-                                    items: data.allCarsSpecs!.result!.types!
-                                        .map((value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value.carTypeId.toString(),
-                                        child: Text(value.typeName ?? ""),
-                                      );
-                                    }).toList(),
-                                    onChanged: (v) {
-                                      var where = data
-                                          .allCarsSpecs!.result!.types!
-                                          .where((element) =>
-                                              element.carTypeId.toString() ==
-                                              v.toString());
-                                      if (where.isNotEmpty) {
-                                        data.carTypeName = where.first.typeName!;
-                                        data.cartypeId = where.first.carTypeId!;
-                                      }
 
-                                      setState(() {});
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          WhiteSpacer.verticalSpace(10),
-                        ],
-                      )
-                    : Container(),
                 WhiteSpacer.horizontalSpace(20),
 
                 Row(

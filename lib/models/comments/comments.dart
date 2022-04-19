@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-CommentsByCars commentsByCarsFromJson(String str) => CommentsByCars.fromJson(json.decode(str));
+CommentsByCars commentsByCarsFromJson( str) => CommentsByCars.fromJson(jsonDecode(utf8.decode(str)));
 
 String commentsByCarsToJson(CommentsByCars data) => json.encode(data.toJson());
 

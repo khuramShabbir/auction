@@ -28,6 +28,7 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
 
   @override
   void initState() {
+    couponProvider.couponQuantity=1;
     super.initState();
   }
 
@@ -37,7 +38,10 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
       return Scaffold(
         appBar: CustomAppBar.appBar(title: "Coupon Detail", action: [
           InkWell(
-              onTap: () {
+              onTap: () async {
+                showProgressCircular();
+                await couponProvider.addCartByUser(result!.id.toString());
+                stopProgressCircular();
                 Get.to(() => const ShoppingCartScreen());
               },
               child: Icon(
@@ -56,7 +60,7 @@ class _CouponDetailScreenState extends State<CouponDetailScreen> {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(result!.picturePath != null
-                          ? "https://auction.api.deeps.info/${result!.picturePath}"
+                          ? "${result!.picturePath}"
                           : imageUrl),
                       fit: BoxFit.fill),
                   borderRadius: BorderRadius.circular(10)),

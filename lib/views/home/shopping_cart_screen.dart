@@ -59,7 +59,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                    image: NetworkImage(imageUrl),
+                                    image: NetworkImage(result.coupon.picturePath),
                                     fit: BoxFit.fill)),
                           ),
                           WhiteSpacer.horizontalSpace(5),
@@ -150,7 +150,6 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                               Text("Delete",style: TextStyle(fontWeight: FontWeight.bold),)
                             ],),
                           )
-
                         ],
                       ),
                     );

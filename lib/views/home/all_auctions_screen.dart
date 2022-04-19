@@ -42,11 +42,6 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       WhiteSpacer.verticalSpace(20),
-                      Text(
-                        "Auction",
-                        style: AppTextStyles.headingStyle,
-                      ),
-                      WhiteSpacer.verticalSpace(10),
                       Expanded(
                         child: GridView.builder(
                             itemCount: data.allAuctions!.result.length,

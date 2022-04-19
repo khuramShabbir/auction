@@ -67,7 +67,6 @@ class _PaymentWebViewState extends State<PaymentWebView> {
               onPageFinished: (String url) {
                 if(url.contains("status=success")) {
                   Get.back(result: true);
-
                 }
                 setState(() {
                   isLoading = false;

@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-GetCouponComments getCouponCommentsFromJson(String str) => GetCouponComments.fromJson(json.decode(str));
+GetCouponComments getCouponCommentsFromJson(str) => GetCouponComments.fromJson(jsonDecode(utf8.decode(str)));
 
 String getCouponCommentsToJson(GetCouponComments data) => json.encode(data.toJson());
 

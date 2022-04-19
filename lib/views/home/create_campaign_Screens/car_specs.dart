@@ -36,6 +36,8 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
   @override
   void initState() {
     super.initState();
+    commentProvider.commentsByCars = null;
+    commentProvider.isLoaded = false;
     commentProvider.getComments(result!.carSaleId);
   }
 
@@ -55,7 +57,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: height * .4,
+                      height: height * .28,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           image: DecorationImage(
@@ -65,7 +67,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                     ),
                     WhiteSpacer.verticalSpace(10),
                     SizedBox(
-                      height: 75,
+                      height: 65,
                       child: ListView.builder(
                         itemCount: result!.pictures!.length,
                         shrinkWrap: true,
@@ -96,8 +98,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                       ),
                     ),
                     WhiteSpacer.verticalSpace(20),
-                    Text("Event By",
-                        style: AppTextStyles.subTitleStyleBlack),
+                    Text("Event By", style: AppTextStyles.subTitleStyleBlack),
                     WhiteSpacer.verticalSpace(10),
                     Row(
                       children: [
@@ -117,8 +118,8 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                           children: [
                             Text("${result!.user!.name}",
                                 style: AppTextStyles.subTitleStyleBlack),
-                            Text("${result!.user!.created}",
-                                style: AppTextStyles.normalGreyTextStyle),
+                            // Text("${result!.user!.created}",
+                            //     style: AppTextStyles.normalGreyTextStyle),
                           ],
                         ),
                         const Expanded(child: SizedBox()),
@@ -338,7 +339,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                     WhiteSpacer.verticalSpace(10),
                     Text(
                       result!.description!,
-                      style: AppTextStyles.normalGreyTextStyle,
+                      style: TextStyle(color: Colors.grey,fontSize: 16),
                     ),
                     WhiteSpacer.verticalSpace(20),
                     data.commentsByCars == null
@@ -383,19 +384,17 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         customizedButton(
-                            onTap: () {
+                            onTap: () async {
                               if (formKey.currentState!.validate()) {
-                                commentProvider
-                                    .postComment(result!.carSaleId.toString());
+                               await  commentProvider.postComment(result!.carSaleId.toString());
                                 textEditingController.clear();
-                                data.getComments(result!.carSaleId);
                               }
                             },
                             textColor: AppColors.whiteColor,
                             buttonColor: AppColors.blueColor,
                             buttonText: "Post",
                             radius: 20,
-                            buttonWidth: .8),
+                            buttonWidth: .85),
                       ],
                     ),
                     WhiteSpacer.verticalSpace(20),
@@ -413,36 +412,46 @@ Widget commentSection(
     required String imageUrl,
     required String comment,
     required String time}) {
-  return Column(crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+  return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
     Row(
       children: [
         CircleAvatar(radius: 25, backgroundImage: NetworkImage(imageUrl)),
         WhiteSpacer.horizontalSpace(10),
-        Text(
-          name,
-          style: AppTextStyles.subTitleStyleBlack,
-        )
-      ],
-    ),
-    WhiteSpacer.verticalSpace(10),
-    Padding(
-      padding: const EdgeInsets.only(left: 30.0),
-      child: Text(
-        comment,
-        style: AppTextStyles.normalGreyTextStyle,
-      ),
-    ),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Text(
-          time,
-          style: AppTextStyles.normalBlackTextStyle,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: AppTextStyles.subTitleStyleBlack,
+              ),
+              SizedBox(height: 5,),
+              Row(children: [
+                Expanded(
+                  child: Text(
+                    comment,
+                    style: TextStyle(color: Colors.grey,fontSize: 16),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      time,
+                      style: AppTextStyles.normalBlackTextStyle,
+                    ),
+                  ],
+                )
+              ],)
+            ],
+          ),
         ),
+
       ],
-    )
+    ),
+
+
   ]);
 }
 
@@ -452,8 +461,8 @@ Widget carFeatures(
     constraints: BoxConstraints(minWidth: width * .21),
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-            color: AppColors.greyColor.withOpacity(.5), width: 2)),
+        border:
+            Border.all(color: AppColors.greyColor.withOpacity(.5), width: 2)),
     child: Padding(
       padding: const EdgeInsets.all(5.0),
       child: Column(

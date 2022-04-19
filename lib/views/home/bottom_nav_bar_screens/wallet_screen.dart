@@ -18,7 +18,11 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("PAYMENT METHOD",style: TextStyle(color: Colors.black),),elevation: 0,backgroundColor: Colors.transparent,),
+      appBar: AppBar(title: const Text("PAYMENT METHOD",style: TextStyle(color: Colors.black),),elevation: 0,backgroundColor: Colors.white ,leading: InkWell(
+          onTap: (){
+            Get.back();
+          },
+          child: Icon(Icons.arrow_back,color: Colors.black,)),),
       // appBar: CustomAppBar.appBar(title: 'PAYMENT METHOD'),
       body: SizedBox(
         height: height,
@@ -119,7 +123,7 @@ class _WalletScreenState extends State<WalletScreen> {
                       Expanded(child: customTextFormField(hintText: "Exp Date"))
                     ],
                   ),
-                  customTextFormField(hintText: "Readex Pro"),
+                  customTextFormField(hintText: ""),
                   extendedButton(
                       onTap: () {
                         Get.to(() => const AddPaymentMethodScreen());

@@ -26,6 +26,7 @@ class _CouponCommentScreenState extends State<CouponCommentScreen> {
 
   @override
   void initState() {
+    commentByCouponProvider.loaded=false;
     super.initState();
     commentByCouponProvider.getComments(result!.id.toString());
   }

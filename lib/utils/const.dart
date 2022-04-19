@@ -28,11 +28,11 @@ class AppColors {
 
 class AppTextStyles {
   static final TextStyle normalGreyTextStyle =
-      TextStyle(color: AppColors.greyColor, fontSize: 13);
+      TextStyle(color: AppColors.greyColor, fontSize: 15);
   static final TextStyle normalBlackTextStyle =
-      TextStyle(color: AppColors.blackColor, fontSize: 13);
+      TextStyle(color: AppColors.blackColor, fontSize: 15);
   static final normalWhiteTextStyle =
-      TextStyle(color: AppColors.whiteColor, fontSize: 13);
+      TextStyle(color: AppColors.whiteColor, fontSize: 15);
 
   static final TextStyle headingStyle = TextStyle(
       color: AppColors.blackColor,
