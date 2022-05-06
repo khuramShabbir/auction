@@ -1,3 +1,4 @@
+import 'package:auction/FCM.dart';
 import 'package:auction/controllers_providers/Dashboard/dashboard_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/home_screen.dart';
@@ -91,7 +92,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
        ProfileSettingScreen(),
     ];
   }
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FCM();
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<DashBoardProvider>(

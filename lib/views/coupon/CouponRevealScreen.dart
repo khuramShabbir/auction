@@ -1,5 +1,6 @@
 import 'package:auction/controllers_providers/Coupon/coupon.dart';
 import 'package:auction/utils/const.dart';
+import 'package:auction/views/coupon/CouponRevealedDetails.dart';
 import 'package:auction/views/home/create_campaign_Screens/car_specs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,11 +32,11 @@ class _CouponRevealScreenState extends State<CouponRevealScreen> {
             onTap: () {
               Get.back();
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             )),
-        title: Text("Coupons", style: TextStyle(color: Colors.black)),
+        title: const Text("Coupons", style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.transparent,
         centerTitle: true,
         elevation: 0,
@@ -44,85 +45,90 @@ class _CouponRevealScreenState extends State<CouponRevealScreen> {
         width: Get.width,
         child: Consumer<CouponProvider>(builder: (builder, data, child) {
           return data.getRevealedCoupon != null
-              ? Column(
-                  children: List.generate(
-                      data.getRevealedCoupon!.result!.length,
-                      (index) {
-                        var result = data.getRevealedCoupon!.result![index];
-                        String timeStamp = "";
+              ? SingleChildScrollView(
+                child: Column(
+                    children: List.generate(
+                        data.getRevealedCoupon!.result!.length,
+                        (index) {
+                          var result = data.getRevealedCoupon!.result![index];
+                          String timeStamp = "";
 
-                        timeStamp = TimeElapsed.fromDateStr(result.expiry.toString());
-                        return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 25),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.whiteColor,
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: height * .1,
-                                    width: width * .21,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        image: DecorationImage(
-                                            image: NetworkImage(result.picture != null
-                                                    ? "${result.picture}"
-                                                    : imageUrl),
-                                            fit: BoxFit.fill)),
+                          timeStamp = TimeElapsed.fromDateStr(result.expiry.toString());
+                          return InkWell(
+                            onTap: ()=>Get.to(()=>CouponRevealedDetails(result)),
+                            child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 25),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whiteColor,
                                   ),
-                                  WhiteSpacer.horizontalSpace(10),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        height: height * .1,
+                                        width: width * .21,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(15),
+                                            image: DecorationImage(
+                                                image: NetworkImage(result.picture != null
+                                                        ? "${result.picture}"
+                                                        : imageUrl),
+                                                fit: BoxFit.fill)),
+                                      ),
+                                      WhiteSpacer.horizontalSpace(10),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
+                                            Row(
+                                              children: [
 
-                                            Expanded(
-                                              child: Text(result.discountCode ?? "",
-                                                  style:TextStyle(color: AppColors.orangeColor,fontWeight: FontWeight.bold,fontSize: 18)),
+                                                Expanded(
+                                                  child: Text(result.discountCode ?? "",
+                                                      style:TextStyle(color: AppColors.orangeColor,fontWeight: FontWeight.bold,fontSize: 18)),
+                                                ),
+
+                                                Text(result.couponTitle ?? "",
+                                                    style:
+                                                        AppTextStyles.subTitleStyleBlack),
+                                              ],
                                             ),
-
-                                            Text(result.couponTitle ?? "",
-                                                style:
-                                                    AppTextStyles.subTitleStyleBlack),
+                                            WhiteSpacer.verticalSpace(5),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                        "Bought ${result.quantity}",
+                                                        style: AppTextStyles
+                                                            .normalGreyTextStyle,
+                                                      ),
+                                                WhiteSpacer.horizontalSpace(5),
+                                                CircleAvatar(
+                                                    backgroundColor:
+                                                        AppColors.greyColor,
+                                                    radius: 1.5),
+                                                WhiteSpacer.horizontalSpace(5),
+                                                Text(
+                                                  "$timeStamp",
+                                                  style: TextStyle(
+                                                      color: AppColors.greyColor,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            )
                                           ],
                                         ),
-                                        WhiteSpacer.verticalSpace(5),
-                                        Row(
-                                          children: [
-                                            Text(
-                                                    "Bought ${result.quantity}",
-                                                    style: AppTextStyles
-                                                        .normalGreyTextStyle,
-                                                  ),
-                                            WhiteSpacer.horizontalSpace(5),
-                                            CircleAvatar(
-                                                backgroundColor:
-                                                    AppColors.greyColor,
-                                                radius: 1.5),
-                                            WhiteSpacer.horizontalSpace(5),
-                                            Text(
-                                              "$timeStamp",
-                                              style: TextStyle(
-                                                  color: AppColors.greyColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                      ),
+                                      WhiteSpacer.horizontalSpace(5)
+                                    ],
                                   ),
-                                  WhiteSpacer.horizontalSpace(5)
-                                ],
+                                ),
                               ),
-                            ),
                           );
-                      }),
-                )
-              : Center(
+                        }),
+                  ),
+              )
+              : const Center(
                   child: CircularProgressIndicator(),
                 );
         }),

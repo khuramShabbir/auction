@@ -412,47 +412,50 @@ Widget commentSection(
     required String imageUrl,
     required String comment,
     required String time}) {
-  return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    Row(
-      children: [
-        CircleAvatar(radius: 25, backgroundImage: NetworkImage(imageUrl)),
-        WhiteSpacer.horizontalSpace(10),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: AppTextStyles.subTitleStyleBlack,
-              ),
-              SizedBox(height: 5,),
-              Row(children: [
-                Expanded(
-                  child: Text(
-                    comment,
-                    style: TextStyle(color: Colors.grey,fontSize: 16),
-                  ),
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(
+        children: [
+          CircleAvatar(radius: 25, backgroundImage: NetworkImage(imageUrl)),
+          WhiteSpacer.horizontalSpace(10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: AppTextStyles.subTitleStyleBlack,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      time,
-                      style: AppTextStyles.normalBlackTextStyle,
+                SizedBox(height: 5,),
+                Row(children: [
+                  Expanded(
+                    child: Text(
+                      comment,
+                      style: TextStyle(color: Colors.grey,fontSize: 16),
                     ),
-                  ],
-                )
-              ],)
-            ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        time,
+                        style: AppTextStyles.normalBlackTextStyle,
+                      ),
+                    ],
+                  )
+                ],)
+              ],
+            ),
           ),
-        ),
 
-      ],
-    ),
+        ],
+      ),
 
 
-  ]);
+    ]),
+  );
 }
 
 Widget carFeatures(

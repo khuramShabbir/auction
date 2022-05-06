@@ -5,6 +5,11 @@ import 'package:provider/provider.dart';
 DashBoardProvider dashBoardProvider=Provider.of<DashBoardProvider>(Get.context!,listen: false);
 
 class DashBoardProvider extends ChangeNotifier{
+  int notificationNumber=0;
+
+  void increamentNotificationNumber() {
+    notificationNumber++;
+  }
 
 
 

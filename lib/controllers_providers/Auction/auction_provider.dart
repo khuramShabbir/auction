@@ -44,7 +44,7 @@ class AuctionProvider extends ChangeNotifier {
   static TextEditingController biddingController = TextEditingController();
 
   getAuction() async {
-    logger.e("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
+    // logger.e("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
     String body = await ApiServices.simpleGet("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
     if (body.isEmpty) return;
     allAuctions = getAllAuctionsFromJson(body);
@@ -95,7 +95,7 @@ class AuctionProvider extends ChangeNotifier {
     notifyListeners();
 
     String body = await ApiServices.simpleGet("Auction/get-Auctions-by-user?userId=${getUser().result!.id}");
-    // logger.e(body);
+    // logger.e("body $body");
     if (body.isEmpty) return;
 
     auctionByUser = auctionByUserModelFromJson(body);

@@ -1,8 +1,6 @@
-import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/controllers_providers/Coupon/coupon.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
-import 'package:auction/views/home/create_campaign_Screens/car_specs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -16,12 +14,12 @@ class ShoppingCartScreen extends StatefulWidget {
 }
 
 class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
+
   @override
   void initState() {
     super.initState();
     couponProvider.getCartByUser();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -229,4 +227,6 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
       },
     );
   }
+
+
 }

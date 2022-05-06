@@ -142,15 +142,14 @@ class CouponProvider extends ChangeNotifier {
     getCart = get_cart_result.getCartFromJson(body);
     cartLoaded = true;
     couponTotalPrice = 0;
+    averageDiscount = 0;
     try {
       if (getCart != null) {
         getCart!.result.forEach((element) {
           if (!element.coupon.couponDiscount.contains("RT40R33")) {
-            averageDiscount = averageDiscount +
-                int.parse(element.coupon.couponDiscount.toString());
+            averageDiscount = averageDiscount + int.parse(element.coupon.couponDiscount.toString());
           }
-          couponTotalPrice =
-              couponTotalPrice + element.quantity * element.coupon.price;
+          couponTotalPrice = couponTotalPrice + element.quantity * element.coupon.price;
         });
       }
       // result.quantity * result.coupon.price).toInt()

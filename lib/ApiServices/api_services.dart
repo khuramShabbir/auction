@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 
 class ApiServices {
+  static String BASE_ONLY = 'https://auction.api.deeps.info/';
   static String BASE_URL = 'https://auction.api.deeps.info/api/';
   static String REGISTER = "accounts/register";
   static String SIGN_IN = "accounts/signIn";

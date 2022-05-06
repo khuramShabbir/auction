@@ -45,11 +45,12 @@ class _BankReceiptScreenState extends State<BankReceiptScreen> {
                   if (value.isEmpty) {
                     return;
                   } else if (value == "Gallery") {
-                    logger.i(value);
+                    // logger.i(value);
                     XFile? xFile =
                         await picker.pickImage(source: ImageSource.gallery);
                     if (xFile == null) return;
                     files.add(File(xFile.path));
+                    logger.i(value);
                     setState(() {});
                   } else {
                     logger.i(value);
