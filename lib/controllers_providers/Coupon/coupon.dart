@@ -67,7 +67,7 @@ class CouponProvider extends ChangeNotifier {
         print("goto direct purchase");
         var resultBool = await Get.to(() => PaymentWebView(
             initUrl:
-                "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=${double.parse((totalPrice * 100).toString()).toInt()}"));
+                "https://auction.cp.deeps.info/Home/Payment?userId=${getUser()!.result!.id}&amount=${double.parse((totalPrice * 100).toString()).toInt()}"));
         if (resultBool == true) {
           _purchaseCouponCodeNow(result, totalPrice);
         }
@@ -98,7 +98,7 @@ class CouponProvider extends ChangeNotifier {
         print("goto direct purchase");
         var resultBool = await Get.to(() => PaymentWebView(
             initUrl:
-                "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=${double.parse((couponTotalPrice * 100).toString()).toInt()}"));
+                "https://auction.cp.deeps.info/Home/Payment?userId=${getUser()!.result!.id}&amount=${double.parse((couponTotalPrice * 100).toString()).toInt()}"));
         if (resultBool == true) {
           for (int i = 0; i < getCart!.result.length; i++) {
             _purchaseCouponCodeNow(Result.fromJson(getCart!.result[i].toJson()),
@@ -125,7 +125,7 @@ class CouponProvider extends ChangeNotifier {
       // "couponCodeId": 0
       "amount": totalPrice.toInt().toString(),
       "quantity": couponQuantity.toString(),
-      "userId": getUser().result!.id.toString(),
+      "userId": getUser()!.result!.id.toString(),
       "couponId": result.id.toString(),
     });
     stopProgressCircular();
@@ -137,7 +137,7 @@ class CouponProvider extends ChangeNotifier {
 
   void getCartByUser() async {
     String body =
-        await ApiServices.simpleGet("Cart/cart?userId=${getUser().result!.id}");
+        await ApiServices.simpleGet("Cart/cart?userId=${getUser()!.result!.id}");
     if (body.isEmpty) return showToast(msg: "Something went wrong");
     getCart = get_cart_result.getCartFromJson(body);
     cartLoaded = true;
@@ -163,7 +163,7 @@ class CouponProvider extends ChangeNotifier {
 
   Future<dynamic> addCartByUser(String couponID) async {
     Map<String, String> body = {
-      "userId": getUser().result!.id.toString(),
+      "userId": getUser()!.result!.id.toString(),
       "couponId": couponID,
       "quantity": couponQuantity.toString()
     };
@@ -181,7 +181,7 @@ class CouponProvider extends ChangeNotifier {
   void updateCartByUser(String couponID, int quantity) async {
     showProgressCircular();
     String body = await ApiServices.simplePost(
-        "Cart/Update-cart?couponId=$couponID&UserId=${getUser().result!.id}&Quantity=$quantity");
+        "Cart/Update-cart?couponId=$couponID&UserId=${getUser()!.result!.id}&Quantity=$quantity");
 
     if (body.isEmpty) {
       showToast(msg: "Something went wrong");
@@ -196,7 +196,7 @@ class CouponProvider extends ChangeNotifier {
 
   Future<void> deleteCartItemByUser(String couponId) async {
     String body = await ApiServices.simplePost(
-        "Cart/Delete-cart?userId=${getUser().result!.id}&CouponId=$couponId");
+        "Cart/Delete-cart?userId=${getUser()!.result!.id}&CouponId=$couponId");
     if (body.isEmpty) {
       showToast(msg: "Something went wrong");
     }
@@ -210,13 +210,13 @@ class CouponProvider extends ChangeNotifier {
 
   Future<dynamic> clearCart() async {
     String body = await ApiServices.simplePost(
-        "Cart/Delete-all-cart?userId=${getUser().result!.id}");
+        "Cart/Delete-all-cart?userId=${getUser()!.result!.id}");
   }
 
   revealedCoupon.GetRevealedCoupons? getRevealedCoupon;
 
   void getRevealedCoupons() async {
-    var body = await ApiServices.simpleGet("Coupon/Coupon-Code?id=${getUser().result!.id}",isBytesRequired: true);
+    var body = await ApiServices.simpleGet("Coupon/Coupon-Code?id=${getUser()!.result!.id}",isBytesRequired: true);
     print(body);
 
     if (body.isEmpty) {

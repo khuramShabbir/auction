@@ -40,7 +40,10 @@ class FCM {
             _firebaseMessagingBackgroundHandler);
 
         await _messaging?.subscribeToTopic("AllUser").then((value) => null);
-        await _messaging?.subscribeToTopic("${getUser().result!.id}").then((value) => null);
+        if(getUser()!=null){
+
+        await _messaging?.subscribeToTopic("${getUser()!.result!.id}").then((value) => null);
+        }
 
         NotificationSettings settings = await _messaging!.requestPermission(
           alert: true,

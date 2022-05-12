@@ -1,5 +1,6 @@
 import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/utils/const.dart';
+import 'package:auction/views/home/dashboard_screen.dart';
 import 'package:auction/views/user_credentials_screens/login_screen.dart';
 import 'package:auction/views/user_credentials_screens/signup_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -22,89 +23,101 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (BuildContext context, data, Widget? child) {
-        return SafeArea(
-          child: Scaffold(
-            body: StaticKPadding.kPadding(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-              Expanded(
-                child: Column(children: [
-                  Expanded(
-                    child: CarouselSlider(
-                      options: CarouselOptions(
-                          height: height * .7,
-                          viewportFraction: 1,
-                          onPageChanged:
-                              (int index, CarouselPageChangedReason reason) {
-                            this.index = index;
-                            setState(() {});
-                          }),
-                      items: List.generate(
-                          textListHeadline.length,
-                              (index) => Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              SvgPicture.asset(svgAssetsList[index]),
-                              Padding(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 25),
-                                child: Text(textListHeadline[index],
-                                    style: AppTextStyles.headingStyle),
-                              ),
-                              const SizedBox(height: 20),
-                              Padding(
-                                padding:
-                                const EdgeInsets.symmetric(horizontal: 25),
-                                child: Text(subTitleTextList[index],
-                                    style:
-                                    AppTextStyles.normalGreyTextStyle),
-                              ),
-                              const SizedBox(height: 20),
-                            ],
-                          )),
-                    ),
+        return Scaffold(
+          body: StaticKPadding.kPadding(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+            Expanded(
+              child: Column(children: [
+                Expanded(
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                        height: height * .7,
+                        viewportFraction: 1,
+                        onPageChanged:
+                            (int index, CarouselPageChangedReason reason) {
+                          this.index = index;
+                          setState(() {});
+                        }),
+                    items: List.generate(
+                        textListHeadline.length,
+                            (index) => Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SvgPicture.asset(svgAssetsList[index]),
+                            Padding(
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 25),
+                              child: Text(textListHeadline[index],
+                                  style: AppTextStyles.headingStyle),
+                            ),
+                            const SizedBox(height: 20),
+                            Padding(
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 25),
+                              child: Text(subTitleTextList[index],
+                                  style:
+                                  AppTextStyles.normalGreyTextStyle),
+                            ),
+                            const SizedBox(height: 20),
+                          ],
+                        )),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      dots(
-                          color: index == 0
-                              ? AppColors.blueColor
-                              : AppColors.lightOrangeColor,
-                          radius: index == 0 ? 5.0 : 3.0),
-                      dots(
-                          color: index == 1
-                              ? AppColors.blueColor
-                              : AppColors.lightOrangeColor,
-                          radius: index == 1 ? 5.0 : 3.0),
-                      dots(
-                          color: index == 2
-                              ? AppColors.blueColor
-                              : AppColors.lightOrangeColor,
-                          radius: index == 2 ? 5.0 : 3.0),
-                    ],
-                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    dots(
+                        color: index == 0
+                            ? AppColors.blueColor
+                            : AppColors.lightOrangeColor,
+                        radius: index == 0 ? 5.0 : 3.0),
+                    dots(
+                        color: index == 1
+                            ? AppColors.blueColor
+                            : AppColors.lightOrangeColor,
+                        radius: index == 1 ? 5.0 : 3.0),
+                    dots(
+                        color: index == 2
+                            ? AppColors.blueColor
+                            : AppColors.lightOrangeColor,
+                        radius: index == 2 ? 5.0 : 3.0),
+                  ],
+                ),
 
-                ],),
-              ),
-                extendedButton(
-                    onTap: () {
-                      Get.to(() => const SignUpScreen());
-                    },
-                    buttonColor: AppColors.blueColor,
-                    buttonText: "Sign Up",
-                    textColor: AppColors.whiteColor),
-                extendedButton(
-                    onTap: () {
-                      Get.to(() => const LoginScreen());
-                    },
-                    buttonText: "Login",
-                    buttonColor: AppColors.orangeColor,
-                    textColor: AppColors.whiteColor),
-              ],
-            )),
-          ),
+              ],),
+            ),
+              extendedButton(
+                  onTap: () {
+                    Get.to(() => const SignUpScreen());
+                  },
+                  buttonColor: AppColors.blueColor,
+                  buttonText: "Sign Up",
+                  textColor: AppColors.whiteColor),
+              extendedButton(
+                  onTap: () {
+                    Get.to(() => const LoginScreen());
+                  },
+                  buttonText: "Login",
+                  buttonColor: AppColors.orangeColor,
+                  textColor: AppColors.whiteColor),
+
+              InkWell(
+                onTap: ()async {
+                  await boxStorage.write(StorageKey.IS_USER_LOGGED_IN, true);
+                  Get.offAll(const DashBoardScreen());
+
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child:  Text("Login as Guest",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                ),
+              )
+
+
+            ],
+          )),
         );
       },
     );

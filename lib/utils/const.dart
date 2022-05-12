@@ -1,11 +1,9 @@
-
 import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/models/user/UserModelPojo.dart';
+import 'package:auction/views/user_credentials_screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-
 
 double width = Get.width;
 double height = Get.height;
@@ -15,6 +13,7 @@ class StorageKey {
   static const NAME = 'name';
   static const FULL_USER_BODY = 'full_user_body';
   static const IS_USE_LOGGED_IN = 'IS_USE_LOGGED_IN';
+  static const IS_USER_LOGGED_IN = 'IS_USER_LOGGED_IN';
 }
 
 class AppColors {
@@ -35,33 +34,31 @@ class AppTextStyles {
       TextStyle(color: AppColors.whiteColor, fontSize: 15);
 
   static final TextStyle headingStyle = TextStyle(
-      color: AppColors.blackColor,
-      fontSize: 22,
-      fontWeight: FontWeight.bold);
+      color: AppColors.blackColor, fontSize: 22, fontWeight: FontWeight.bold);
   static final TextStyle appBarStyle = TextStyle(
-      color: AppColors.blackColor,
-      fontSize: 16,
-      fontWeight: FontWeight.bold);
+      color: AppColors.blackColor, fontSize: 16, fontWeight: FontWeight.bold);
 
   static final TextStyle subTitleStyleBlack = TextStyle(
-      color: AppColors.blackColor,
-      fontWeight: FontWeight.w500,
-      fontSize: 16);
+      color: AppColors.blackColor, fontWeight: FontWeight.w500, fontSize: 16);
 }
 
 class StaticAssets {
-  static final notificationIcon =SvgPicture.asset('assets/SvgAssets/notification.svg');
-  static final walletSvg =SvgPicture.asset('assets/SvgAssets/Wallet.svg',color: Colors.black,);
-  static final leftArrow =
-      Icon(Icons.arrow_back, color: AppColors.blackColor);
+  static final notificationIcon =
+      SvgPicture.asset('assets/SvgAssets/notification.svg');
+  static final walletSvg = SvgPicture.asset(
+    'assets/SvgAssets/Wallet.svg',
+    color: Colors.white,
+  );
+  static final leftArrow = Icon(Icons.arrow_back, color: AppColors.blackColor);
 
-  static final rightArrow =Icon(Icons.arrow_forward, color: AppColors.whiteColor);
+  static final rightArrow =
+      Icon(Icons.arrow_forward, color: AppColors.whiteColor);
 }
 
 class CustomAppBar {
   static appBar({
     String title = "Auction",
-    List <Widget>? action,
+    List<Widget>? action,
   }) {
     return AppBar(
       elevation: 0,
@@ -73,7 +70,7 @@ class CustomAppBar {
           },
           child: StaticAssets.leftArrow),
       title: Text(title, style: AppTextStyles.appBarStyle),
-      actions:action,
+      actions: action,
     );
   }
 }
@@ -97,15 +94,12 @@ class WhiteSpacer {
   }
 }
 
-
-UserModelPojo getUser(){
-  String data =boxStorage.read(StorageKey.FULL_USER_BODY);
-
-  UserModelPojo user =   userModelPojoFromJson(data);
-  return user;
-
-
+UserModelPojo? getUser() {
+  String data = boxStorage.read(StorageKey.FULL_USER_BODY)??"";
+  if (data.isNotEmpty) {
+    return userModelPojoFromJson(data);
+  }
+  return null;
 }
-
 
 

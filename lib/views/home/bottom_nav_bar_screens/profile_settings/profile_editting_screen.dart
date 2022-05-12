@@ -27,7 +27,7 @@ class _ProfileEditingScreenState extends State<ProfileEditingScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Khaled", style: AppTextStyles.subTitleStyleBlack),
+            Text("${getUser()==null?"": getUser()!.result!.name}", style: AppTextStyles.subTitleStyleBlack),
             WhiteSpacer.horizontalSpace(5),
             SvgPicture.asset('assets/SvgAssets/edit.svg',
                 color: AppColors.greyColor.withOpacity(.5)),

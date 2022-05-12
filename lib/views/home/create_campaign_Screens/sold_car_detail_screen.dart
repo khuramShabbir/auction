@@ -39,10 +39,10 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
     return Consumer<AuctionProvider>(
       builder: (BuildContext context, data, Widget? child) {
         return Scaffold(
-            appBar: CustomAppBar.appBar(title: "Create a campaign"),
+            appBar: CustomAppBar.appBar(title: "Invoice"),
             body: Column(
               children: [
-                stepper(2, "Target amount"),
+                stepper(1, "Invoice details"),
                 WhiteSpacer.verticalSpace(20),
                 StaticKPadding.kPadding(
                     child: Column(
@@ -73,10 +73,10 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children:  [
-                        Text("Down Payment",
+                        const Text("Down Payment",
                             style: TextStyle(color: Colors.red)),
-                        Text("${result!.downPayment}" " SAR",
-                            style: TextStyle(color: Colors.red))
+                        Text("(${result!.downPayment})" " SAR",
+                            style: const TextStyle(color: Colors.red))
                       ],
                     ),
                     WhiteSpacer.verticalSpace(10),
@@ -182,8 +182,8 @@ class _SoldCarDetailScreenState extends State<SoldCarDetailScreen> {
                         : Column(
                             children: [
                               WhiteSpacer.verticalSpace(20),
-                              Padding(
-                                padding: const EdgeInsets.all(25.0),
+                              const Padding(
+                                padding: EdgeInsets.all(25.0),
                                 child: Center(
                                   child: Text(
                                     "",

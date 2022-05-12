@@ -519,28 +519,6 @@ Widget stepper(int activeStep, String title) {
               backgroundColor: activeStep == 3
                   ? AppColors.orangeColor.withOpacity(.4)
                   : AppColors.greyColor),
-          Container(height: 1, color: AppColors.greyColor, width: 20),
-          CircleAvatar(
-              child: Text(
-                "4",
-                style: activeStep == 4
-                    ? AppTextStyles.normalWhiteTextStyle
-                    : AppTextStyles.normalBlackTextStyle,
-              ),
-              backgroundColor: activeStep == 4
-                  ? AppColors.orangeColor.withOpacity(.4)
-                  : AppColors.greyColor),
-          Container(height: 1, color: AppColors.greyColor, width: 20),
-          CircleAvatar(
-              child: Text(
-                "5",
-                style: activeStep == 5
-                    ? AppTextStyles.normalWhiteTextStyle
-                    : AppTextStyles.normalBlackTextStyle,
-              ),
-              backgroundColor: activeStep == 5
-                  ? AppColors.orangeColor.withOpacity(.4)
-                  : AppColors.greyColor),
         ],
       ),
       WhiteSpacer.verticalSpace(10),

@@ -39,7 +39,7 @@ import '../../utils/widgets.dart';
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   Future<void> checkUserStatus() async {
-    bool? user = boxStorage.read(StorageKey.IS_USE_LOGGED_IN);
+    bool? user = boxStorage.read(StorageKey.IS_USER_LOGGED_IN);
 
     if (user == null || user == false) {
       Get.to(() => const UserAuthScreen());

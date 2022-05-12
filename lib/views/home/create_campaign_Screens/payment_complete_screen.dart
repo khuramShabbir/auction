@@ -19,7 +19,7 @@ class _PaymentCompleteScreenState extends State<PaymentCompleteScreen> {
     return Consumer<AuctionProvider>(
       builder: (BuildContext context, value, Widget? child) {
         return Scaffold(
-          appBar: CustomAppBar.appBar(title: "Complete", action: [
+          appBar: CustomAppBar.appBar(title: "Payment", action: [
             Padding(
               padding: const EdgeInsets.only(right: 20.0),
               child: Center(
@@ -33,41 +33,34 @@ class _PaymentCompleteScreenState extends State<PaymentCompleteScreen> {
           body: StaticKPadding.kPadding(
               child: Column(
             children: [
-              WhiteSpacer.verticalSpace(10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  WhiteSpacer.verticalSpace(15),
-                  CircleAvatar(
-                    backgroundColor: Colors.green,
-                    child: Icon(
-                      Icons.check,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                  WhiteSpacer.verticalSpace(15),
-                  Text(
-                    "Create successful campaign",
-                    style: AppTextStyles.subTitleStyleBlack,
-                  ),
-                ],
+              Spacer(),
+              CircleAvatar(
+                backgroundColor: Colors.green,
+                child: Icon(
+                  Icons.check,
+                  color: AppColors.whiteColor,
+                ),
               ),
-              WhiteSpacer.verticalSpace(20),
+              WhiteSpacer.verticalSpace(15),
               Text(
-                "Fundria will verify your campaign as soon as you publish"
-                ". This can take 12-48 hours."
-                " If there is any problem, we will notify you.",
+                "Receipt uploaded",
+                style: AppTextStyles.subTitleStyleBlack,
+              ),
+              WhiteSpacer.verticalSpace(15),
+              Text(
+                "The Auction Team will verify your transaction within 12-48 hours. If there is any questions please call us at: 0533546607",
+                textAlign: TextAlign.center,
                 style: AppTextStyles.normalGreyTextStyle,
               ),
-              WhiteSpacer.verticalSpace(20),
-              // extendedButton(
-              //   onTap: () {
-              //     // Get.to(() => const ViewReceiptScreen());
-              //   },
-              //   buttonColor: StaticColors.blueColor,
-              //   buttonText: "View Receipt",
-              //   textColor: StaticColors.whiteColor,
-              // ),
+              Spacer(),
+              extendedButton(
+                onTap: () {
+                  Get.back();
+                },
+                buttonColor: AppColors.blueColor,
+                buttonText: "Done",
+                textColor: AppColors.whiteColor,
+              ),
             ],
           )),
         );

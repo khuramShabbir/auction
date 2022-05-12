@@ -21,72 +21,70 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (BuildContext context, data, Widget? child) {
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: AppColors.whiteColor,
-            appBar: CustomAppBar.appBar(title: "Login"),
-            body: StaticKPadding.kPadding(
-                child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  customTextFormField(
+        return Scaffold(
+          backgroundColor: AppColors.whiteColor,
+          appBar: CustomAppBar.appBar(title: "Login"),
+          body: StaticKPadding.kPadding(
+              child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                customTextFormField(
+                  validator: (v) {
+                    if (v!.isEmpty) {
+                      return "field can't be empty";
+                    } else if (v.isEmail == false) {
+                      return "please enter correct Email";
+                    }
+                    return null;
+                  },
+                  onChange: (v) {
+                    data.email = v;
+                  },
+                  hintText: "Email",
+                  isOutLinedBorder: true,
+                ),
+                customTextFormField(
                     validator: (v) {
                       if (v!.isEmpty) {
                         return "field can't be empty";
-                      } else if (v.isEmail == false) {
-                        return "please enter correct Email";
+                      } else if (v.length < 8) {
+                        return "password should be at least 8 Characters";
                       }
                       return null;
                     },
                     onChange: (v) {
-                      data.email = v;
+                      data.password = v;
                     },
-                    hintText: "Email",
                     isOutLinedBorder: true,
-                  ),
-                  customTextFormField(
-                      validator: (v) {
-                        if (v!.isEmpty) {
-                          return "field can't be empty";
-                        } else if (v.length < 8) {
-                          return "password should be at least 8 Characters";
-                        }
-                        return null;
+                    hintText: "Password",
+                    obscureText: obscure ? true : false,
+                    suffixIcon: InkWell(
+                      onTap: () {
+                        setState(() {
+                          obscure = !obscure;
+                        });
                       },
-                      onChange: (v) {
-                        data.password = v;
-                      },
-                      isOutLinedBorder: true,
-                      hintText: "Password",
-                      obscureText: obscure ? true : false,
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          setState(() {
-                            obscure = !obscure;
-                          });
-                        },
-                        child: Icon(
-                          Icons.remove_red_eye,
-                          color: obscure
-                              ? AppColors.greyColor
-                              : AppColors.orangeColor,
-                        ),
-                      )),
-                  extendedButton(
-                      onTap: () async {
-                        if (formKey.currentState!.validate()) {
-                           data.loginUser();
-                        }
-                      },
-                      buttonColor: AppColors.orangeColor,
-                      textColor: AppColors.whiteColor,
-                      buttonText: "Login")
-                ],
-              ),
-            )),
-          ),
+                      child: Icon(
+                        Icons.remove_red_eye,
+                        color: obscure
+                            ? AppColors.greyColor
+                            : AppColors.orangeColor,
+                      ),
+                    )),
+                extendedButton(
+                    onTap: () async {
+                      if (formKey.currentState!.validate()) {
+                         data.loginUser();
+                      }
+                    },
+                    buttonColor: AppColors.orangeColor,
+                    textColor: AppColors.whiteColor,
+                    buttonText: "Login")
+              ],
+            ),
+          )),
         );
       },
     );

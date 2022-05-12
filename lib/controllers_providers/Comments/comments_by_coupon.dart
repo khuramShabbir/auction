@@ -36,7 +36,7 @@ class CommentByCoupon extends ChangeNotifier {
   Future<void> postComment(String couponID) async {
     Map<String, String> commentBody = {
       "comment": comment!,
-      "userId": getUser().result!.id.toString(),
+      "userId": getUser()!.result!.id.toString(),
       "couponId": couponID
     };
 
@@ -59,7 +59,7 @@ class CommentByCoupon extends ChangeNotifier {
   void postCommentRating(String couponID) async {
     Map<String, String> response = {
       "rating": "3.0",
-      "userId": getUser().result!.id.toString(),
+      "userId": getUser()!.result!.id.toString(),
       "couponId": couponID
     };
 

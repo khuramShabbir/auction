@@ -105,7 +105,7 @@ class _CouponRevealedDetailsState extends State<CouponRevealedDetails> {
                             borderRadius: BorderRadius.circular(15),
                             image: DecorationImage(
                                 image: NetworkImage(
-                                    "${ApiServices.BASE_ONLY}${result.qrCodeImage}"),
+                                    "${ApiServices.BASE_IMAGE}${result.qrCodeImage}"),
                                 fit: BoxFit.fill)),
                       )),
                     ],

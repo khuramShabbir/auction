@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 
 class ApiServices {
-  static String BASE_ONLY = 'https://auction.api.deeps.info/';
+  static String BASE_IMAGE = 'https://auction.api.deeps.info/';
   static String BASE_URL = 'https://auction.api.deeps.info/api/';
   static String REGISTER = "accounts/register";
   static String SIGN_IN = "accounts/signIn";
@@ -20,6 +20,10 @@ class ApiServices {
   static String ALL_CAR_SPECS = 'CarSales/get-car-specs';
   static String ADD_A_CAR_NORMAL_PURCHASE = 'CarSales/add-car';
   static String PURCHASE_A_COUPON = 'Coupon/Purchase-Coupon';
+  static String GET_SHIPMENT_STATUS = 'ShipmentBooking/get-booking-status?';
+  static String GET_ALL_SHIPPING_COMPANIES = 'Shipper';
+  static String GET_ALL_INSURANCE_COMPANIES = 'Insurance';
+  static String BOOK_A_SHIPMENT = 'ShipmentBooking/book-shipment?';
 
 
 
@@ -35,7 +39,7 @@ class ApiServices {
       return resBody;
     } else {
       String resBody = await response.stream.bytesToString();
-
+      logger.e(resBody);
       var data = await jsonDecode(resBody);
       String msg =
           data["responseException"]["exceptionMessage"][0]["description"];
@@ -109,6 +113,7 @@ class ApiServices {
   static Future<String> simplePost(String feedUrl) async {
     http.Response response = await http.post(Uri.parse(BASE_URL + feedUrl));
     stopProgressCircular();
+
     if (response.statusCode == 200) {
       return response.body;
     }

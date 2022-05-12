@@ -2,7 +2,9 @@ import 'package:auction/controllers_providers/Comments/comments_by_cars.dart';
 import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
+import 'package:auction/views/user_credentials_screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../../models/AllCars/all_cars_model.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -385,6 +387,11 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
                       children: [
                         customizedButton(
                             onTap: () async {
+
+                              if(getUser()==null){
+
+                                return Get.to(()=>const LoginScreen());
+                              }
                               if (formKey.currentState!.validate()) {
                                await  commentProvider.postComment(result!.carSaleId.toString());
                                 textEditingController.clear();
@@ -405,6 +412,7 @@ class _CarSpecsScreenState extends State<CarSpecsScreen> {
       },
     );
   }
+
 }
 
 Widget commentSection(

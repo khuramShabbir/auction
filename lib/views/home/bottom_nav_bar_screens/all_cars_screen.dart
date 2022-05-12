@@ -63,7 +63,7 @@ class _AllCarsScreenState extends State<AllCarsScreen> {
                 ),
                 Row(
                   children: [
-                    myCarsLoaded==false?
+                    myCarsLoaded==true?
                     InkWell(
                         onTap: () {
                           Get.back();

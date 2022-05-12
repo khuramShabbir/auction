@@ -33,6 +33,7 @@ class Result {
      required this.carInformationId,
      required this.isManual,
      required this.carName,
+     required this.isPaymentVerified,
      required this.isGps,
      required this.isBluetooth,
      required this.isAwarded,
@@ -64,6 +65,7 @@ class Result {
   dynamic muzadCommission;
   dynamic vatPercent;
   bool isManual;
+  bool isPaymentVerified;
   String carName;
   bool isGps;
   bool isBluetooth;
@@ -92,6 +94,7 @@ class Result {
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         carInformationId: json["carInformationId"],
         isManual: json["isManual"],
+    isPaymentVerified: json["isPaymentVerified"],
     muzadCommission: json["muzadCommission"],
     vatPercent: json["vatPercent"],
         carName: json["carName"],

@@ -21,125 +21,127 @@ class ProfileSettingScreen extends StatefulWidget {
 class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
   @override
   void initState() {
+    if(getUser()!=null){
     walletProvider.getWallet();
     walletProvider.getWalletHistory();
+
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Settings",
-            style: TextStyle(color: Colors.black),
-          ),
-          actions: [
-            Consumer<WalletProvider>(builder: (builder, data, child) {
-              return Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: Row(
-                    children: [
-                      StaticAssets.walletSvg,
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        data.walletModel == null
-                            ? "0 SAR"
-                            : "${double.parse(data.walletModel!.result.amount.toString()).toInt()} SAR",
-                        style: TextStyle(color: Colors.black),
-                      )
-                    ],
-                  ));
-            })
-          ],
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: StaticKPadding.kPadding(
-            child: SingleChildScrollView(
-              child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-              profileModules(
-                  onTap: () {
-                    setState(() {
-                      Get.to(() => const ProfileEditingScreen());
-                    });
-                  },
-                  title: 'Profile',
-                  leading: SvgPicture.asset('assets/SvgAssets/Profile.svg',
-                      color: AppColors.blackColor)),
-              profileModules(
-                  onTap: () {},
-                  title: 'Notifications',
-                  leading: SvgPicture.asset('assets/SvgAssets/notification.svg',
-                      color: AppColors.blackColor)),
-              profileModules(
-                  onTap: () {
-                    Get.to(const WalletScreen());
-                  },
-                  title: 'Your wallet',
-                  leading: SvgPicture.asset('assets/SvgAssets/Wallet.svg',
-                      color: AppColors.blackColor)),
-              profileModules(
-                  onTap: () {
-                    Get.to(const CouponRevealScreen());
-                  },
-                  title: 'Your Coupons',
-                  leading: SvgPicture.asset('assets/SvgAssets/coupon_icon.svg',
-                      color: AppColors.blackColor)),
-              profileModules(
-                onTap: () {},
-                title: 'Login Setting',
-                leading: SvgPicture.asset('assets/SvgAssets/loginSetting.svg',
-                    color: AppColors.blackColor),
-              ),
-              profileModules(
-                  onTap: () {},
-                  title: 'Service Centre',
-                  leading: SvgPicture.asset('assets/SvgAssets/callServices.svg',
-                      color: AppColors.blackColor)),
-              WhiteSpacer.verticalSpace(20),
-              InkWell(
-                onTap: () async {
-                  await boxStorage.erase();
+    return Scaffold(
+      appBar: AppBar(
 
-                  Get.offAll(const SplashScreen());
-                },
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: SvgPicture.asset(
-                      'assets/SvgAssets/logOut.svg',
-                      color: AppColors.blackColor,
-                    ),
-                  ),
-                  width: 55,
-                  height: 55,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: AppColors.whiteColor,
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 10,
-                            spreadRadius: 1,
-                            color: AppColors.greyColor.withOpacity(.1))
-                      ]),
-                ),
-              ),
-              WhiteSpacer.verticalSpace(20),
-              Text(
-                "Log Out",
-                style: AppTextStyles.subTitleStyleBlack,
-              )
-          ],
+        title: Text(
+          "Settings",
+          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
         ),
-            )),
+        actions: [
+          Consumer<WalletProvider>(builder: (builder, data, child) {
+            return Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Row(
+                  children: [
+                    StaticAssets.walletSvg,
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      data.walletModel == null
+                          ? "0 SAR"
+                          : "${double.parse(data.walletModel!.result.amount.toString()).toInt()} SAR",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ));
+          })
+        ],
+        elevation: 0,
+        backgroundColor: AppColors.blueColor,
       ),
+      body: StaticKPadding.kPadding(
+          child: SingleChildScrollView(
+            child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+            profileModules(
+                onTap: () {
+                  setState(() {
+                    Get.to(() => const ProfileEditingScreen());
+                  });
+                },
+                title: 'Profile',
+                leading: SvgPicture.asset('assets/SvgAssets/Profile.svg',
+                    color: AppColors.blackColor)),
+            profileModules(
+                onTap: () {},
+                title: 'Notifications',
+                leading: SvgPicture.asset('assets/SvgAssets/notification.svg',
+                    color: AppColors.blackColor)),
+            profileModules(
+                onTap: () {
+                  Get.to(const WalletScreen());
+                },
+                title: 'Your wallet',
+                leading: SvgPicture.asset('assets/SvgAssets/Wallet.svg',
+                    color: AppColors.blackColor)),
+            profileModules(
+                onTap: () {
+                  Get.to(const CouponRevealScreen());
+                },
+                title: 'Your Coupons',
+                leading: SvgPicture.asset('assets/SvgAssets/coupon_icon.svg',
+                    color: AppColors.blackColor)),
+            profileModules(
+              onTap: () {},
+              title: 'Login Setting',
+              leading: SvgPicture.asset('assets/SvgAssets/loginSetting.svg',
+                  color: AppColors.blackColor),
+            ),
+            profileModules(
+                onTap: () {},
+                title: 'Service Centre',
+                leading: SvgPicture.asset('assets/SvgAssets/callServices.svg',
+                    color: AppColors.blackColor)),
+            WhiteSpacer.verticalSpace(20),
+            InkWell(
+              onTap: () async {
+                await boxStorage.erase();
+
+                Get.offAll(const SplashScreen());
+              },
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: SvgPicture.asset(
+                    'assets/SvgAssets/logOut.svg',
+                    color: AppColors.blackColor,
+                  ),
+                ),
+                width: 55,
+                height: 55,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppColors.whiteColor,
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 10,
+                          spreadRadius: 1,
+                          color: AppColors.greyColor.withOpacity(.1))
+                    ]),
+              ),
+            ),
+            WhiteSpacer.verticalSpace(20),
+            Text(
+              "Log Out",
+              style: AppTextStyles.subTitleStyleBlack,
+            )
+        ],
+      ),
+          )),
     );
   }
 

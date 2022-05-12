@@ -4,6 +4,7 @@ import 'package:auction/models/auction/GetAllAuctions.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/car_specification.dart';
 import 'package:auction/views/home/create_campaign_Screens/car_specs.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,7 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                               mainAxisExtent: height * .3,
                               // crossAxisSpacing: 3,
                               // mainAxisSpacing: 2,
-                              crossAxisCount: 2,
+                              crossAxisCount: kIsWeb ? 4 : 2,
                             ),
                             itemBuilder: (context, index) {
                               Result result = data.allAuctions!.result[index];
@@ -138,8 +139,8 @@ class _AllAuctionScreenState extends State<AllAuctionScreen> {
                                                       ),
                                                     ),
                                                   ),
-                                                  decoration: BoxDecoration(
-                                                      color: getUser()
+                                                  decoration:getUser()==null?null: BoxDecoration(
+                                                      color: getUser()!
                                                                   .result!
                                                                   .id !=
                                                               result.user.userId

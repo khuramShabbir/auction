@@ -93,7 +93,7 @@ class NormalSaleProvider extends ChangeNotifier{
     }
 
     Map<String, String> body={
-      "userId":"${getUser().result!.id}",
+      "userId":"${getUser()!.result!.id}",
       "MakeCompanyId":"$companyId",
       "Model":"${compannName} ${carNameController.text}",
       "TypeId":"$cartypeId",

@@ -4,6 +4,7 @@ import 'package:auction/utils/widgets.dart';
 import 'package:auction/views/home/CouponScreens/coupon_detail_screen.dart';
 import 'package:auction/views/home/create_campaign_Screens/car_specs.dart';
 import 'package:auction/views/home/shopping_cart_screen.dart';
+import 'package:auction/views/user_credentials_screens/login_screen.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,11 @@ class _CouponScreenState extends State<CouponScreen> {
           appBar: CustomAppBar.appBar(title: "Discount Coupons", action: [
             InkWell(
                 onTap: () {
+                  if(getUser()==null){
 
+                    Get.to(()=>const LoginScreen());
+                    return;
+                  }
                   Get.to(() => const ShoppingCartScreen());
                 },
                 child: Icon(
@@ -132,6 +137,12 @@ class _CouponScreenState extends State<CouponScreen> {
                                         const Expanded(child: SizedBox()),
                                         InkWell(
                                           onTap: () async {
+
+                                            if(getUser()==null){
+
+                                              return Get.to(()=>const LoginScreen());
+                                            }
+
                                             showProgressCircular();
                                             await couponProvider.addCartByUser(
                                                 result.id.toString());

@@ -9,7 +9,7 @@ class WalletProvider extends ChangeNotifier {
   GetWalletHistory? getWalletHistoryResponse;
   getWallet() async {
 
-    String body = await ApiServices.simplePost("${ApiServices.GET_WALLET}${getUser().result!.id.toString()}");
+    String body = await ApiServices.simplePost("${ApiServices.GET_WALLET}${getUser()!.result!.id.toString()}");
     
     if(!body.contains("successful")) return;
     walletModel=null;
@@ -20,9 +20,9 @@ class WalletProvider extends ChangeNotifier {
   }
 
   void getWalletHistory()async {
-    print("${ApiServices.GET_WALLET_HISTORY}${getUser().result!.id.toString()}");
+    print("${ApiServices.GET_WALLET_HISTORY}${getUser()!.result!.id.toString()}");
 
-    String body = await ApiServices.simpleGet("${ApiServices.GET_WALLET_HISTORY}${getUser().result!.id.toString()}");
+    String body = await ApiServices.simpleGet("${ApiServices.GET_WALLET_HISTORY}${getUser()!.result!.id.toString()}");
     if(!body.contains("successful")) return;
     getWalletHistoryResponse=null;
     notifyListeners();

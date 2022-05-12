@@ -20,8 +20,10 @@ class _UserWalletState extends State<UserWallet> {
 
   @override
   void initState() {
+    if(getUser()!=null){
     walletProvider.getWallet();
     walletProvider.getWalletHistory();
+    }
     super.initState();
 
   }
@@ -34,9 +36,9 @@ class _UserWalletState extends State<UserWallet> {
         centerTitle: true,
         title: Text(
           "Wallet".tr,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.blueColor,
         elevation: 0,
         // leading: InkWell(
         //     onTap: () {

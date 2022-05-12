@@ -19,8 +19,10 @@ class _CouponRevealScreenState extends State<CouponRevealScreen> {
   void initState() {
     // TODO: implement initState
 
-    couponProvider.getRevealedCoupons();
+if(getUser()!=null) {
+  couponProvider.getRevealedCoupons();
 
+}
     super.initState();
   }
 
@@ -128,7 +130,7 @@ class _CouponRevealScreenState extends State<CouponRevealScreen> {
                         }),
                   ),
               )
-              : const Center(
+              : getUser()==null?Container() : Center(
                   child: CircularProgressIndicator(),
                 );
         }),

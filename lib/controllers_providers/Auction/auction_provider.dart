@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:auction/ApiServices/api_services.dart';
@@ -23,7 +24,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:auction/models/auction/GetAllAuctions.dart' as r;
 
-AuctionProvider auctionProvider = Provider . of < AuctionProvider > (Get.context!, listen: false);
+AuctionProvider auctionProvider =Provider.of<AuctionProvider>(Get.context!, listen: false);
 
 class AuctionProvider extends ChangeNotifier {
   GetAllAuctions? allAuctions;
@@ -45,56 +46,64 @@ class AuctionProvider extends ChangeNotifier {
 
   getAuction() async {
     // logger.e("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
-    String body = await ApiServices.simpleGet("${ApiServices.GET_AUCTION}?userId=${getUser().result!.id}");
+    String body = await ApiServices.simpleGet(
+        "${ApiServices.GET_AUCTION}?userId=${getUser() == null ? 0 : getUser()!.result!.id}");
     if (body.isEmpty) return;
     allAuctions = getAllAuctionsFromJson(body);
-    isAuctionLoaded=false;
+    isAuctionLoaded = false;
     notifyListeners();
     isAuctionLoaded = true;
     notifyListeners();
   }
 
   getWallet(r.Result? result) async {
-    if(result!.alreadyBid){
+    if (result!.alreadyBid) {
       payBid(result);
-    }
-    else {
-    String body = await ApiServices.simplePost("${ApiServices.GET_WALLET}${getUser().result!.id.toString()}");
-    if (body.isEmpty) {
-      showToast(msg: "Some thing went wrong! please try again later");
-      return;
-    }
-    walletModel = walletModelFromJson(body);
-    walletAmount = walletModel!.result.amount;
-    if (result.downPayment == 0) {
-      showToast(msg: "Can't be bid at this car");
-      return;
-    }
-    else if (walletAmount! >= result.downPayment) {
-
+    } else {
+      String body = await ApiServices.simplePost(
+          "${ApiServices.GET_WALLET}${getUser()!.result!.id.toString()}");
+      if (body.isEmpty) {
+        showToast(msg: "Some thing went wrong! please try again later");
+        return;
+      }
+      walletModel = walletModelFromJson(body);
+      walletAmount = walletModel!.result.amount;
+      if (result.downPayment == 0) {
+        showToast(msg: "Can't be bid at this car");
+        return;
+      } else if (walletAmount! >= result.downPayment) {
         payBid(result);
-      //biddingAmountBottomSheet(result);
-      return;
-    }
-    var resultBool= await Get.to(() => PaymentWebView(initUrl: "https://auction.cp.deeps.info/Home/Payment?userId=${getUser().result!.id}&amount=${double.parse((double.parse(result.downPayment.toString())*100).toString()).toInt()}"));
-    if(resultBool==true){
-      payBid(result);
-    }
+        //biddingAmountBottomSheet(result);
+        return;
+      }
+      var resultBool = await Get.to(() => PaymentWebView(
+          initUrl:
+              "https://auction.cp.deeps.info/Home/Payment?userId=${getUser()!.result!.id}&amount=${double.parse((double.parse(result.downPayment.toString()) * 100).toString()).toInt()}"));
+      if (resultBool == true) {
+        payBid(result);
+      }
     }
   }
-
 
   void payBid(r.Result result) async {
-    biddingController.text=(double.parse(result.bidding.biddingAmount.toString()) + double.parse(result.bidIncrement.toString())).toString();
-    String body = await ApiServices.simplePost("Bidding/Bid?userId=${getUser().result!.id}&carId=${result.carInformationId}&amount=${biddingController.text}&lastUserId=${result.user.userId}");
+    print(
+        "Bidding/Bid?userId=${getUser()!.result!.id}&carId=${result.carInformationId}&amount=${biddingController.text}&lastUserId=${result.user.userId}");
+    biddingController.text =
+        (double.parse(result.bidding.biddingAmount.toString()) +
+                double.parse(result.bidIncrement.toString()))
+            .toString();
+    String body = await ApiServices.simplePost(
+        "Bidding/Bid?userId=${getUser()!.result!.id}&carId=${result.carInformationId}&amount=${biddingController.text}&lastUserId=${result.user.userId}");
     getAuction();
   }
+
   getAuctionByUser() async {
-    auctionByUser =null;
+    auctionByUser = null;
     isAuctionByUserLoaded = false;
     notifyListeners();
 
-    String body = await ApiServices.simpleGet("Auction/get-Auctions-by-user?userId=${getUser().result!.id}");
+    String body = await ApiServices.simpleGet(
+        "Auction/get-Auctions-by-user?userId=${getUser()!.result!.id}");
     // logger.e("body $body");
     if (body.isEmpty) return;
 
@@ -102,10 +111,11 @@ class AuctionProvider extends ChangeNotifier {
     isAuctionByUserLoaded = true;
     notifyListeners();
   }
+
   uploadPaymentEvidence(List<File> files, int carInformationId) async {
     showProgressCircular();
     Map<String, String> body = {
-      'UserId': getUser().result!.id.toString(),
+      'UserId': getUser()!.result!.id.toString(),
       'CarID': '$carInformationId',
     };
     String bodyResult = await ApiServices.postMultiPartWithFile(
@@ -121,12 +131,13 @@ class AuctionProvider extends ChangeNotifier {
     stopProgressCircular();
     return true;
   }
+
   Future<bool> getPaymentEvidence(user_auction.Result? result) async {
     showProgressCircular();
     print(
-        "PaymentEvidence/Get-Evidence?userId=${getUser().result!.id}&carId=${result!.carInformationId}");
+        "PaymentEvidence/Get-Evidence?userId=${getUser()!.result!.id}&carId=${result!.carInformationId}");
     String body = await ApiServices.simpleGet(
-        'PaymentEvidence/Get-Evidence?userId=${getUser().result!.id}&carId=${result.carInformationId}');
+        'PaymentEvidence/Get-Evidence?userId=${getUser()!.result!.id}&carId=${result.carInformationId}');
     stopProgressCircular();
     if (body.isEmpty) {
       // showToast(msg: "No Payment Evidence Found");
@@ -135,6 +146,7 @@ class AuctionProvider extends ChangeNotifier {
     return true;
     // return Get.to(() => const PaymentCompleteScreen());
   }
+
   getBankAccount(int userId) async {
     String body = await ApiServices.simpleGet('BankAccount/31');
     if (body.isEmpty) {
@@ -150,16 +162,40 @@ class AuctionProvider extends ChangeNotifier {
 
     notifyListeners();
   }
-  static void increamentBidd(r.Result result, AuctionProvider data) {
 
-    biddingController.text=(double.parse(biddingController.text)+double.parse(result.bidIncrement.toString())).toString();
+  static void increamentBidd(r.Result result, AuctionProvider data) {
+    biddingController.text = (double.parse(biddingController.text) +
+            double.parse(result.bidIncrement.toString()))
+        .toString();
     data.notifyListeners();
   }
+
   static void decreamentBidd(r.Result result, AuctionProvider data) {
-    if(double.parse(biddingController.text)<=double.parse(result.bidding.biddingAmount.toString())) return;
-    biddingController.text=(double.parse(biddingController.text)-double.parse(result.bidIncrement.toString())).toString();
+    if (double.parse(biddingController.text) <=
+        double.parse(result.bidding.biddingAmount.toString())) return;
+    biddingController.text = (double.parse(biddingController.text) -
+            double.parse(result.bidIncrement.toString()))
+        .toString();
     data.notifyListeners();
+  }
 
+  Future<bool> getShipmentBookedOrNot(carId) async {
+    try {
+      showProgressCircular();
+      String body = await ApiServices.simplePost(
+          ApiServices.GET_SHIPMENT_STATUS +
+              "userId=${getUser()!.result!.id}&carId=$carId");
+      if (body.isNotEmpty) {
+        var decode = json.decode(body);
+        if (decode["result"] == true) {
+          return true;
+        }
+        return false;
+      }
 
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 }

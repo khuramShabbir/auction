@@ -29,12 +29,12 @@ class _BankReceiptScreenState extends State<BankReceiptScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.appBar(title: 'Create campaign'),
+      appBar: CustomAppBar.appBar(title: 'Upload receipt'),
       body: Consumer<AuctionProvider>(
     builder: (BuildContext context, data, Widget? child) {
       return Column(
         children: [
-          stepper(3, "Upload photos"),
+          stepper(2, "Upload photos"),
           WhiteSpacer.verticalSpace(10),
           StaticKPadding.kPadding(
               child: Column(
@@ -74,7 +74,7 @@ class _BankReceiptScreenState extends State<BankReceiptScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Text(
-                          "Upload Cover Photo",
+                          "Upload Photo",
                           style: TextStyle(
                               color: AppColors.blackColor,
                               fontWeight: FontWeight.w300),

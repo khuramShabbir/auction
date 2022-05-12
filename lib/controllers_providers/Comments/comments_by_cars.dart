@@ -36,7 +36,7 @@ await Future.delayed(Duration.zero);
   Future<void> postComment(carID)async{
     Map<String,String> body={
       "comment": commentText!,
-      "userId": getUser().result!.id.toString(),
+      "userId": getUser()!.result!.id.toString(),
       "carId": carID,
       "commentDate": DateTime.now().toString()
     };

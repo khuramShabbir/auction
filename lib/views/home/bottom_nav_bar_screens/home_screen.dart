@@ -9,6 +9,7 @@ import 'package:auction/views/home/bottom_nav_bar_screens/all_cars_screen.dart';
 import 'package:auction/views/home/CouponScreens/coupen_screen.dart';
 import 'package:auction/views/wallet/wallet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    if(getUser()==null){
+
+      return;
+    }
     walletProvider.getWallet();
 
   }
@@ -42,7 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (BuildContext context, data, child) {
       return Scaffold(
         appBar:
-            AppBar(elevation: 0, backgroundColor: Colors.transparent, actions: [
+            AppBar(
+
+                elevation: 0, backgroundColor: AppColors.blueColor,
+                centerTitle: false,
+                title: Text("Zawid.online",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                actions: [
           InkWell(
             onTap: (){
 
@@ -52,9 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Padding(
                     padding: const EdgeInsets.only(right: 20),
                     child: Row(children: [
-                      StaticAssets.walletSvg,
+                      SvgPicture.asset('assets/SvgAssets/Wallet.svg',color: Colors.white,),
                       SizedBox(width: 10,),
-                      Text(data.walletModel==null?"0 SAR":"${double.parse(data.walletModel!.result.amount.toString()).toInt()} SAR",style: TextStyle(color: Colors.black),)
+                      Text(data.walletModel==null?"0 SAR":"${double.parse(data.walletModel!.result.amount.toString()).toInt()} SAR",style: TextStyle(color: Colors.white),)
                     ],));
               }
             ),
@@ -65,12 +75,13 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 10,),
               Text(boxStorage.read(StorageKey.NAME) ?? 'Welcome',
                   style: TextStyle(
                       color: Colors.grey.withOpacity(.5),
                       fontWeight: FontWeight.bold,
                       fontSize: 17)),
-              Text("${getUser().result!.name}", style: AppTextStyles.headingStyle),
+              Text(getUser()==null? "":"${getUser()!.result!.name}", style: AppTextStyles.headingStyle),
               Expanded(
                   child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15.0),
@@ -80,6 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: Container(
                     height: height * .2,
+                    width: width,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(carList[0]), fit: BoxFit.cover),
@@ -125,15 +137,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     // bottomSheetComingSoon();
 
-
-
-
                     Get.to(() =>    AllCarsScreen(true));
 
                   },
                   child: Container(
                     width: width,
                     height: height * .2,
+
+
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(carList[1]), fit: BoxFit.cover),
