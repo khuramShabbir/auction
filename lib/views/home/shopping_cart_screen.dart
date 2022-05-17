@@ -1,6 +1,7 @@
 import 'package:auction/controllers_providers/Coupon/coupon.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
+import 'package:auction/views/home/bottom_nav_bar_screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
   @override
   void initState() {
     super.initState();
-    couponProvider.getCartByUser();
+   if(getUser()!=null ) couponProvider.getCartByUser();
   }
 
   @override
@@ -26,14 +27,9 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
     return Consumer<CouponProvider>(
       builder: (BuildContext context, data, Widget? child) {
         return Scaffold(
-          appBar: CustomAppBar.appBar(title: "Cart", action: [
-            Icon(
-              Icons.add_shopping_cart,
-              color: AppColors.blackColor,
-            ),
-            WhiteSpacer.horizontalSpace(20)
-          ]),
-          body: StaticKPadding.kPadding(
+          appBar: getAppBar("Cart",isLeadingRequired: false),
+          body: getUser()==null ? Container() :
+          StaticKPadding.kPadding(
               child: data.cartLoaded
                   ?
               Column(
@@ -221,7 +217,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
             ],
           )
                   :
-                  const Center(child: CircularProgressIndicator(),)
+              Center(child: CircularProgressIndicator(),)
           ),
         );
       },

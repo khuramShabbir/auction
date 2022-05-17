@@ -5,6 +5,7 @@ import 'package:auction/views/home/CouponScreens/coupon_detail_screen.dart';
 import 'package:auction/views/home/create_campaign_Screens/car_specs.dart';
 import 'package:auction/views/home/shopping_cart_screen.dart';
 import 'package:auction/views/user_credentials_screens/login_screen.dart';
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -31,74 +32,84 @@ class _CouponScreenState extends State<CouponScreen> {
       builder: (BuildContext context, data, Widget? child) {
         return Scaffold(
           backgroundColor: AppColors.whiteColor,
-          appBar: CustomAppBar.appBar(title: "Discount Coupons", action: [
-            InkWell(
-                onTap: () {
-                  if(getUser()==null){
-
-                    Get.to(()=>const LoginScreen());
-                    return;
-                  }
-                  Get.to(() => const ShoppingCartScreen());
-                },
-                child: Icon(
-                  Icons.add_shopping_cart_outlined,
-                  color: AppColors.blackColor,
-                )),
-            WhiteSpacer.horizontalSpace(20)
-          ]),
+          // appBar: CustomAppBar.appBar(title: "Discount Coupons", action: [
+          //   InkWell(
+          //       onTap: () {
+          //         if(getUser()==null){
+          //
+          //           Get.to(()=>const LoginScreen());
+          //           return;
+          //         }
+          //         Get.to(() => const ShoppingCartScreen());
+          //       },
+          //       child: Icon(
+          //         Icons.add_shopping_cart_outlined,
+          //         color: AppColors.blackColor,
+          //       )),
+          //   WhiteSpacer.horizontalSpace(20)
+          // ]),
           body: StaticKPadding.kPadding(
               child: data.couponLoaded
-                  ? Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        WhiteSpacer.verticalSpace(20),
-                        Flexible(
-                          child: ListView.builder(
-                            itemCount: data.getCoupon!.result.length,
-                            shrinkWrap: true,
-                            physics: const ScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) {
-                              Result result = data.getCoupon!.result[index];
-                              final value = data.getCoupon!.result[index];
-                              String timeString = value.expiry.toString();
-                              String timeStamp = "";
-                              if (!timeString.contains("null")) {
-                                timeStamp = TimeElapsed.fromDateStr(timeString);
-                              }
+                  ?  Center(
+                    child: Container(
+                width: Get.width*0.6,
+                child: GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisExtent: height * .45,
+                      // crossAxisSpacing: 3,
+                      // mainAxisSpacing: 2,
+                      crossAxisCount: kIsWeb  && context.height>600 && context.width>600 ? 4 : 2,
+                ),
+                itemCount: data.getCoupon!.result.length,
+                itemBuilder: (BuildContext context, int index) {
+                      Result result = data.getCoupon!.result[index];
+                      final value = data.getCoupon!.result[index];
+                      String timeString = value.expiry.toString();
+                      String timeStamp = "";
+                      if (!timeString.contains("null")) {
+                        timeStamp = TimeElapsed.fromDateStr(timeString);
+                      }
 
-                              return InkWell(
-                                onTap: () {
-                                  Get.to(
-                                      () => CouponDetailScreen(result: result));
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: AppColors.whiteColor,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          height: height * .1,
-                                          width: width * .21,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              image: DecorationImage(
-                                                  image: NetworkImage(result
-                                                              .picturePath !=
-                                                          null
-                                                      ? "${result.picturePath}"
-                                                      : imageUrl),
-                                                  fit: BoxFit.fill)),
-                                        ),
-                                        WhiteSpacer.horizontalSpace(10),
-                                        Column(
+                      return InkWell(
+                        onTap: () {
+                          Get.to(() => CouponDetailScreen(result: result));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10.0,
+                            horizontal: 25
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(15),
+                              color: AppColors.greyColor.withOpacity(0.05),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: height * .3,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(15),
+                                      image: DecorationImage(
+                                          image: NetworkImage(result
+                                              .picturePath !=
+                                              null
+                                              ? "${result.picturePath}"
+                                              : imageUrl),
+                                          fit: BoxFit.fill)),
+                                ),
+                                WhiteSpacer.horizontalSpace(10),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
                                             Text(value.couponTitle ?? "",
                                                 style: AppTextStyles
@@ -108,65 +119,70 @@ class _CouponScreenState extends State<CouponScreen> {
                                               children: [
                                                 value.isPercent
                                                     ? Text(
-                                                        "Discount  ${value.couponDiscount ?? ""}%",
-                                                        style: AppTextStyles
-                                                            .normalGreyTextStyle)
+                                                    "Discount  ${value.couponDiscount ?? ""}%",
+                                                    style: AppTextStyles
+                                                        .normalGreyTextStyle)
                                                     : Text(
-                                                        "Discount price",
-                                                        style: AppTextStyles
-                                                            .normalGreyTextStyle,
-                                                      ),
+                                                  "Discount price",
+                                                  style: AppTextStyles
+                                                      .normalGreyTextStyle,
+                                                ),
                                                 WhiteSpacer.horizontalSpace(5),
                                                 CircleAvatar(
                                                     backgroundColor:
-                                                        AppColors.greyColor,
+                                                    AppColors.greyColor,
                                                     radius: 1.5),
                                                 WhiteSpacer.horizontalSpace(5),
                                                 Text(
                                                   timeStamp,
                                                   style: TextStyle(
                                                       color:
-                                                          AppColors.greyColor,
+                                                      AppColors.greyColor,
                                                       fontWeight:
-                                                          FontWeight.bold),
+                                                      FontWeight.bold),
                                                 ),
                                               ],
-                                            )
+                                            ),
+
                                           ],
                                         ),
-                                        const Expanded(child: SizedBox()),
-                                        InkWell(
-                                          onTap: () async {
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
 
-                                            if(getUser()==null){
+                                          if(getUser()==null){
 
-                                              return Get.to(()=>const LoginScreen());
-                                            }
+                                            return Get.to(()=>const LoginScreen());
+                                          }
 
-                                            showProgressCircular();
-                                            await couponProvider.addCartByUser(
-                                                result.id.toString());
-                                            stopProgressCircular();
-                                            Get.to(() =>
-                                                const ShoppingCartScreen());
-                                          },
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Icon(Icons
-                                                .add_shopping_cart_outlined),
-                                          ),
+                                          showProgressCircular();
+                                          await couponProvider.addCartByUser(
+                                              result.id.toString());
+                                          stopProgressCircular();
+                                          Get.to(() =>
+                                          const ShoppingCartScreen());
+                                        },
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Icon(Icons
+                                              .add_shopping_cart_outlined),
                                         ),
-                                        WhiteSpacer.horizontalSpace(5)
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              );
-                            },
+
+
+
+                              ],
+                            ),
                           ),
-                        )
-                      ],
-                    )
+                        ),
+                      );
+                },
+              ),
+                    ),
+                  )
                   : Center(
                       child: CircularProgressIndicator(
                           color: AppColors.orangeColor),

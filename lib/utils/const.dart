@@ -18,7 +18,10 @@ class StorageKey {
 
 class AppColors {
   static Color orangeColor = const Color(0xFFFF5e00);
+  static Color ligthOrangeColor = const Color(0xFFFD9B3B);
   static Color blueColor = const Color(0xFF0000fe);
+  static Color darkblueColor = const Color(0xFF17222A);
+  static Color lightblueColor = const Color(0xFF232F3F);
   static Color lightOrangeColor = const Color(0xFFFFDFCC);
   static Color greyColor = const Color(0xFF666666).withOpacity(.7);
   static Color whiteColor = Colors.white;

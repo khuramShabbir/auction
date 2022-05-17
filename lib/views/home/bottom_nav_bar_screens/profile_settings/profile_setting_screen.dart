@@ -2,6 +2,7 @@ import 'package:auction/controllers_providers/Auth/auth_provider.dart';
 import 'package:auction/controllers_providers/Wallet/wallet_provider.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/views/coupon/CouponRevealScreen.dart';
+import 'package:auction/views/home/bottom_nav_bar_screens/home_screen.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/profile_settings/profile_editting_screen.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/wallet_screen.dart';
 import 'package:auction/views/wallet/wallet.dart';
@@ -32,35 +33,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-        title: Text(
-          "Settings",
-          style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          Consumer<WalletProvider>(builder: (builder, data, child) {
-            return Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: Row(
-                  children: [
-                    StaticAssets.walletSvg,
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      data.walletModel == null
-                          ? "0 SAR"
-                          : "${double.parse(data.walletModel!.result.amount.toString()).toInt()} SAR",
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ));
-          })
-        ],
-        elevation: 0,
-        backgroundColor: AppColors.blueColor,
-      ),
+      appBar: getAppBar("Settings",isLeadingRequired: false),
       body: StaticKPadding.kPadding(
           child: SingleChildScrollView(
             child: Column(

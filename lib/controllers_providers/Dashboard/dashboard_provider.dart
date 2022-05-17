@@ -6,6 +6,7 @@ DashBoardProvider dashBoardProvider=Provider.of<DashBoardProvider>(Get.context!,
 
 class DashBoardProvider extends ChangeNotifier{
   int notificationNumber=0;
+  int? index = 0;
 
   void increamentNotificationNumber() {
     notificationNumber++;

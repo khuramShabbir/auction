@@ -1,6 +1,7 @@
 import 'package:auction/controllers_providers/Dashboard/dashboard_provider.dart';
 import 'package:auction/controllers_providers/Wallet/wallet_provider.dart';
 import 'package:auction/utils/const.dart';
+import 'package:auction/views/home/bottom_nav_bar_screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
@@ -32,23 +33,7 @@ class _UserWalletState extends State<UserWallet> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Wallet".tr,
-          style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: AppColors.blueColor,
-        elevation: 0,
-        // leading: InkWell(
-        //     onTap: () {
-        //       Get.back();
-        //     },
-        //     child: const Icon(
-        //       Icons.arrow_back,
-        //       color: Colors.black,
-        //     )),
-      ),
+      appBar: getAppBar("Wallet",isLeadingRequired: false),
       body: SizedBox(
         width: Get.width,
         child: Padding(

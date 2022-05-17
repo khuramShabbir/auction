@@ -2,6 +2,7 @@ import 'package:auction/controllers_providers/Auction/auction_provider.dart';
 
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
+import 'package:auction/views/home/bottom_nav_bar_screens/home_screen.dart';
 import 'package:auction/views/home/create_campaign_Screens/payment_complete_screen.dart';
 import 'package:auction/views/home/create_campaign_Screens/sold_car_detail_screen.dart';
 import 'package:auction/views/home/create_campaign_Screens/viewReceipt.dart';
@@ -41,16 +42,7 @@ class _MyCarsState extends State<MyCarsScreen> {
       builder: (BuildContext context, data, Widget? child) {
         return Scaffold(
           backgroundColor: AppColors.whiteColor,
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: AppColors.blueColor,
-            leading: const Text(""),
-            title: const Text(
-              "My Cars",
-              style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-            ),
-            centerTitle: true,
-          ),
+          appBar: getAppBar("My Cars",isLeadingRequired: false),
           body: getUser()!=null ?
           StaticKPadding.kPadding(
               child: data.isAuctionByUserLoaded

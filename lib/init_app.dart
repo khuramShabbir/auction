@@ -8,6 +8,8 @@ import 'package:auction/controllers_providers/normalSale/normalSaleProvider.dart
 import 'package:auction/controllers_providers/PaymentMethod/payment_method_provider.dart';
 import 'package:auction/controllers_providers/Wallet/wallet_provider.dart';
 import 'package:auction/controllers_providers/shipment_provider/shipmentProvider.dart';
+import 'package:auction/views/home/all_auctions_screen.dart';
+import 'package:auction/views/home/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -72,7 +74,9 @@ class _InitAppState extends State<InitApp> {
       ],
       child: const GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: DashBoardScreen(),
+        // home: AllAuctionScreen(),
+        // home: SplashScreen(),
       ),
     );
   }

@@ -2,6 +2,7 @@
 import 'package:auction/models/auction/GetAllAuctions.dart';
 import 'package:auction/utils/const.dart';
 import 'package:auction/utils/widgets.dart';
+import 'package:auction/views/home/bottom_nav_bar_screens/home_screen.dart';
 
 import 'package:auction/views/inspection/pdf_view.dart';
 import 'package:flutter/foundation.dart';
@@ -35,7 +36,7 @@ int index=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.appBar(),
+      appBar: getAppBar("${result!.carName}"),
       body: StaticKPadding.kPadding(
           child: Column(
         children: [

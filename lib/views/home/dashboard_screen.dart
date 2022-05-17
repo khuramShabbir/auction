@@ -4,14 +4,15 @@ import 'package:auction/utils/const.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/home_screen.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/my_cars_screens.dart';
 import 'package:auction/views/home/bottom_nav_bar_screens/profile_settings/profile_setting_screen.dart';
-
-import 'package:auction/views/home/bottom_nav_bar_screens/wallet_screen.dart';
+import 'package:auction/views/home/shopping_cart_screen.dart';
 import 'package:auction/views/wallet/wallet.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'bottom_nav_bar_screens/all_cars_screen.dart';
+import 'package:get/get.dart';
 
 
 PersistentTabController persistentTabController =
@@ -25,7 +26,6 @@ class DashBoardScreen extends StatefulWidget {
 }
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
-  int? index = 0;
 
   List<PersistentBottomNavBarItem> itemList() {
     return [
@@ -37,7 +37,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         inactiveColorPrimary: AppColors.blueColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Home.svg',
-          color: index == 0 ? AppColors.blueColor : null,
+          color: dashBoardProvider.index == 0 ? AppColors.blueColor : null,
         ),
         title: "Home",
       ),
@@ -46,7 +46,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         activeColorSecondary: AppColors.blackColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Search.svg',
-          color: index == 1 ? AppColors.blueColor : null,
+          color: dashBoardProvider.index == 1 ? AppColors.blueColor : null,
         ),
         title: "Search",
       ),
@@ -55,7 +55,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         activeColorSecondary: AppColors.blackColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Paper.svg',
-          color: index == 2 ? AppColors.blueColor : null,
+          color: dashBoardProvider.index == 2 ? AppColors.blueColor : null,
         ),
         title: "My Cars",
       ),
@@ -64,7 +64,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         activeColorSecondary: AppColors.blackColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Wallet.svg',
-          color: index == 3 ? AppColors.blueColor : null,
+          color: dashBoardProvider.index == 3 ? AppColors.blueColor : null,
         ),
         title: "Wallet",
       ),
@@ -73,7 +73,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         activeColorSecondary: AppColors.blackColor,
         icon: SvgPicture.asset(
           'assets/SvgAssets/Profile.svg',
-          color: index == 4 ? AppColors.blueColor : null,
+          color: dashBoardProvider.index == 4 ? AppColors.blueColor : null,
         ),
         title: "Profile",
       ),
@@ -81,17 +81,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
     ];
   }
-
-  List<Widget> listScreen() {
-    return [
-       HomeScreen(),
-       AllCarsScreen(false),
-       MyCarsScreen(),
-        UserWallet(),
-       // WalletScreen(),
-       ProfileSettingScreen(),
+  List <Widget> listScreen = [
+      HomeScreen(),
+      AllCarsScreen(false),
+      MyCarsScreen(),
+      UserWallet(),
+      ProfileSettingScreen(),
+      ShoppingCartScreen(),
     ];
-  }
+
 @override
   void initState() {
     // TODO: implement initState
@@ -99,46 +97,60 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     FCM();
   }
   @override
-  Widget build(BuildContext context) {
-    return Consumer<DashBoardProvider>(
-      builder: (BuildContext context, value, Widget? child) {
-        return PersistentTabView(
-          context,
-          controller: persistentTabController,
-          screens: listScreen(),
-          items: itemList(),
-          selectedTabScreenContext: (context) {
+  Widget build(BuildContext contexts) {
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context,constraints) {
+          return Consumer<DashBoardProvider>(
+            builder: (BuildContext context, value, Widget? child) {
+              return context.height > 600 && kIsWeb ?
+               SizedBox(
 
+                 height: height,
+                 width: width,
+                 child: listScreen[value.index!],
+               )
+                  :
+              PersistentTabView(
+                context,
+                controller: persistentTabController,
+                screens: listScreen,
+                items: itemList(),
+                selectedTabScreenContext: (context) {
+
+                },
+                confineInSafeArea: true,
+                backgroundColor: Colors.white,
+                handleAndroidBackButtonPress: true,
+                resizeToAvoidBottomInset: true,
+                stateManagement: true,
+                onItemSelected: (index) {
+                  value.index = index;
+                 value.notifyListeners();
+                },
+                hideNavigationBarWhenKeyboardShows: true,
+                decoration: NavBarDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  colorBehindNavBar: Colors.white,
+                ),
+                popAllScreensOnTapOfSelectedTab: true,
+                popActionScreens: PopActionScreensType.all,
+                itemAnimationProperties: const ItemAnimationProperties(
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                ),
+                screenTransitionAnimation: const ScreenTransitionAnimation(
+                  animateTabTransition: true,
+                  curve: Curves.ease,
+                  duration: Duration(milliseconds: 500),
+                ),
+                navBarStyle: NavBarStyle
+                    .style7,
+              );
             },
-          confineInSafeArea: true,
-          backgroundColor: Colors.white,
-          handleAndroidBackButtonPress: true,
-          resizeToAvoidBottomInset: true,
-          stateManagement: true,
-          onItemSelected: (index) {
-            this.index = index;
-            setState(() {});
-          },
-          hideNavigationBarWhenKeyboardShows: true,
-          decoration: NavBarDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            colorBehindNavBar: Colors.white,
-          ),
-          popAllScreensOnTapOfSelectedTab: true,
-          popActionScreens: PopActionScreensType.all,
-          itemAnimationProperties: const ItemAnimationProperties(
-            duration: Duration(milliseconds: 500),
-            curve: Curves.ease,
-          ),
-          screenTransitionAnimation: const ScreenTransitionAnimation(
-            animateTabTransition: true,
-            curve: Curves.ease,
-            duration: Duration(milliseconds: 500),
-          ),
-          navBarStyle: NavBarStyle
-              .style7,
-        );
-      },
+          );
+        }
+      ),
     );
   }
 }
