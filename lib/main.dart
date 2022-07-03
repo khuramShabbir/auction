@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  // WidgetsBinding.instance.window.physicalSize.height;
-  // WidgetsBinding.instance.window.physicalSize.width/2;
+
   if(kIsWeb){
     await Firebase.initializeApp(
       // Replace with actual values
@@ -20,8 +19,10 @@ void main() async{
       ),
     );
   }
+
   else{
     await Firebase.initializeApp();
   }
+
   runApp(const InitApp());
 }

@@ -19,74 +19,79 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthProvider>(
-      builder: (BuildContext context, data, Widget? child) {
-        return Scaffold(
-          backgroundColor: AppColors.whiteColor,
-          appBar: CustomAppBar.appBar(title: "Login"),
-          body: StaticKPadding.kPadding(
-              child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                customTextFormField(
-                  validator: (v) {
-                    if (v!.isEmpty) {
-                      return "field can't be empty";
-                    } else if (v.isEmail == false) {
-                      return "please enter correct Email";
-                    }
-                    return null;
-                  },
-                  onChange: (v) {
-                    data.email = v;
-                  },
-                  hintText: "Email",
-                  isOutLinedBorder: true,
-                ),
-                customTextFormField(
+    return Container(
+      width: Get.width * 0.5,
+      color: Colors.blue,
+      child: Consumer<AuthProvider>(
+
+        builder: (BuildContext context, data, Widget? child) {
+          return Scaffold(
+            backgroundColor: AppColors.whiteColor,
+            appBar: CustomAppBar.appBar(title: "Logins"),
+            body: StaticKPadding.kPadding(
+                child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  customTextFormField(
                     validator: (v) {
                       if (v!.isEmpty) {
                         return "field can't be empty";
-                      } else if (v.length < 8) {
-                        return "password should be at least 8 Characters";
+                      } else if (v.isEmail == false) {
+                        return "please enter correct Email";
                       }
                       return null;
                     },
                     onChange: (v) {
-                      data.password = v;
+                      data.email = v;
                     },
+                    hintText: "Email",
                     isOutLinedBorder: true,
-                    hintText: "Password",
-                    obscureText: obscure ? true : false,
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          obscure = !obscure;
-                        });
+                  ),
+                  customTextFormField(
+                      validator: (v) {
+                        if (v!.isEmpty) {
+                          return "field can't be empty";
+                        } else if (v.length < 8) {
+                          return "password should be at least 8 Characters";
+                        }
+                        return null;
                       },
-                      child: Icon(
-                        Icons.remove_red_eye,
-                        color: obscure
-                            ? AppColors.greyColor
-                            : AppColors.orangeColor,
-                      ),
-                    )),
-                extendedButton(
-                    onTap: () async {
-                      if (formKey.currentState!.validate()) {
-                         data.loginUser();
-                      }
-                    },
-                    buttonColor: AppColors.orangeColor,
-                    textColor: AppColors.whiteColor,
-                    buttonText: "Login")
-              ],
-            ),
-          )),
-        );
-      },
+                      onChange: (v) {
+                        data.password = v;
+                      },
+                      isOutLinedBorder: true,
+                      hintText: "Password",
+                      obscureText: obscure ? true : false,
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          setState(() {
+                            obscure = !obscure;
+                          });
+                        },
+                        child: Icon(
+                          Icons.remove_red_eye,
+                          color: obscure
+                              ? AppColors.greyColor
+                              : AppColors.orangeColor,
+                        ),
+                      )),
+                  extendedButton(
+                      onTap: () async {
+                        if (formKey.currentState!.validate()) {
+                           data.loginUser();
+                        }
+                      },
+                      buttonColor: AppColors.orangeColor,
+                      textColor: AppColors.whiteColor,
+                      buttonText: "Login")
+                ],
+              ),
+            )),
+          );
+        },
+      ),
     );
   }
 }
